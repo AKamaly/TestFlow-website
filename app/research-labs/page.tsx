@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { SiteHeader } from "@/components/site-header"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, FlaskRoundIcon as Flask, Microscope, LineChart, FileCheck, Check, ChevronDown, Beaker, Database, Share2, Building2, GraduationCap, Award, Users, Plus, MinusCircle } from 'lucide-react'
+import { ArrowRight, Microscope, LineChart, FileCheck, Check, Beaker, Database, Share2, Building2, GraduationCap, Award, Users } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import {

@@ -3,15 +3,9 @@
 import { motion } from 'framer-motion'
 import { SiteHeader } from "@/components/site-header"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Cpu, Zap, Clock, Shield, BarChart, Workflow, Check, ChevronDown, CircuitBoard, MicroscopeIcon as Microchip, Gauge, Laptop, Smartphone, Tv, Radio, Server, Wifi, Settings, PenToolIcon as Tool } from 'lucide-react'
+import { ArrowRight, Zap, Shield, BarChart, Workflow, Check, CircuitBoard, MicroscopeIcon as Microchip, Gauge, Laptop, Smartphone, Tv, Radio, Server, Settings, PenToolIcon as Tool } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-Accordion,
-AccordionContent,
-AccordionItem,
-AccordionTrigger,
-} from "@/components/ui/accordion"
 import { useState } from 'react'
 import { Notification } from '@/components/notification'
 

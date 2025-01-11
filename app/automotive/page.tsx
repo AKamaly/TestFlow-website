@@ -3,15 +3,9 @@
 import { motion } from 'framer-motion'
 import { SiteHeader } from "@/components/site-header"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Car, Gauge, Shield, BarChart, Workflow, Check, ChevronDown, Battery, Cpu, Zap, AlertTriangle, CarFront, Settings2, Radio, Wifi, BatteryCharging, ShieldCheck, Award, Building2, Factory, Cog, Wrench, TestTube, FileCheck } from 'lucide-react'
+import { ArrowRight, Gauge, Shield, BarChart, Check, Battery, Cpu, Zap, AlertTriangle, ShieldCheck, Award, TestTube, FileCheck } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-Accordion,
-AccordionContent,
-AccordionItem,
-AccordionTrigger,
-} from "@/components/ui/accordion"
 import { useState } from 'react';
 import { Notification } from '@/components/notification'
 

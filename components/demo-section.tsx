@@ -29,7 +29,7 @@ const nodeTypes = {
 
 // Custom edge with particle animation
 function CustomEdge(props: EdgeProps) {
-  const { sourceX, sourceY, targetX, targetY, style = {} } = props
+  const { id, sourceX, sourceY, targetX, targetY, style = {}, animated, data } = props
   const [edgePath] = getBezierPath({
     sourceX,
     sourceY: sourceY - 5,
@@ -55,11 +55,11 @@ function CustomEdge(props: EdgeProps) {
       />
       <Particle
         edge={{
-          ...props,
-          path: edgePath,
+          id,
+          path: edgePath
         }}
-        animated={props.animated || false}
-        progress={props.data?.progress || 0}
+        animated={animated || false}
+        progress={data?.progress || 0}
       />
     </>
   )
@@ -316,7 +316,7 @@ function Flow() {
       onConnect={onConnect}
       nodeTypes={nodeTypes}
       edgeTypes={edgeTypes}
-      attributionPosition="hidden"
+      proOptions={{ hideAttribution: true }}
       defaultViewport={{ x: 0, y: 0, zoom: 0.7 }}
       minZoom={0.5}
       maxZoom={1.5}
@@ -431,7 +431,7 @@ export function DemoSection() {
                     description: "See your validation workflow come to life as you build it",
                     gradient: "from-green-500/20 to-green-500/0"
                   }
-                ].map((feature, index) => (
+                ].map((feature) => (
                   <div
                     key={feature.title}
                     className="relative group"

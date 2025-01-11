@@ -14,19 +14,22 @@ const industries = [
     title: "Electronics",
     description: "Streamline validation for consumer and industrial electronics. Automate complex testing scenarios and reduce human error.",
     icon: "electronics" as const,
-    stats: "10x accuracy"
+    stats: "10x accuracy",
+    href: "/electronics"
   },
   {
     title: "Automotive",
     description: "Ensure reliability of automotive electronics and components. Meet strict industry standards with automated validation processes.",
     icon: "automotive" as const,
-    stats: "100% compliance"
+    stats: "100% compliance",
+    href: "/automotive"
   },
   {
     title: "Research Labs",
     description: "Accelerate research with automated validation processes. Focus on innovation while we handle the repetitive testing.",
     icon: "research" as const,
-    stats: "24/7 testing"
+    stats: "24/7 testing",
+    href: "/research-labs"
   }
 ]
 

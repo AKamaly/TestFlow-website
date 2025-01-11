@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export function TrustLogos() {
   const companies = [
     {
@@ -33,16 +35,18 @@ export function TrustLogos() {
         Built by engineers from
       </p>
       <div className="flex items-center justify-center gap-12 overflow-hidden flex-wrap md:flex-nowrap">
-        {companies.map((company, index) => (
+        {companies.map((company) => (
           <div
             key={company.name}
             className="relative group transition-all duration-500"
           >
             <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
             <div className="relative p-4">
-              <img
+              <Image
                 src={company.logo}
                 alt={company.name}
+                width={company.width}
+                height={48}
                 className="h-12 w-auto object-contain relative brightness-0 invert opacity-40 group-hover:opacity-100 transition-all duration-300"
                 style={{ maxWidth: company.width }}
               />

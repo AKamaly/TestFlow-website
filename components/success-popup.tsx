@@ -47,7 +47,7 @@ export function SuccessPopup({ isOpen, onClose }: SuccessPopupProps) {
               Message Sent Successfully!
             </h3>
             <p className="text-gray-400 text-center">
-              Thanks for reaching out! We'll get back to you within 24 hours.
+              Thanks for reaching out! We&apos;ll get back to you within 24 hours.
             </p>
           </motion.div>
         </>

@@ -1,21 +1,24 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
-import { Edge } from 'reactflow'
+
+interface ParticleEdge {
+  id: string
+  path: string
+}
 
 interface ParticleProps {
-  edge: Edge
+  edge: ParticleEdge
   animated: boolean
   progress: number
 }
 
 export function Particle({ edge, animated, progress }: ParticleProps) {
-  const [pathLength, setPathLength] = useState(0)
   const [pathElement, setPathElement] = useState<SVGPathElement | null>(null)
 
   useEffect(() => {
     if (pathElement) {
-      setPathLength(pathElement.getTotalLength())
+      pathElement.getTotalLength()
     }
   }, [pathElement])
 

@@ -4,14 +4,9 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { SiteHeader } from "@/components/site-header"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Cpu, Zap, Clock, Shield, BarChart, Workflow, AlertTriangle, Microscope, LineChart, FileCheck, Check, ChevronDown, Users } from 'lucide-react'
+import { ArrowRight, Cpu, Zap, Clock, Shield, BarChart, Workflow, AlertTriangle, Microscope, LineChart, FileCheck, Check, Users } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
 import { Notification } from '@/components/notification'
 
 function ROICalculator() {
@@ -126,10 +121,13 @@ function ROICalculator() {
         </div>
       </motion.div>
 
-      <Button className="w-full group" size="lg">
+      <Link 
+        href="/contact" 
+        className="w-full group bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-lg px-6 py-2.5 transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)] flex items-center justify-center gap-2"
+      >
         Get Detailed ROI Report
-        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-      </Button>
+        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+      </Link>
     </div>
   )
 }

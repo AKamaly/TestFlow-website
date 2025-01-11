@@ -1,15 +1,15 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Bot, Send, Sparkles, Terminal, ZoomIn, ZoomOut, Play, Share2 } from 'lucide-react'
+import { Bot, Sparkles, Terminal, ZoomIn, ZoomOut, Play, Share2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import ReactFlow, {
   Background,
   useNodesState,
   useEdgesState,
-  ReactFlowProvider,
   useReactFlow,
+  ReactFlowProvider,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
 import { WorkflowNode } from './workflow/custom-nodes'
@@ -28,11 +28,10 @@ const nodeTypes = {
   workflow: WorkflowNode,
 }
 
-function Flow({ currentNodeIndex }: { currentNodeIndex: number }) {
+function Flow({ currentNodeIndex, isAnimationComplete }: { currentNodeIndex: number; isAnimationComplete: boolean }) {
   const [nodes, setNodes, onNodesChange] = useNodesState([])
   const [edges, setEdges, onEdgesChange] = useEdgesState([])
   const reactFlowInstance = useReactFlow()
-  const [isAnimationComplete, setIsAnimationComplete] = useState(false)
   const [loadingPhase, setLoadingPhase] = useState<'instruments' | 'commands' | 'nodes' | null>(null)
 
   useEffect(() => {
@@ -130,7 +129,7 @@ function Flow({ currentNodeIndex }: { currentNodeIndex: number }) {
         minZoom={0.3}
         maxZoom={1.2}
         className="transition-transform duration-200"
-        attributionPosition="hidden"
+        proOptions={{ hideAttribution: true }}
       >
         <Background
           gap={20}
@@ -327,6 +326,13 @@ function AIChatDemo() {
   const [showFlow, setShowFlow] = useState(false)
   const [currentNodeIndex, setCurrentNodeIndex] = useState(-1)
   const [isThinking, setIsThinking] = useState(false)
+  const [isAnimationComplete, setIsAnimationComplete] = useState(false)
+
+  useEffect(() => {
+    if (currentNodeIndex >= initialNodes.length - 1) {
+      setIsAnimationComplete(true)
+    }
+  }, [currentNodeIndex])
 
   const handleCreateFlow = async () => {
     setIsThinking(true)
@@ -507,7 +513,7 @@ function AIChatDemo() {
                       <div className="flex justify-center">
                         <Button 
                           onClick={handleCreateFlow} 
-                          className="gap-2 px-8 py-6 text-lg bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/30"
+                          className="gap-2 px-8 py-6 text-lg bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)]"
                           disabled={showFlow || isThinking}
                         >
                           <Sparkles className="w-5 h-5" />
@@ -526,7 +532,7 @@ function AIChatDemo() {
                           className="h-[600px] w-full"
                         >
                           <ReactFlowProvider>
-                            <Flow currentNodeIndex={currentNodeIndex} />
+                            <Flow currentNodeIndex={currentNodeIndex} isAnimationComplete={isAnimationComplete} />
                           </ReactFlowProvider>
                         </motion.div>
                       )}

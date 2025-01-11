@@ -22,15 +22,23 @@ export function HeroForm() {
     
     // Handle final form submission
     if (isExpanded && email && name && position) {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 500))
-      setShowSuccess(true)
-      
-      // Reset form
-      setEmail('')
-      setName('')
-      setPosition('')
-      setIsExpanded(false)
+      try {
+        // You can add an API call here if needed
+        // const response = await fetch('/api/submit', {
+        //   method: 'POST',
+        //   body: JSON.stringify({ email, name, position }),
+        // })
+        
+        setShowSuccess(true)
+        
+        // Reset form
+        setEmail('')
+        setName('')
+        setPosition('')
+        setIsExpanded(false)
+      } catch (error) {
+        console.error('Error:', error)
+      }
     }
   }
 

@@ -1,4 +1,4 @@
-import { Check, Zap, Clock, LayoutTemplateIcon as Template, Users, MessageSquare, FileText, Cable, Share2 } from 'lucide-react'
+import { Zap, Clock, LayoutTemplateIcon as Template, Users, MessageSquare, FileText, Cable, Share2 } from 'lucide-react'
 
 export function FeaturesSection() {
   const features = [
