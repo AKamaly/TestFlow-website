@@ -49,7 +49,7 @@ export default function Page() {
         {/* Enhanced gradient overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(63,61,86,0.1),rgba(0,0,0,0.2))]" />
 
-        <div className="container px-4 relative">
+        <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">
               Validate and launch your hardware faster
@@ -63,16 +63,38 @@ export default function Page() {
             <HeroForm />
             <div className="mt-40 relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-xl blur-2xl transition-all duration-500 group-hover:blur-3xl group-hover:opacity-70 opacity-50" />
-              <div className="relative rounded-xl overflow-hidden border border-white/10 bg-gradient-to-b from-white/[0.07] to-transparent backdrop-blur-sm shadow-[0_0_30px_-15px_rgba(0,0,0,0.3)]">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Tool%20screen%20shot2-AcvsGBAbQcO81S3vOFouIJRliglA4B.png"
-                  width={1200}
-                  height={675}
-                  alt="Atoms Testflow Platform Interface"
-                  className="w-full object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+              
+              {/* Animated border container */}
+              <div className="relative">
+                {/* Glow effect */}
+                <div className="absolute -inset-[2px] rounded-xl bg-[conic-gradient(from_var(--angle),transparent_0%,transparent_35%,#8B5CF6_45%,transparent_55%,transparent_100%)] animate-[rotate_10s_linear_infinite] opacity-70 blur-[2px]" />
+                <div className="relative p-[2px] rounded-xl bg-[conic-gradient(from_var(--angle),transparent_0%,transparent_35%,#8B5CF6_45%,transparent_55%,transparent_100%)] animate-[rotate_10s_linear_infinite]">
+                  <style jsx>{`
+                    @property --angle {
+                      syntax: '<angle>';
+                      initial-value: 0deg;
+                      inherits: false;
+                    }
+                    @keyframes rotate {
+                      to {
+                        --angle: 360deg;
+                      }
+                    }
+                  `}</style>
+                  
+                  {/* Main content container */}
+                  <div className="relative rounded-xl overflow-hidden bg-[rgba(20,20,20,1)] z-10">
+                    <Image
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Tool%20screen%20shot2-AcvsGBAbQcO81S3vOFouIJRliglA4B.png"
+                      width={1200}
+                      height={675}
+                      alt="Atoms Testflow Platform Interface"
+                      className="w-full object-cover"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                  </div>
+                </div>
               </div>
               
               {/* Trust Logos */}
@@ -83,66 +105,87 @@ export default function Page() {
       </section>
 
       {/* Use Cases Section */}
-      <section id="solutions" className="relative py-20 md:py-32 border-t border-white/10 overflow-hidden">
-        <UseCasesSection />
+      <section id="solutions" className="relative py-10 md:py-16 border-t border-white/10 overflow-hidden">
+        <div className="container mx-auto px-4 max-w-[1400px] w-full">
+          <UseCasesSection />
+        </div>
       </section>
 
       {/* Interactive Demo Section */}
-      <section id="demo" className="py-20 md:py-32 border-t border-white/10">
-        <DemoSection />
+      <section id="demo" className="py-10 md:py-16 border-t border-white/10">
+        <div className="container mx-auto px-4 max-w-[1400px] w-full">
+          <DemoSection />
+        </div>
       </section>
 
       {/* Features Comparison Section */}
-      <section id="features" className="py-20 md:py-32 border-t border-white/10">
-        <ComparisonSection />
+      <section id="features" className="py-10 md:py-16 border-t border-white/10">
+        <div className="container mx-auto px-4 max-w-[1400px] w-full">
+          <ComparisonSection />
+        </div>
       </section>
 
       {/* AI Section */}
-      <AISection />
+      <section className="py-10 md:py-16 border-t border-white/10">
+        <div className="container mx-auto px-4 max-w-[1400px] w-full">
+          <AISection />
+        </div>
+      </section>
 
       {/* AI Chat Demo Section */}
-      <AIChatDemo />
+      <section className="py-10 md:py-16 border-t border-white/10">
+        <div className="container mx-auto px-4 max-w-[1400px] w-full">
+          <AIChatDemo />
+        </div>
+      </section>
 
       {/* Timeline Section */}
-      <TimelineSection />
+      <section className="py-10 md:py-16 border-t border-white/10">
+        <div className="container mx-auto px-4 max-w-[1400px] w-full">
+          <TimelineSection />
+        </div>
+      </section>
 
       {/* Compatibility Section */}
-      <CompatibilitySection />
-
+      <section className="py-10 md:py-16 border-t border-white/10">
+        <div className="container mx-auto px-4 max-w-[1400px] w-full">
+          <CompatibilitySection />
+        </div>
+      </section>
 
       {/* CTA Section */}
-      <section id="pricing" className="relative py-20 md:py-32 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.1, 0.2, 0.1],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute top-1/4 -right-1/4 w-1/2 h-1/2 bg-gradient-to-bl from-blue-500/10 via-transparent to-transparent rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.1, 0.2, 0.1],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "linear",
-              delay: 4
-            }}
-            className="absolute bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-gradient-to-tr from-purple-500/10 via-transparent to-transparent rounded-full blur-3xl"
-          />
-        </div>
+      <section id="pricing" className="relative py-10 md:py-16 overflow-hidden">
+        <div className="container mx-auto px-4 max-w-[1400px] w-full relative">
+          {/* Background Elements */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+            <motion.div
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.1, 0.2, 0.1],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+              className="absolute top-1/4 -right-1/4 w-1/2 h-1/2 bg-gradient-to-bl from-blue-500/10 via-transparent to-transparent rounded-full blur-3xl"
+            />
+            <motion.div
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.1, 0.2, 0.1],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "linear",
+                delay: 4
+              }}
+              className="absolute bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-gradient-to-tr from-purple-500/10 via-transparent to-transparent rounded-full blur-3xl"
+            />
+          </div>
 
-        <div className="container px-4 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

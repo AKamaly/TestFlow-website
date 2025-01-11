@@ -56,11 +56,11 @@ export function SiteHeader() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/50 backdrop-blur-lg">
-      <div className="container flex h-16 items-center justify-between px-4">
+      <div className="container mx-auto max-w-[1400px] w-full flex h-16 items-center justify-between px-4">
         <Link href="/" className="text-xl font-bold">
           Atoms
         </Link>
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center justify-center gap-8">
           <button 
             onClick={() => scrollToSection('solutions')} 
             className="text-sm text-gray-400 hover:text-white transition-colors"
@@ -68,11 +68,11 @@ export function SiteHeader() {
             Solutions
           </button>
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors">
+            <DropdownMenuTrigger className="flex items-center justify-center gap-1 text-sm text-gray-400 hover:text-white transition-colors">
               Industries
               <ChevronDown className="w-4 h-4" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-[600px] grid grid-cols-2 gap-2">
+            <DropdownMenuContent align="center" className="w-[600px] grid grid-cols-2 gap-2">
               {industryItems.map((item) => {
                 const Icon = item.icon
                 return (

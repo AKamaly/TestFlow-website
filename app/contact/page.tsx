@@ -45,7 +45,7 @@ export default function ContactPage() {
       <SiteHeader />
       <div className="pt-32"> {/* Added pt-32 here to maintain original top padding */}
       {/* Header section */}
-      <div className="container px-4 pb-16">
+      <div className="container mx-auto px-4 pb-16"> {/* Centering applied here */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -73,7 +73,7 @@ export default function ContactPage() {
         </div>
 
         {/* Split layout */}
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto"> {/* Centering applied here */}
           {/* Left column - Info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}

@@ -35,7 +35,7 @@ return (
         <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-purple-500/10 via-transparent to-transparent rounded-full blur-3xl" />
       </div>
 
-      <div className="container px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-left space-y-8">
             <motion.div
@@ -134,7 +134,7 @@ return (
 
     {/* Features Section */}
     <section className="py-20 md:py-32 border-t border-white/10 relative overflow-hidden">
-      <div className="container px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -212,7 +212,7 @@ return (
 
     {/* Safety Standards Section */}
     <section className="py-20 md:py-32 border-t border-white/10 relative overflow-hidden">
-      <div className="container px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -304,7 +304,7 @@ return (
 
     {/* Compatible Equipment Section */}
     <section className="py-20 md:py-32 border-t border-white/10 relative overflow-hidden">
-      <div className="container px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -412,7 +412,7 @@ return (
 
     {/* Success Metrics Section */}
     <section className="py-20 md:py-32 border-t border-white/10 relative overflow-hidden">
-      <div className="container px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -551,7 +551,7 @@ return (
 
     {/* CTA Section */}
     <section className="relative py-20 md:py-32 overflow-hidden">
-      <div className="container px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

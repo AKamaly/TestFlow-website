@@ -35,7 +35,7 @@ return (
         <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-purple-500/10 via-transparent to-transparent rounded-full blur-3xl" />
       </div>
 
-      <div className="container px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-left space-y-8">
             <motion.div
@@ -134,7 +134,7 @@ return (
 
     {/* Features Section */}
     <section className="py-20 md:py-32 border-t border-white/10 relative overflow-hidden">
-      <div className="container px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -212,7 +212,7 @@ return (
 
     {/* Compatible Equipment Section - Replacing "See It In Action" */}
     <section className="py-20 md:py-32 border-t border-white/10 relative overflow-hidden">
-      <div className="container px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -320,7 +320,7 @@ return (
 
     {/* Product Categories */}
     <section className="py-20 md:py-32 border-t border-white/10 relative overflow-hidden">
-      <div className="container px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -399,7 +399,7 @@ return (
 
     {/* Testing Process */}
     <section className="py-20 md:py-32 border-t border-white/10 relative overflow-hidden">
-      <div className="container px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -477,7 +477,7 @@ return (
 
     {/* Success Metrics Section - Replacing "Seamless Integration" */}
     <section className="py-20 md:py-32 border-t border-white/10 relative overflow-hidden">
-      <div className="container px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -616,7 +616,7 @@ return (
 
     {/* CTA Section */}
     <section className="relative py-20 md:py-32 overflow-hidden">
-      <div className="container px-4 relative">
+      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -634,7 +634,7 @@ return (
                 className="space-y-4"
               >
                 <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-white via-white to-gray-400 bg-clip-text text-transparent">
-                  Start Testing Smarter Today
+                  Start Your Electronics Validation Journey
                 </h2>
                 <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
                   Join leading electronics manufacturers who trust Atoms Testflow to validate their products.
