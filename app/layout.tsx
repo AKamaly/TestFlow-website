@@ -17,6 +17,8 @@ const geistMono = localFont({
 export const metadata = {
   title: "Atoms TestFlow - Hardware Validation Platform",
   description: "Validate and launch your hardware faster with AI-powered automation",
+  viewport: "width=device-width, initial-scale=1",
+  themeColor: "#000000",
 }
 
 export default function RootLayout({
@@ -25,18 +27,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <GoogleAnalytics />
-        <style>{`
-          html {
-            zoom: 1.05;
-            -moz-transform: scale(1.05);
-            -moz-transform-origin: 0 0;
-          }
-        `}</style>
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-black`}>
         {children}
       </body>
     </html>

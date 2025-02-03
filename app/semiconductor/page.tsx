@@ -203,12 +203,10 @@ export default function SemiconductorPage() {
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() => setShowNotification(true)}
-                >
-                  View Documentation
+                <Button asChild variant="outline" size="lg">
+                  <Link href="/docs">
+                    View Documentation
+                  </Link>
                 </Button>
               </motion.div>
 

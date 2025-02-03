@@ -1,3 +1,6 @@
+import { db } from '@/firebase'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+
 export async function submitContactForm(formData: FormData) {
   // Get form data
   const name = formData.get('name')
@@ -6,32 +9,39 @@ export async function submitContactForm(formData: FormData) {
   const companySize = formData.get('company-size')
   const message = formData.get('message')
 
-  // For now, just simulate an API call
-  await new Promise(resolve => setTimeout(resolve, 1000))
+  try {
+    // Create a new document in the "User Submissions" collection
+    const docRef = await addDoc(collection(db, 'User Submissions'), {
+      name,
+      email,
+      company,
+      companySize,
+      message,
+      createdAt: serverTimestamp(), // Add a timestamp for when the form was submitted
+      formType: 'contact' // Add a field to distinguish contact form submissions
+    })
 
-  // In a real application, you would send this data to an external API endpoint
-  // Example:
-  // const response = await fetch('https://api.your-backend.com/contact', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify({
-  //     name,
-  //     email,
-  //     company,
-  //     companySize,
-  //     message
-  //   })
-  // })
+    console.log('Form submission saved with ID:', docRef.id)
+    return { success: true, id: docRef.id }
+  } catch (error) {
+    console.error('Error saving form submission:', error)
+    throw error
+  }
+}
 
-  console.log('Form submission:', {
-    name,
-    email,
-    company,
-    companySize,
-    message
-  })
+export async function submitHeroForm(data: { email: string; name: string; position: string }) {
+  try {
+    // Create a new document in the "User Submissions" collection
+    const docRef = await addDoc(collection(db, 'User Submissions'), {
+      ...data,
+      createdAt: serverTimestamp(),
+      formType: 'hero' // Add a field to distinguish hero form submissions
+    })
 
-  return { success: true }
+    console.log('Hero form submission saved with ID:', docRef.id)
+    return { success: true, id: docRef.id }
+  } catch (error) {
+    console.error('Error saving hero form submission:', error)
+    throw error
+  }
 } 

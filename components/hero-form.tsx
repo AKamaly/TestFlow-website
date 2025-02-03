@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "framer-motion"
 import { SuccessPopup } from './success-popup'
+import { submitHeroForm } from '@/lib/contact'
 
 export function HeroForm() {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -11,6 +12,7 @@ export function HeroForm() {
   const [name, setName] = useState('')
   const [position, setPosition] = useState('')
   const [showSuccess, setShowSuccess] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,12 +25,8 @@ export function HeroForm() {
     // Handle final form submission
     if (isExpanded && email && name && position) {
       try {
-        // You can add an API call here if needed
-        // const response = await fetch('/api/submit', {
-        //   method: 'POST',
-        //   body: JSON.stringify({ email, name, position }),
-        // })
-        
+        setIsLoading(true)
+        await submitHeroForm({ email, name, position })
         setShowSuccess(true)
         
         // Reset form
@@ -38,6 +36,8 @@ export function HeroForm() {
         setIsExpanded(false)
       } catch (error) {
         console.error('Error:', error)
+      } finally {
+        setIsLoading(false)
       }
     }
   }
@@ -104,9 +104,10 @@ export function HeroForm() {
                 />
                 <Button
                   type="submit"
+                  disabled={isLoading}
                   className="bg-gradient-to-r from-white to-gray-100 text-black hover:opacity-90 rounded-full px-6 py-2 text-sm font-medium transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shrink-0 shadow-sm"
                 >
-                  Get Started
+                  {isLoading ? 'Submitting...' : 'Get Started'}
                 </Button>
               </motion.div>
             )}
