@@ -11,11 +11,7 @@ import {
   Cpu,
   Workflow,
   Code2,
-  Webhook,
   MessageSquare,
-  FileSpreadsheet,
-  Mail,
-  Calendar,
   LineChart,
   Database,
   Cloud,
@@ -29,6 +25,7 @@ import {
 } from "lucide-react"
 import { useState, useMemo } from "react"
 import { TeamsIcon, ExcelIcon } from "./integration-icons"
+import Image from "next/image"
 
 interface DocsContentProps {
   currentSection: string
@@ -82,9 +79,11 @@ export function DocsContent({ currentSection }: DocsContentProps) {
 
         <div className="relative rounded-lg overflow-hidden border border-white/10">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-          <img
+          <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Visual%20Workflow%20builder-KjBOHdo8VPYYyZFa4Xs13lonNRTrL5.png"
             alt="TestFlow Visual Workflow Builder"
+            width={1200}
+            height={675}
             className="w-full"
           />
         </div>
@@ -175,8 +174,7 @@ export function DocsContent({ currentSection }: DocsContentProps) {
               <div>
                 <h3 className="text-xl font-medium text-white mb-3">Create New Workflow</h3>
                 <p className="text-lg text-white/60 mb-4">
-                  Click the "+" button in the workflow builder or use the "New Test" button in the dashboard to start a
-                  new workflow.
+                  Click the &quot;+&quot; button in the workflow builder or use the &quot;New Test&quot; button in the dashboard to start a new workflow.
                 </p>
                 <div className="rounded-lg overflow-hidden border border-white/10">
                   <img
@@ -1191,9 +1189,11 @@ export function DocsContent({ currentSection }: DocsContentProps) {
         {/* AI Demo Image */}
         <div className="relative rounded-lg overflow-hidden border border-white/10">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-          <img
+          <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AI%20chat-9ux1pM0XtMoD9RPVF8IsZakFXPh1cS.png"
             alt="ATOMS AI Interface"
+            width={1200}
+            height={675}
             className="w-full"
           />
         </div>
@@ -1236,9 +1236,11 @@ export function DocsContent({ currentSection }: DocsContentProps) {
         {/* AI Workflow Image */}
         <div className="relative rounded-lg overflow-hidden border border-white/10">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-          <img
+          <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Visual%20Workflow%20builder-KjBOHdo8VPYYyZFa4Xs13lonNRTrL5.png"
             alt="AI-Powered Workflow Builder"
+            width={1200}
+            height={675}
             className="w-full"
           />
         </div>
@@ -1392,7 +1394,7 @@ export function DocsContent({ currentSection }: DocsContentProps) {
         </div>
       </div>
     )
-  }, [currentSection])
+  }, [currentSection, content])
 
   return (
     <div className="flex-1 px-8 py-6 overflow-y-auto max-w-5xl mx-auto">

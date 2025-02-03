@@ -101,7 +101,7 @@ export function SiteHeader() {
                 >
                   <div className="flex flex-col gap-1">
                     <div className="text-sm font-medium text-white">Need a custom solution?</div>
-                    <div className="text-sm text-gray-400">Let's discuss your specific requirements</div>
+                    <div className="text-sm text-gray-400">Let&apos;s discuss your specific requirements</div>
                   </div>
                   <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </Link>
