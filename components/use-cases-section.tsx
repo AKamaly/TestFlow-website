@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import IndustryCard from './industry-card'
+import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 const industries = [
   {
@@ -35,7 +37,7 @@ const industries = [
 
 export default function UseCasesSection() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden py-16">
       {/* Animated background elements */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Grid pattern */}
@@ -74,21 +76,23 @@ export default function UseCasesSection() {
 
       <div className="container relative z-10 px-4">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block rounded-full px-4 py-1.5 text-sm font-medium bg-white/5 border border-white/10 backdrop-blur-sm mb-4"
+            className="inline-block rounded-full px-4 py-1.5 text-sm font-medium bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 backdrop-blur-sm mb-4"
           >
-            Who is it for?
+            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Who is it for?
+            </span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-4xl font-bold mb-6"
+            className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent"
           >
             Accelerate Your Validation Process
           </motion.h2>
@@ -97,48 +101,53 @@ export default function UseCasesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-400 text-lg"
+            className="text-xl text-gray-400"
           >
             See how different industries use Atoms Testflow to accelerate their validation process
           </motion.p>
         </div>
 
         {/* Cards Grid */}
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {industries.map((industry, index) => (
             <IndustryCard
               key={industry.title}
               {...industry}
               index={index}
-              href={`/${industry.title.toLowerCase().replace(' ', '-')}`}  // Add href prop
+              href={`/${industry.title.toLowerCase().replace(' ', '-')}`}
             />
           ))}
         </div>
 
-        {/* Stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-          {[
-            { label: 'Validation Time', value: '-85%' },
-            { label: 'Success Rate', value: '99.9%' },
-            { label: 'Time Saved', value: '1000h+' },
-            { label: 'Companies', value: '500+' },
-          ].map((stat, index) => (
+        {/* Get Started Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+          className="flex justify-center mt-10"
+        >
+          <Link 
+            href="/contact" 
+            className="group inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]"
+          >
+            <span className="text-sm font-medium">Get Started</span>
             <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
-              className="relative group"
+              animate={{
+                x: [0, 4, 0]
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-purple-500/5 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative text-center p-4 rounded-xl bg-white/[0.02] border border-white/10 backdrop-blur-sm">
-                <div className="text-2xl font-bold text-blue-400 mb-1">{stat.value}</div>
-                <div className="text-sm text-gray-400">{stat.label}</div>
-              </div>
+              <ArrowRight className="w-4 h-4" />
             </motion.div>
-          ))}
-        </div>
+          </Link>
+        </motion.div>
+
+        {/* Stats section removed as requested */}
       </div>
     </section>
   )

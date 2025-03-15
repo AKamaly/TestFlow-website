@@ -22,6 +22,8 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight, ZoomIn, ZoomOut, Play, Share2, Pause } from 'lucide-react'
 import { Particle } from './workflow/particle-animation'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { PuzzleIcon, BrainIcon, EyeIcon, PlugIcon, SettingsIcon, ActivityIcon } from 'lucide-react'
 
 const nodeTypes = {
   workflow: WorkflowNode,
@@ -387,61 +389,133 @@ export function DemoSection() {
       <div className="container px-4 relative">
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block rounded-full px-4 py-1.5 text-sm font-medium bg-white/5 border border-white/10 backdrop-blur-sm mb-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block rounded-full px-4 py-1.5 text-sm font-medium bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 backdrop-blur-sm mb-4"
+          >
+            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             What is TestFlow?
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            </span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent"
+          >
             Experience the Future of Hardware Validation
-          </h2>
-          <p className="text-gray-400 text-lg">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-xl text-gray-400"
+          >
             Create sophisticated validation workflows in minutes with our intuitive drag-and-drop interface
-          </p>
+          </motion.p>
         </div>
 
         {/* Main Demo Area */}
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          {/* Left Column - Flow Demo */}
-          <div className="relative">
+          {/* Left Column - Video */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative"
+          >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-2xl blur-2xl" />
-            <div className="relative aspect-square w-full max-w-xl mx-auto rounded-2xl border border-white/10 bg-black/90 backdrop-blur-sm overflow-hidden shadow-2xl">
-              <ReactFlowProvider>
-                <Flow />
-              </ReactFlowProvider>
+            <div className="relative w-full max-w-xl mx-auto rounded-2xl border border-white/10 bg-black/40 backdrop-blur-sm overflow-hidden shadow-2xl">
+              {/* Video with overlay */}
+              <div className="aspect-[3/4] relative">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                >
+                  <source src="/static/media/TestFlow workflow builder Video.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                
+                {/* Optional: Add a play button overlay that fades out after a few seconds */}
+                <motion.div 
+                  initial={{ opacity: 1 }}
+                  animate={{ opacity: 0 }}
+                  transition={{ delay: 2, duration: 1 }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+                      <Play className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column - Features */}
-          <div className="space-y-8">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="space-y-8"
+          >
             <div className="space-y-6">
-              <h3 className="text-2xl font-bold">Build Your Workflow</h3>
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Build Your Workflow</h3>
               <div className="grid gap-4">
                 {[
                   {
                     title: "Drag & Drop Interface",
                     description: "Intuitively create complex validation workflows with simple drag and drop actions",
-                    gradient: "from-blue-500/20 to-blue-500/0"
+                    gradient: "from-blue-500/20 to-blue-500/0",
+                    icon: "puzzle"
                   },
                   {
                     title: "Smart Connections",
                     description: "AI-powered automatic connections between compatible instruments",
-                    gradient: "from-purple-500/20 to-purple-500/0"
+                    gradient: "from-purple-500/20 to-purple-500/0",
+                    icon: "brain"
                   },
                   {
                     title: "Real-time Preview",
                     description: "See your validation workflow come to life as you build it",
-                    gradient: "from-green-500/20 to-green-500/0"
+                    gradient: "from-green-500/20 to-green-500/0",
+                    icon: "eye"
                   }
-                ].map((feature) => (
-                  <div
+                ].map((feature, index) => (
+                  <motion.div
                     key={feature.title}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
                     className="relative group"
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl`} />
-                    <div className="relative p-4 bg-white/[0.03] border border-white/10 rounded-xl backdrop-blur-sm">
-                      <h4 className="font-semibold mb-2">{feature.title}</h4>
-                      <p className="text-sm text-gray-400">{feature.description}</p>
+                    <div className="relative p-5 bg-white/[0.03] border border-white/10 rounded-xl backdrop-blur-sm hover:border-white/20 transition-all duration-300">
+                      <div className="flex items-start gap-4">
+                        <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/10 border border-blue-500/30">
+                          {feature.icon === "puzzle" && <PuzzleIcon className="w-5 h-5 text-blue-400" />}
+                          {feature.icon === "brain" && <BrainIcon className="w-5 h-5 text-purple-400" />}
+                          {feature.icon === "eye" && <EyeIcon className="w-5 h-5 text-green-400" />}
+                        </div>
+                        <div>
+                          <h4 className="font-semibold mb-2 group-hover:text-blue-400 transition-colors">{feature.title}</h4>
+                          <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">{feature.description}</p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -449,30 +523,51 @@ export function DemoSection() {
             {/* Stats Section */}
             <div className="grid grid-cols-3 gap-4">
               {[
-                { value: "85%", label: "Faster Setup" },
-                { value: "24/7", label: "Operation" },
-                { value: "100%", label: "Accuracy" }
-              ].map((stat) => (
-                <div key={stat.label} className="text-center p-4 bg-white/[0.03] rounded-xl border border-white/10">
-                  <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                { value: "85%", label: "Faster Setup", color: "blue" },
+                { value: "24/7", label: "Operation", color: "purple" },
+                { value: "100%", label: "Accuracy", color: "green" }
+              ].map((stat, index) => (
+                <motion.div 
+                  key={stat.label} 
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                  className="relative group"
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-b from-${stat.color}-500/10 to-${stat.color}-500/5 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                  <div className="relative text-center p-4 bg-white/[0.03] rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300">
+                    <div className={`text-2xl font-bold text-${stat.color}-400`}>
                     {stat.value}
                   </div>
                   <div className="text-sm text-gray-400">{stat.label}</div>
                 </div>
+                </motion.div>
               ))}
             </div>
 
             {/* CTA Button */}
-            <Button asChild className="w-full group" size="lg">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 }}
+            >
               <Link 
                 href="/contact" 
-                className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-lg px-6 py-2.5 transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)]"
+                className="w-full group inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_25px_rgba(59,130,246,0.5)]"
               >
-                Schadule A Call
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <span className="text-sm font-medium">Schedule A Call</span>
+                <motion.div
+                  animate={{ x: [0, 0] }}
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </motion.div>
               </Link>
-            </Button>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Bottom Section - Steps */}
@@ -482,27 +577,46 @@ export function DemoSection() {
               {
                 step: "01",
                 title: "Connect Instruments",
-                description: "Choose from our library of supported testing equipment"
+                description: "Choose from our library of supported testing equipment",
+                icon: "plug"
               },
               {
                 step: "02",
                 title: "Configure Tests",
-                description: "Set up your testing parameters and conditions"
+                description: "Set up your testing parameters and conditions",
+                icon: "settings"
               },
               {
                 step: "03",
                 title: "Run & Monitor",
-                description: "Execute tests and monitor results in real-time"
+                description: "Execute tests and monitor results in real-time",
+                icon: "activity"
               }
-            ].map((step) => (
-              <div key={step.step} className="relative group">
+            ].map((step, index) => (
+              <motion.div 
+                key={step.step} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="relative group"
+              >
                 <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-                <div className="relative p-6 bg-white/[0.03] border border-white/10 rounded-xl backdrop-blur-sm">
-                  <div className="text-sm font-mono text-blue-400 mb-2">{step.step}</div>
-                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-gray-400">{step.description}</p>
+                <div className="relative p-6 bg-white/[0.03] border border-white/10 rounded-xl backdrop-blur-sm hover:border-white/20 transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-sm font-mono">
+                      {step.step}
+                    </div>
+                    <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/10 border border-blue-500/30">
+                      {step.icon === "plug" && <PlugIcon className="w-4 h-4 text-blue-400" />}
+                      {step.icon === "settings" && <SettingsIcon className="w-4 h-4 text-purple-400" />}
+                      {step.icon === "activity" && <ActivityIcon className="w-4 h-4 text-green-400" />}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">{step.title}</h3>
+                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors">{step.description}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

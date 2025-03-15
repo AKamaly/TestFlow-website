@@ -9,32 +9,33 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 
-const industryItems = [
+const solutionItems = [
   {
     label: "Semiconductor",
     href: "/semiconductor",
     icon: Cpu,
-    description: "Comprehensive validation solutions for semiconductor manufacturing and testing."
+    description: "For semiconductor manufacturing and testing"
   },
   {
     label: "Research Labs",
     href: "/research-labs",
     icon: Flask,
-    description: "Automated testing workflows designed for research laboratories."
+    description: "For research laboratories and academic institutions"
   },
   {
     label: "Electronics",
     href: "/electronics",
     icon: CircuitBoard,
-    description: "Streamline electronics validation for consumer and industrial products."
+    description: "For consumer and industrial electronics"
   },
   {
     label: "Automotive",
     href: "/automotive",
     icon: Car,
-    description: "Industry-standard compliance testing for automotive components."
+    description: "For automotive components and systems"
   }
 ]
 
@@ -61,51 +62,43 @@ export function SiteHeader() {
           Atoms
         </Link>
         <nav className="hidden md:flex items-center justify-center gap-8">
-          <button 
-            onClick={() => scrollToSection('solutions')} 
-            className="text-sm text-gray-400 hover:text-white transition-colors"
-          >
-            Solutions
-          </button>
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center justify-center gap-1 text-sm text-gray-400 hover:text-white transition-colors">
-              Industries
+              Solutions
               <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="center" className="w-[640px] p-6 bg-black/90 backdrop-blur-xl border border-white/10">
-              <div className="grid grid-cols-2 gap-6">
-                {industryItems.map((item) => {
+            <DropdownMenuContent align="center" className="w-[400px] p-3 bg-black/90 backdrop-blur-xl border border-white/10">
+              <div className="grid grid-cols-1 gap-1">
+                {solutionItems.map((item) => {
                   const Icon = item.icon
                   return (
                     <DropdownMenuItem key={item.label} asChild className="cursor-pointer focus:bg-transparent">
                       <Link 
                         href={item.href} 
-                        className="flex gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors group"
+                        className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors"
                       >
-                        <div className="w-12 h-12 rounded-sm bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-white/10 flex items-center justify-center group-hover:border-white/20 group-hover:from-blue-500/20 group-hover:to-purple-500/20 transition-all duration-300">
-                          <Icon className="w-6 h-6 text-blue-400 group-hover:text-blue-300 transition-colors" />
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-white/10 flex items-center justify-center">
+                          <Icon className="w-4 h-4 text-blue-400" />
                         </div>
-                        <div className="flex flex-col gap-1.5">
-                          <div className="font-medium text-base text-white/90 group-hover:text-white transition-colors">{item.label}</div>
-                          <div className="text-sm text-gray-400 line-clamp-2 group-hover:text-gray-300 transition-colors">{item.description}</div>
+                        <div>
+                          <div className="font-medium text-sm text-white/90">{item.label}</div>
+                          <div className="text-xs text-gray-400">{item.description}</div>
                         </div>
                       </Link>
                     </DropdownMenuItem>
                   )
                 })}
               </div>
-              <div className="mt-6 pt-6 border-t border-white/5">
+              <DropdownMenuSeparator className="my-2" />
+              <DropdownMenuItem asChild className="cursor-pointer focus:bg-transparent">
                 <Link 
                   href="/contact" 
-                  className="flex items-center justify-between p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors group"
+                  className="flex items-center justify-between p-3 rounded-lg hover:bg-blue-500/10 transition-colors"
                 >
-                  <div className="flex flex-col gap-1">
-                    <div className="text-sm font-medium text-white">Need a custom solution?</div>
-                    <div className="text-sm text-gray-400">Let&apos;s discuss your specific requirements</div>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                  <span className="text-sm font-medium text-blue-400">Custom solution</span>
+                  <ArrowRight className="w-4 h-4 text-blue-400" />
                 </Link>
-              </div>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <button 
@@ -126,9 +119,6 @@ export function SiteHeader() {
           >
             <Book className="w-4 h-4" />
             Documentation
-          </Link>
-          <Link href="/contact" className="text-sm text-gray-400 hover:text-white transition-colors">
-            Contact
           </Link>
         </nav>
         <div className="flex items-center gap-4">

@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .animate-scroll-infinite {
+    animation: scroll-infinite var(--duration, 60s) linear infinite;
+  }
+}
+
+@keyframes scroll-infinite {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 3rem));
+  }
+}
+
 :root {
   --background: 0 0% 0%;
   --foreground: 0 0% 100%;

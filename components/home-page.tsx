@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Check, ArrowRight, Clock, AlertTriangle } from 'lucide-react'
+import { Check, ArrowRight, Clock, AlertTriangle, BrainCircuit, Cable, Users, LayoutTemplate } from 'lucide-react'
 import Image from "next/image"
 import { DemoSection } from '@/components/demo-section'
 import { HeroForm } from '@/components/hero-form'
@@ -11,13 +11,13 @@ import { TypingEffect } from '@/components/typing-effect'
 import { TrustLogos } from '@/components/trust-logos'
 import { ComparisonSection } from '@/components/comparison-section'
 import { AISection } from '@/components/ai-section'
-import { TimelineSection } from '@/components/timeline-section'
 import { CompatibilitySection } from '@/components/compatibility-section'
-import AIChatDemo from '@/components/ai-chat-demo'
+import { TimeComparisonSection } from '@/components/time-comparison-section'
 import { motion } from 'framer-motion'
 import { SiteHeader } from "@/components/site-header"
 import { useState, useEffect } from 'react'
 import { Notification } from "@/components/notification"
+import { LogoCarousel } from '@/components/logo-carousel'
 
 function ROICalculator() {
   const [validationTime, setValidationTime] = useState(12)
@@ -148,80 +148,109 @@ export function HomePage() {
     <div className="min-h-screen bg-black text-white">
       <SiteHeader />
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-        {/* Video Background */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute w-full h-full object-cover"
-            style={{ 
-              filter: 'brightness(0.95)',
-              transform: 'translateY(5%)'
-            }}
-          >
-            <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero%20video-o5Wm5RugFPJ6Wvpu8MNM56J97hr6uW.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
+      <section className="relative pt-32 pb-0 md:pt-40 md:pb-0 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+          <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-purple-500/10 via-transparent to-transparent rounded-full blur-3xl" />
         </div>
-
-        {/* Enhanced gradient overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(63,61,86,0.1),rgba(0,0,0,0.2))]" />
 
         <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">
-              Validate and launch your hardware faster
-            </h1>
-            <div className="text-base md:text-lg text-gray-400 mb-8 max-w-2xl mx-auto h-20">
-              <TypingEffect 
-                text="Our AI validation tool helps semiconductors and electronics companies validate and launch their products 20x faster by fully automating the validation process in minutes."
-                delay={30}
-              />
-            </div>
-            <HeroForm />
-            <div className="mt-40 relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-xl blur-2xl transition-all duration-500 group-hover:blur-3xl group-hover:opacity-70 opacity-50" />
-              
-              {/* Animated border container */}
-              <div className="relative">
-                {/* Glow effect */}
-                <div className="absolute -inset-[2px] rounded-xl bg-[conic-gradient(from_var(--angle),transparent_0%,transparent_35%,#8B5CF6_45%,transparent_55%,transparent_100%)] animate-[rotate_10s_linear_infinite] opacity-70 blur-[2px]" />
-                <div className="relative p-[2px] rounded-xl bg-[conic-gradient(from_var(--angle),transparent_0%,transparent_35%,#8B5CF6_45%,transparent_55%,transparent_100%)] animate-[rotate_10s_linear_infinite]">
-                  <style jsx>{`
-                    @property --angle {
-                      syntax: '<angle>';
-                      initial-value: 0deg;
-                      inherits: false;
-                    }
-                    @keyframes rotate {
-                      to {
-                        --angle: 360deg;
-                      }
-                    }
-                  `}</style>
-                  
-                  {/* Main content container */}
-                  <div className="relative rounded-xl overflow-hidden bg-[rgba(20,20,20,1)] z-10">
-                    <Image
-                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Tool%20screen%20shot2-AcvsGBAbQcO81S3vOFouIJRliglA4B.png"
-                      width={1200}
-                      height={675}
-                      alt="Atoms Testflow Platform Interface"
-                      className="w-full object-cover"
-                      priority
-                    />
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-block rounded-full px-4 py-1.5 text-sm font-medium bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 backdrop-blur-sm mb-8"
+            >
+              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Introducing AI-Powered Validation
+              </span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-white to-purple-400 bg-clip-text text-transparent leading-[1.2] tracking-tight"
+            >
+              Validate and launch your hardware faster.
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-base md:text-lg text-gray-400 max-w-xl mx-auto mb-8"
+            >
+              Our AI validation tool helps semiconductors and electronics companies automate their testing process, reducing time-to-market and validation costs.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
+            >
+              <Button asChild size="default" className="h-11 px-6 text-base">
+                <Link 
+                  href="/contact" 
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center gap-2"
+                >
+                  Get Started
+                  <motion.div
+                    animate={{
+                      x: [0, 4, 0]
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.div>
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="default" className="h-11 px-6 text-base">
+                <Link href="/docs" className="rounded-full border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5">
+                  View Documentation
+                </Link>
+              </Button>
+            </motion.div>
+
+            {/* Product Preview */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="relative mx-auto max-w-5xl"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-2xl blur-2xl" />
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full"
+                >
+                  <source src="/static/media/cursorful-video-1741889347046.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                  </div>
-                </div>
               </div>
-              
-              {/* Trust Logos */}
-              <TrustLogos />
-            </div>
+            </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Logo Carousel Section - Now part of hero */}
+      <section className="py-12 bg-gradient-to-b from-black to-gray-900/30 border-b border-white/5">
+        <div className="container mx-auto px-4 max-w-[1400px] w-full">
+          <LogoCarousel />
         </div>
       </section>
 
@@ -239,10 +268,96 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Features Comparison Section */}
-      <section id="features" className="py-10 md:py-16 border-t border-white/10">
+      {/* Features Section */}
+      <section id="features" className="py-20 md:py-32 border-t border-white/10">
         <div className="container mx-auto px-4 max-w-[1400px] w-full">
-          <ComparisonSection />
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-block rounded-full px-4 py-1.5 text-sm font-medium bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 backdrop-blur-sm mb-4"
+            >
+              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Key Features
+              </span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent"
+            >
+              Everything you need to validate hardware
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-xl text-gray-400 max-w-2xl mx-auto"
+            >
+              Powerful features that help you validate and launch products faster
+            </motion.p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {[
+              {
+                title: "AI-Powered Validation",
+                description: "Automate your validation process with advanced AI that learns and adapts to your specific needs.",
+                color: "blue",
+                icon: "brain"
+              },
+              {
+                title: "Universal Compatibility",
+                description: "Works seamlessly with all major testing equipment and automation frameworks.",
+                color: "purple",
+                icon: "plug"
+              },
+              {
+                title: "Team Collaboration",
+                description: "Enable real-time collaboration between engineers, developers, and stakeholders.",
+                color: "green",
+                icon: "users"
+              },
+              {
+                title: "Pre-built Templates",
+                description: "Get started quickly with industry-specific validation templates for your needs.",
+                color: "orange",
+                icon: "template"
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group relative overflow-hidden rounded-xl"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br from-${feature.color}-500/10 via-${feature.color}-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl blur-lg`} />
+                <div className="relative bg-white/[0.03] rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 h-full">
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className={`p-2.5 rounded-lg bg-${feature.color}-500/10 border border-${feature.color}-500/20 group-hover:border-${feature.color}-500/40 transition-all duration-300`}>
+                        {feature.icon === "brain" && <BrainCircuit className={`w-5 h-5 text-${feature.color}-400`} />}
+                        {feature.icon === "plug" && <Cable className={`w-5 h-5 text-${feature.color}-400`} />}
+                        {feature.icon === "users" && <Users className={`w-5 h-5 text-${feature.color}-400`} />}
+                        {feature.icon === "template" && <LayoutTemplate className={`w-5 h-5 text-${feature.color}-400`} />}
+                      </div>
+                      <h3 className={`text-lg font-semibold group-hover:text-${feature.color}-400 transition-colors`}>
+                        {feature.title}
+                      </h3>
+                    </div>
+                    <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -253,17 +368,10 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* AI Chat Demo Section */}
-      <section className="py-10 md:py-16 border-t border-white/10">
-        <div className="container mx-auto px-4 max-w-[1400px] w-full">
-          <AIChatDemo />
-        </div>
-      </section>
-
-      {/* Timeline Section */}
-      <section className="py-10 md:py-16 border-t border-white/10">
-        <div className="container mx-auto px-4 max-w-[1400px] w-full">
-          <TimelineSection />
+      {/* Time Comparison Section */}
+      <section className="py-24 px-4 overflow-hidden">
+        <div className="container">
+          <TimeComparisonSection />
         </div>
       </section>
 
@@ -425,59 +533,28 @@ export function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section id="pricing" className="relative py-10 md:py-16 overflow-hidden">
-        <div className="container mx-auto px-4 max-w-[1400px] w-full relative">
-          {/* Background Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.1, 0.2, 0.1],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              className="absolute top-1/4 -right-1/4 w-1/2 h-1/2 bg-gradient-to-bl from-blue-500/10 via-transparent to-transparent rounded-full blur-3xl"
-            />
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.1, 0.2, 0.1],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "linear",
-                delay: 4
-              }}
-              className="absolute bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-gradient-to-tr from-purple-500/10 via-transparent to-transparent rounded-full blur-3xl"
-            />
-          </div>
-
+      <section className="relative py-32 overflow-hidden">
+        <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative max-w-4xl mx-auto"
+            className="relative max-w-5xl mx-auto text-center"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-2xl blur-3xl opacity-50" />
-            <div className="relative bg-black/40 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12">
-              <div className="text-center space-y-8">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-3xl blur-3xl opacity-30" />
+            <div className="relative">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 }}
-                  className="space-y-4"
+                className="space-y-4 mb-8"
                 >
-                  <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-white via-white to-gray-400 bg-clip-text text-transparent">
-                    Start automating your validation process today
+                <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent">
+                  Ready to transform your<br />validation process?
                   </h2>
-                  <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
-                    The AI validation platform that accelerates you product launch.
+                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                  Join leading companies who trust Atoms TestFlow to validate their products faster and more efficiently.
                   </p>
                 </motion.div>
 
@@ -486,29 +563,55 @@ export function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
-                  className="flex flex-col items-center gap-6"
+                className="flex flex-col sm:flex-row gap-4 justify-center items-center"
                 >
-                  <Button asChild className="w-full">
-                    <Link 
-                      href="/contact" 
-                      className="inline-flex items-center justify-center gap-2 bg-white text-black hover:bg-white/90 rounded-full px-8 py-6 text-lg font-medium transition-all duration-300 hover:scale-105 w-full"
-                    >
-                      Try Atoms TestFlow Now
-                      <motion.div
-                        animate={{
-                          x: [0, 4, 0]
-                        }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      >
-                        <ArrowRight className="w-5 h-5" />
-                      </motion.div>
-                    </Link>
-                  </Button>
+                <Link 
+                  href="/contact" 
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center justify-center gap-2 h-11 px-6 text-base w-full sm:w-auto min-w-[160px]"
+                >
+                  Get Started
+                  <motion.div
+                    animate={{
+                      x: [0, 4, 0]
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.div>
+                </Link>
+                <Link 
+                  href="/docs" 
+                  className="rounded-full border border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 h-11 px-6 text-base w-full sm:w-auto min-w-[160px] flex items-center justify-center"
+                >
+                  View Documentation
+                </Link>
+              </motion.div>
 
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="mt-12 flex flex-col items-center gap-6"
+              >
+                <div className="flex items-center gap-6">
+                  <div className="flex -space-x-2">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div
+                        key={i}
+                        className="w-10 h-10 rounded-full border-2 border-black bg-gradient-to-br from-blue-400 to-purple-400"
+                      />
+                    ))}
+                  </div>
+                  <div className="text-left">
+                    <div className="text-sm font-medium">Join 10,000+ engineers</div>
+                    <div className="text-sm text-gray-400">who are already using Atoms TestFlow</div>
+                  </div>
+                </div>
                   <div className="flex items-center gap-4 text-sm text-gray-400">
                     <div className="flex items-center gap-2">
                       <Check className="w-4 h-4 text-green-400" />
@@ -526,7 +629,6 @@ export function HomePage() {
                     </div>
                   </div>
                 </motion.div>
-              </div>
             </div>
           </motion.div>
         </div>
