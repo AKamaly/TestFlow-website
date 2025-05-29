@@ -8,6 +8,7 @@ import { ArrowRight, Cpu, Zap, Clock, Shield, BarChart, Workflow, AlertTriangle,
 import Link from 'next/link'
 import Image from 'next/image'
 import { Notification } from '@/components/notification'
+import { SectionTracker, trackButtonClick, trackCTAClick, trackFormSubmission } from '@/components/analytics-tracker'
 
 function ROICalculator() {
   const [validationTime, setValidationTime] = useState(12)
@@ -29,6 +30,16 @@ function ROICalculator() {
       cost: costSaved
     })
   }, [validationTime, engineers, costPerEngineer])
+
+  const handleROIClick = () => {
+    trackCTAClick('roi_calculator', 'Get Detailed ROI Report', 'semiconductor_page')
+    trackButtonClick('Get Detailed ROI Report', 'ROI Calculator Section', {
+      validation_time: validationTime,
+      engineers: engineers,
+      cost_per_engineer: costPerEngineer,
+      estimated_savings: savings.cost
+    })
+  }
 
   return (
     <div className="space-y-6">
@@ -123,6 +134,7 @@ function ROICalculator() {
 
       <Link 
         href="/contact" 
+        onClick={handleROIClick}
         className="w-full group bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-lg px-6 py-2.5 transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)] flex items-center justify-center gap-2"
       >
         Get Detailed ROI Report
@@ -136,9 +148,29 @@ export default function SemiconductorPage() {
   const [showNotification, setShowNotification] = useState(false)
   const [showSubscribeNotification, setShowSubscribeNotification] = useState(false)
 
+  const handleCTAClick = (ctaText: string, location: string) => {
+    trackCTAClick('primary_cta', ctaText, location)
+  }
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setShowSubscribeNotification(true)
+    trackFormSubmission('newsletter', true, { page: 'semiconductor' })
+    // Reset form
+    const form = e.target as HTMLFormElement
+    form.reset()
+  }
+
   return (
     <div className="min-h-screen bg-black text-white">
       <SiteHeader />
+
+      {/* Section Trackers */}
+      <SectionTracker sectionId="hero" sectionName="Semiconductor Hero" />
+      <SectionTracker sectionId="features" sectionName="Semiconductor Features" />
+      <SectionTracker sectionId="equipment" sectionName="Compatible Equipment" />
+      <SectionTracker sectionId="roi" sectionName="ROI Calculator" />
+      <SectionTracker sectionId="cta" sectionName="Final CTA" />
 
       <Notification 
         isOpen={showNotification}
@@ -147,7 +179,7 @@ export default function SemiconductorPage() {
       />
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-20 md:pt-24 md:pb-28 overflow-hidden">
+      <section id="hero" className="relative pt-20 pb-20 md:pt-24 md:pb-28 overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
@@ -197,6 +229,7 @@ export default function SemiconductorPage() {
                 <Button asChild className="group">
                   <Link 
                     href="/contact" 
+                    onClick={() => handleCTAClick('Book A Demo', 'Hero Section')}
                     className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-lg px-6 py-2.5 transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)]"
                   >
                     Book A Demo
@@ -204,7 +237,10 @@ export default function SemiconductorPage() {
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href="/docs">
+                  <Link 
+                    href="/docs"
+                    onClick={() => trackButtonClick('View Documentation', 'Hero Section', { page: 'semiconductor' })}
+                  >
                     View Documentation
                   </Link>
                 </Button>
@@ -959,13 +995,7 @@ export default function SemiconductorPage() {
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Stay Updated</h3>
         <p className="text-sm text-gray-400">Subscribe to our newsletter for the latest updates and features.</p>
-        <form className="space-y-2" onSubmit={(e) => {
-          e.preventDefault()
-          setShowSubscribeNotification(true)
-          // Reset form
-          const form = e.target as HTMLFormElement
-          form.reset()
-        }}>
+        <form className="space-y-2" onSubmit={handleNewsletterSubmit}>
           <input
             type="email"
             placeholder="Enter your email"

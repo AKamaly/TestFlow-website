@@ -14,20 +14,45 @@ AccordionTrigger,
 } from "@/components/ui/accordion"
 import { useState } from 'react';
 import { Notification } from '@/components/notification'
+import { SectionTracker, trackButtonClick, trackCTAClick, trackFormSubmission } from '@/components/analytics-tracker'
 
 export default function ResearchLabsPage() {
 const [showNotification, setShowNotification] = useState(false)
 const [showSubscribeNotification, setShowSubscribeNotification] = useState(false)
+
+const handleCTAClick = (ctaText: string, location: string) => {
+  trackCTAClick('primary_cta', ctaText, location)
+}
+
+const handleNewsletterSubmit = (e: React.FormEvent) => {
+  e.preventDefault()
+  setShowSubscribeNotification(true)
+  trackFormSubmission('newsletter', true, { page: 'research-labs' })
+  // Reset form
+  const form = e.target as HTMLFormElement
+  form.reset()
+}
+
 return (
   <div className="min-h-screen bg-black text-white">
     <SiteHeader />
+
+    {/* Section Trackers */}
+    <SectionTracker sectionId="hero" sectionName="Research Labs Hero" />
+    <SectionTracker sectionId="features" sectionName="Research Lab Solutions" />
+    <SectionTracker sectionId="why-choose" sectionName="Why Choose Us" />
+    <SectionTracker sectionId="equipment" sectionName="Compatible Equipment" />
+    <SectionTracker sectionId="metrics" sectionName="Success Metrics" />
+    <SectionTracker sectionId="faq" sectionName="FAQ" />
+    <SectionTracker sectionId="cta" sectionName="Final CTA" />
+
     <Notification 
       isOpen={showNotification}
       onClose={() => setShowNotification(false)}
       message="Documentation coming soon..."
     />
     {/* Hero Section */}
-    <section className="relative pt-20 pb-20 md:pt-24 md:pb-28 overflow-hidden">
+    <section id="hero" className="relative pt-20 pb-20 md:pt-24 md:pb-28 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
@@ -77,6 +102,7 @@ return (
               <Button asChild className="group">
                 <Link 
                   href="/contact" 
+                  onClick={() => handleCTAClick('Book A Demo', 'Hero Section')}
                   className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-lg px-6 py-2.5 transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)]"
                 >
                   Book A Demo
@@ -84,7 +110,10 @@ return (
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/docs">
+                <Link 
+                  href="/docs"
+                  onClick={() => trackButtonClick('View Documentation', 'Hero Section', { page: 'research-labs' })}
+                >
                   View Documentation
                 </Link>
               </Button>
@@ -740,13 +769,7 @@ return (
           <div className="space-y-4">
             <h3 className="font-semibold text-lg">Stay Updated</h3>
             <p className="text-sm text-gray-400">Subscribe to our newsletter for the latest updates and features.</p>
-            <form className="space-y-2" onSubmit={(e) => {
-              e.preventDefault()
-              setShowSubscribeNotification(true)
-              // Reset form
-              const form = e.target as HTMLFormElement
-              form.reset()
-            }}>
+            <form className="space-y-2" onSubmit={handleNewsletterSubmit}>
               <input
                 type="email"
                 placeholder="Enter your email"

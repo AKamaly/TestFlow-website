@@ -1,6 +1,30 @@
+'use client'
+
+import { usePathname, useSearchParams } from 'next/navigation'
+import { useEffect, Suspense } from 'react'
 import localFont from "next/font/local"
 import "./globals.css"
 import { GoogleAnalytics } from "@/components/google-analytics"
+import { ScrollTracker } from '@/components/scroll-tracker'
+import { EnhancedPageTracker, TimeTracker } from '@/components/analytics-tracker'
+
+// Track page views
+function PageViewTracker() {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'page_view', {
+        page_path: pathname,
+        page_search: searchParams.toString(),
+        page_title: document.title
+      });
+    }
+  }, [pathname, searchParams])
+
+  return null
+}
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,13 +38,6 @@ const geistMono = localFont({
   weight: "100 900",
 })
 
-export const metadata = {
-  title: "Atoms TestFlow - Hardware Validation Platform",
-  description: "Validate and launch your hardware faster with AI-powered automation",
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#000000",
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,6 +49,12 @@ export default function RootLayout({
         <GoogleAnalytics />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-black`}>
+        <Suspense fallback={null}>
+          <PageViewTracker />
+          <EnhancedPageTracker />
+          <TimeTracker />
+        </Suspense>
+        <ScrollTracker />
         {children}
       </body>
     </html>

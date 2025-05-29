@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Search, User, Tag, ArrowUpRight, Clock, Calendar, Filter } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { SectionTracker, trackButtonClick, trackFormSubmission, trackPageSpecificEvent } from '@/components/analytics-tracker'
 
 // Helper function to create slug from title
 const createSlug = (title: string) => {
@@ -21,6 +22,30 @@ const createSlug = (title: string) => {
 // Sample blog post data
 const blogPosts = [
   {
+    id: 7,
+    title: "The Journey of a Chip: Understanding the Semiconductor Manufacturing Cycle",
+    slug: "semiconductor-manufacturing-cycle",
+    excerpt: "Dive deep into the fascinating journey of how semiconductors are designed, manufactured, tested, and brought to market - from initial circuit design to final validation.",
+    coverImage: "https://9zog2la6l29pbfba.public.blob.vercel-storage.com/Semiconductor%20Cycle%20From%20Design%20to%20Market-TOtU5YHS8FdCl0vrO4wrHIDFxGpaXt.jpg",
+    category: "Industry Insights",
+    author: "Ali Kamaly",
+    date: "Apr 15, 2025",
+    readTime: "8 min read",
+    featured: true
+  },
+  {
+    id: 8,
+    title: "NVIDIA's AI Revolution: Breaking Down Their $29.8B Profit Engine",
+    slug: "nvidia-profit-breakdown",
+    excerpt: "A deep dive into how NVIDIA transformed $60.9B in revenue into nearly $30B in net profit, marking their evolution from a gaming company to an AI infrastructure powerhouse.",
+    coverImage: "https://9zog2la6l29pbfba.public.blob.vercel-storage.com/NVIDIA%20Revenue%20by%20segment-1A8LeHhFO9NHtnpRtMO0aTFNhMF8pG.png",
+    category: "Industry Analysis",
+    author: "Ali Kamaly",
+    date: "Apr 10, 2025",
+    readTime: "7 min read",
+    featured: false
+  },
+  {
     id: 1,
     title: "Revolutionizing Semiconductor Validation with AI",
     slug: "revolutionizing-semiconductor-validation",
@@ -30,7 +55,7 @@ const blogPosts = [
     author: "Ali Kamaly",
     date: "Jan 15, 2025",
     readTime: "5 min read",
-    featured: true
+    featured: false
   },
   {
     id: 3,
@@ -108,15 +133,47 @@ export default function BlogPage() {
   // Get featured posts
   const featuredPosts = blogPosts.filter(post => post.featured);
 
+  const handleSearch = (query: string) => {
+    setSearchQuery(query)
+    trackPageSpecificEvent('blog_search', { query, results_count: filteredPosts.length })
+  }
+
+  const handleCategoryFilter = (category: string) => {
+    setSelectedCategory(category)
+    trackPageSpecificEvent('blog_filter', { category, results_count: filteredPosts.length })
+  }
+
+  const handleBlogPostClick = (post: any) => {
+    trackPageSpecificEvent('blog_post_click', { 
+      post_title: post.title, 
+      post_category: post.category,
+      post_id: post.id 
+    })
+  }
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    trackFormSubmission('newsletter', true, { page: 'blog' })
+    // Reset form
+    const form = e.target as HTMLFormElement
+    form.reset()
+  }
+
   return (
     <div className="min-h-screen bg-black text-white">
       <SiteHeader />
+
+      {/* Section Trackers */}
+      <SectionTracker sectionId="featured" sectionName="Featured Blog Posts" />
+      <SectionTracker sectionId="search-filter" sectionName="Blog Search and Filter" />
+      <SectionTracker sectionId="articles" sectionName="Blog Articles Grid" />
+      <SectionTracker sectionId="cta" sectionName="Blog CTA" />
       
       {/* Blog Content Container */}
       <div className="container mx-auto px-4 relative max-w-[1200px] w-full pb-20 pt-20 md:pt-24">
         {/* Featured Post like in the image */}
         {featuredPosts.length > 0 && (
-          <div className="mb-16">
+          <div id="featured" className="mb-16">
             <div className="flex flex-col space-y-8">
               {featuredPosts.slice(0, 1).map((post) => (
                 <div key={post.id} className="bg-white/[0.02] border border-white/10 rounded-xl overflow-hidden">
@@ -162,6 +219,7 @@ export default function BlogPage() {
                         
                         <Link 
                           href={`/blog/${post.slug}`}
+                          onClick={() => handleBlogPostClick(post)}
                           className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors"
                         >
                           Read more
@@ -177,14 +235,14 @@ export default function BlogPage() {
         )}
 
         {/* Search and Filter Bar */}
-        <div className="mb-10 py-5 border-y border-white/10 sticky top-16 z-10 bg-black/95 backdrop-blur-sm">
+        <div id="search-filter" className="mb-10 py-5 border-y border-white/10 sticky top-16 z-10 bg-black/95 backdrop-blur-sm">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="relative w-full md:w-auto md:min-w-[300px]">
               <input
                 type="text"
                 placeholder="Search articles..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => handleSearch(e.target.value)}
                 className="w-full bg-white/5 border border-white/10 rounded-lg px-5 py-2 pl-10 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-500/50"
               />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
@@ -194,7 +252,7 @@ export default function BlogPage() {
               {categories.map((category) => (
                 <button
                   key={category}
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => handleCategoryFilter(category)}
                   className={`px-3 py-1.5 rounded-lg text-sm transition-all ${
                     selectedCategory === category
                       ? "bg-blue-500/20 text-blue-400 border border-blue-500/40"
@@ -224,7 +282,7 @@ export default function BlogPage() {
                 <button
                   key={category}
                   onClick={() => {
-                    setSelectedCategory(category);
+                    handleCategoryFilter(category);
                     setShowFilters(false);
                   }}
                   className={`px-3 py-1.5 rounded-lg text-sm transition-all ${
@@ -241,10 +299,14 @@ export default function BlogPage() {
         </div>
 
         {/* Articles Grid - Clean Artisan Style */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+        <div id="articles" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {filteredPosts.map((post) => (
             <div key={post.id} className="group flex flex-col h-full">
-              <Link href={`/blog/${post.slug}`} className="block flex-grow">
+              <Link 
+                href={`/blog/${post.slug}`} 
+                onClick={() => handleBlogPostClick(post)}
+                className="block flex-grow"
+              >
                 <div className="relative aspect-[16/9] mb-4 overflow-hidden rounded-xl">
                   <Image
                     src={post.coverImage}
@@ -284,7 +346,7 @@ export default function BlogPage() {
         )}
 
         {/* CTA Section from home page */}
-        <section className="relative py-24 mt-10 overflow-hidden">
+        <section id="cta" className="relative py-24 mt-10 overflow-hidden">
           <div className="relative max-w-5xl mx-auto text-center">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-3xl blur-3xl opacity-30" />
             <div className="relative">
@@ -300,6 +362,7 @@ export default function BlogPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link 
                   href="/contact" 
+                  onClick={() => trackButtonClick('Get Started', 'Blog CTA', { page: 'blog' })}
                   className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center justify-center gap-2 h-11 px-6 text-base w-full sm:w-auto min-w-[160px]"
                 >
                   Get Started
@@ -318,6 +381,7 @@ export default function BlogPage() {
                 </Link>
                 <Link 
                   href="/docs" 
+                  onClick={() => trackButtonClick('View Documentation', 'Blog CTA', { page: 'blog' })}
                   className="rounded-full border border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 h-11 px-6 text-base w-full sm:w-auto min-w-[160px] flex items-center justify-center"
                 >
                   View Documentation
@@ -421,12 +485,7 @@ export default function BlogPage() {
               <div className="space-y-4">
                 <h3 className="font-semibold text-lg">Stay Updated</h3>
                 <p className="text-sm text-gray-400">Subscribe to our newsletter for the latest updates and features.</p>
-                <form className="space-y-2" onSubmit={(e) => {
-                  e.preventDefault()
-                  // Reset form
-                  const form = e.target as HTMLFormElement
-                  form.reset()
-                }}>
+                <form className="space-y-2" onSubmit={handleNewsletterSubmit}>
                   <input
                     type="email"
                     placeholder="Enter your email"

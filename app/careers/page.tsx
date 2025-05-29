@@ -11,6 +11,7 @@ import Spline from '@splinetool/react-spline'
 import { db } from '@/firebase'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { LogoCarousel } from "@/components/logo-carousel"
+import { SectionTracker, trackButtonClick, trackFormSubmission, trackPageSpecificEvent } from '@/components/analytics-tracker'
 
 // Career positions data
 const positions = [
@@ -121,6 +122,11 @@ export default function CareersPage() {
       await addDoc(collection(db, 'applications'), applicationData)
       
       setShowSuccess(true)
+      trackFormSubmission('job_application', true, { 
+        position: formData.position,
+        page: 'careers'
+      })
+      
       setFormData({
         name: '',
         email: '',
@@ -133,18 +139,57 @@ export default function CareersPage() {
       
     } catch (error) {
       console.error('Error submitting application:', error)
+      trackFormSubmission('job_application', false, { 
+        position: formData.position,
+        page: 'careers',
+        error: 'submission_failed'
+      })
       alert('An error occurred while submitting your application. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
   }
 
+  const handlePositionClick = (position: any) => {
+    setActivePosition(activePosition === position.title ? null : position.title)
+    trackPageSpecificEvent('position_details_view', {
+      position_title: position.title,
+      department: position.department
+    })
+  }
+
+  const handleApplyClick = (position: any) => {
+    setFormData(prev => ({ ...prev, position: position.title }))
+    trackPageSpecificEvent('apply_button_click', {
+      position_title: position.title,
+      department: position.department
+    })
+    document.getElementById('application-form')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setShowSuccess(true)
+    trackFormSubmission('newsletter', true, { page: 'careers' })
+    // Reset form
+    const form = e.target as HTMLFormElement
+    form.reset()
+  }
+
   return (
     <div className="min-h-screen bg-black text-white">
       <SiteHeader />
 
+      {/* Section Trackers */}
+      <SectionTracker sectionId="hero" sectionName="Careers Hero" />
+      <SectionTracker sectionId="mission" sectionName="Our Mission" />
+      <SectionTracker sectionId="who-should-join" sectionName="Who Should Join Us" />
+      <SectionTracker sectionId="positions" sectionName="Open Positions" />
+      <SectionTracker sectionId="application-form" sectionName="Application Form" />
+      <SectionTracker sectionId="cta" sectionName="Careers CTA" />
+
       {/* Hero Section */}
-      <section className="relative pt-20 pb-0 md:pt-24 md:pb-0 overflow-hidden">
+      <section id="hero" className="relative pt-20 pb-0 md:pt-24 md:pb-0 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
           <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent rounded-full blur-3xl" />
@@ -181,6 +226,7 @@ export default function CareersPage() {
               <Button asChild size="default" className="h-11 px-6 text-base">
                 <Link 
                   href="#positions" 
+                  onClick={() => trackButtonClick('View Open Positions', 'Hero Section', { page: 'careers' })}
                   className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center gap-2"
                 >
                   View Open Positions
@@ -225,7 +271,7 @@ export default function CareersPage() {
       </section>
 
       {/* Our Mission Section */}
-      <section className="py-16 bg-gradient-to-b from-black to-gray-900/30">
+      <section id="mission" className="py-16 bg-gradient-to-b from-black to-gray-900/30">
         <div className="container mx-auto px-4 max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -305,7 +351,7 @@ export default function CareersPage() {
       </section>
 
       {/* Who Should Join Us Section */}
-      <section className="py-16 bg-gradient-to-b from-black to-gray-900/30">
+      <section id="who-should-join" className="py-16 bg-gradient-to-b from-black to-gray-900/30">
         <div className="container mx-auto px-4 max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -395,10 +441,7 @@ export default function CareersPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 className={`p-6 rounded-xl bg-gradient-to-br from-blue-500/5 to-purple-500/5 border border-white/10 cursor-pointer transition-all duration-300 hover:border-blue-500/30 group ${activePosition === position.title ? 'border-blue-500/50' : ''}`}
-                onClick={() => {
-                  setActivePosition(activePosition === position.title ? null : position.title)
-                  setFormData(prev => ({ ...prev, position: position.title }))
-                }}
+                onClick={() => handlePositionClick(position)}
               >
                 <div className="flex items-start gap-4">
                   <div className="p-2.5 rounded-lg bg-blue-500/10 border border-blue-500/20 group-hover:border-blue-500/40 transition-colors">
@@ -419,8 +462,7 @@ export default function CareersPage() {
                       <Button
                         onClick={(e) => {
                           e.stopPropagation()
-                          setFormData(prev => ({ ...prev, position: position.title }))
-                          document.getElementById('application-form')?.scrollIntoView({ behavior: 'smooth' })
+                          handleApplyClick(position)
                         }}
                         className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-full px-4 py-1.5 text-sm"
                       >
@@ -557,7 +599,7 @@ export default function CareersPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-32 overflow-hidden">
+      <section id="cta" className="relative py-32 overflow-hidden">
         <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -591,6 +633,7 @@ export default function CareersPage() {
               >
                 <Link 
                   href="/contact" 
+                  onClick={() => trackButtonClick('Get Started', 'Careers CTA', { page: 'careers' })}
                   className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center justify-center gap-2 h-11 px-6 text-base w-full sm:w-auto min-w-[160px]"
                 >
                   Get Started
@@ -609,6 +652,7 @@ export default function CareersPage() {
                 </Link>
                 <Link 
                   href="/docs" 
+                  onClick={() => trackButtonClick('View Documentation', 'Careers CTA', { page: 'careers' })}
                   className="rounded-full border border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 h-11 px-6 text-base w-full sm:w-auto min-w-[160px] flex items-center justify-center"
                 >
                   View Documentation
@@ -737,13 +781,7 @@ export default function CareersPage() {
             <div className="space-y-4">
               <h3 className="font-semibold text-lg">Stay Updated</h3>
               <p className="text-sm text-gray-400">Subscribe to our newsletter for the latest updates and features.</p>
-              <form className="space-y-2" onSubmit={(e) => {
-                e.preventDefault()
-                setShowSuccess(true)
-                // Reset form
-                const form = e.target as HTMLFormElement
-                form.reset()
-              }}>
+              <form className="space-y-2" onSubmit={handleNewsletterSubmit}>
                 <input
                   type="email"
                   placeholder="Enter your email"

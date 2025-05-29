@@ -20,6 +20,7 @@ import { Notification } from "@/components/notification"
 import { LogoCarousel } from '@/components/logo-carousel'
 import { WebinarPopup } from "@/components/webinar-popup"
 import { VideoModal } from "@/components/video-modal"
+import { SectionTracker, trackButtonClick, trackFormSubmission, trackPageSpecificEvent } from '@/components/analytics-tracker'
 
 function ROICalculator() {
   const [validationTime, setValidationTime] = useState(12)
@@ -135,6 +136,13 @@ function ROICalculator() {
 
       <Link 
         href="/contact" 
+        onClick={() => trackButtonClick('Get Detailed ROI Report', 'ROI Calculator', { 
+          time_saved: savings.time, 
+          cost_saved: savings.cost,
+          validation_time: validationTime,
+          engineers: engineers,
+          cost_per_engineer: costPerEngineer
+        })}
         className="w-full group bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-lg px-6 py-2.5 transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)] flex items-center justify-center gap-2"
       >
         Get Detailed ROI Report
@@ -154,9 +162,29 @@ export function HomePage() {
     sessionStorage.setItem('hasSeenWebinar', 'true')
   }
 
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setShowSubscribeNotification(true)
+    trackFormSubmission('newsletter', true, { page: 'home' })
+    // Reset form
+    const form = e.target as HTMLFormElement
+    form.reset()
+  }
+
   return (
     <div className="min-h-screen bg-black text-white">
       <SiteHeader />
+      {/* Section Trackers */}
+      <SectionTracker sectionId="hero" sectionName="Home Hero" />
+      <SectionTracker sectionId="logo-carousel" sectionName="Logo Carousel" />
+      <SectionTracker sectionId="solutions" sectionName="Use Cases Section" />
+      <SectionTracker sectionId="demo" sectionName="Interactive Demo" />
+      <SectionTracker sectionId="features" sectionName="Key Features" />
+      <SectionTracker sectionId="ai-section" sectionName="AI Section" />
+      <SectionTracker sectionId="time-comparison" sectionName="Time Comparison" />
+      <SectionTracker sectionId="compatibility" sectionName="Compatibility" />
+      <SectionTracker sectionId="roi" sectionName="ROI Calculator" />
+      <SectionTracker sectionId="cta" sectionName="Final CTA" />
       {/* Hero Section */}
       <section className="relative pt-20 pb-0 md:pt-24 md:pb-0 overflow-hidden">
         {/* Background Elements */}
@@ -207,6 +235,7 @@ export function HomePage() {
               <Button asChild size="default" className="h-11 px-6 text-base">
                 <Link 
                   href="/contact" 
+                  onClick={() => trackButtonClick('Get Started', 'Hero Section', { page: 'home' })}
                   className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center gap-2"
                 >
                   Get Started
@@ -228,7 +257,10 @@ export function HomePage() {
                 variant="outline" 
                 size="default" 
                 className="h-11 px-6 text-base"
-                onClick={() => setShowVideoModal(true)}
+                onClick={() => {
+                  setShowVideoModal(true)
+                  trackButtonClick('Watch Demo', 'Hero Section', { page: 'home' })
+                }}
               >
                 <span className="rounded-full border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 flex items-center gap-2">
                   <PlayCircle className="w-4 h-4" />
@@ -583,6 +615,7 @@ export function HomePage() {
                 >
                 <Link 
                   href="/contact" 
+                  onClick={() => trackButtonClick('Get Started', 'Final CTA', { page: 'home' })}
                   className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center justify-center gap-2 h-11 px-6 text-base w-full sm:w-auto min-w-[160px]"
                 >
                   Get Started
@@ -601,6 +634,7 @@ export function HomePage() {
                 </Link>
                 <Link 
                   href="/docs" 
+                  onClick={() => trackButtonClick('View Documentation', 'Final CTA', { page: 'home' })}
                   className="rounded-full border border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 h-11 px-6 text-base w-full sm:w-auto min-w-[160px] flex items-center justify-center"
                 >
                   View Documentation
@@ -745,13 +779,7 @@ export function HomePage() {
             <div className="space-y-4">
               <h3 className="font-semibold text-lg">Stay Updated</h3>
               <p className="text-sm text-gray-400">Subscribe to our newsletter for the latest updates and features.</p>
-              <form className="space-y-2" onSubmit={(e) => {
-                e.preventDefault()
-                setShowSubscribeNotification(true)
-                // Reset form
-                const form = e.target as HTMLFormElement
-                form.reset()
-              }}>
+              <form className="space-y-2" onSubmit={handleNewsletterSubmit}>
                 <input
                   type="email"
                   placeholder="Enter your email"
