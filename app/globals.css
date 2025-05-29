@@ -17,6 +17,7 @@
   }
 }
 
+<<<<<<< HEAD
 /* Always show scrollbar to prevent layout shift */
 html {
   overflow-y: scroll;
@@ -42,6 +43,8 @@ html {
   background: rgba(255, 255, 255, 0.3);
 }
 
+=======
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
 :root {
   --background: 0 0% 0%;
   --foreground: 0 0% 100%;
@@ -72,10 +75,13 @@ html {
 body {
   background-color: black;
   color: white;
+<<<<<<< HEAD
   overflow-x: hidden;
   position: relative;
   width: 100%;
   margin-right: 0 !important;
+=======
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
 }
 
 ::selection {

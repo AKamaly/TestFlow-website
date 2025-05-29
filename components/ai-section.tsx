@@ -68,7 +68,11 @@ export function AISection() {
                   playsInline
                   className="w-full h-[600px] object-cover object-center"
                 >
+<<<<<<< HEAD
                   <source src="/Video/AI powred validation Vertical.mp4" type="video/mp4" />
+=======
+                  <source src="/static/media/AI powred validation Vertical.mp4" type="video/mp4" />
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
                   Your browser does not support the video tag.
                 </video>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>

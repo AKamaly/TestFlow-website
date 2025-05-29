@@ -3,7 +3,11 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { usePathname } from "next/navigation"
+<<<<<<< HEAD
 import { ArrowRight, ChevronDown, Cpu, FlaskRoundIcon as Flask, Car, CircuitBoard, Book, FileText, Users, Rocket, Building2, PlayCircle } from 'lucide-react'
+=======
+import { ArrowRight, ChevronDown, Cpu, FlaskRoundIcon as Flask, Car, CircuitBoard, Book } from 'lucide-react'
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +15,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
+<<<<<<< HEAD
 import { useState } from "react"
 import React from "react"
 
@@ -37,6 +42,11 @@ const solutionItems = [
 
 const industryItems = [
   {
+=======
+
+const solutionItems = [
+  {
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
     label: "Semiconductor",
     href: "/semiconductor",
     icon: Cpu,
@@ -49,6 +59,15 @@ const industryItems = [
     description: "For research laboratories and academic institutions"
   },
   {
+<<<<<<< HEAD
+=======
+    label: "Electronics",
+    href: "/electronics",
+    icon: CircuitBoard,
+    description: "For consumer and industrial electronics"
+  },
+  {
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
     label: "Automotive",
     href: "/automotive",
     icon: Car,
@@ -56,6 +75,7 @@ const industryItems = [
   }
 ]
 
+<<<<<<< HEAD
 const resourceItems = {
   company: [
     {
@@ -188,6 +208,11 @@ export function SiteHeader() {
       })
     }
   }, [isSolutionsOpen, isResourcesOpen])
+=======
+export function SiteHeader() {
+  const pathname = usePathname()
+  const isHomePage = pathname === "/"
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
 
   const scrollToSection = (sectionId: string) => {
     if (!isHomePage) {
@@ -202,6 +227,7 @@ export function SiteHeader() {
   }
 
   return (
+<<<<<<< HEAD
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/50 backdrop-blur-lg relative">
       <div className="container mx-auto max-w-[1400px] w-full flex h-16 items-center px-4 relative">
         {/* Exact center reference dot - hidden but still used for positioning */}
@@ -238,6 +264,52 @@ export function SiteHeader() {
                 ></div>
               )}
             </div>
+=======
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/50 backdrop-blur-lg">
+      <div className="container mx-auto max-w-[1400px] w-full flex h-16 items-center justify-between px-4">
+        <Link href="/" className="text-xl font-bold">
+          Atoms
+        </Link>
+        <nav className="hidden md:flex items-center justify-center gap-8">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center justify-center gap-1 text-sm text-gray-400 hover:text-white transition-colors">
+              Solutions
+              <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="center" className="w-[400px] p-3 bg-black/90 backdrop-blur-xl border border-white/10">
+              <div className="grid grid-cols-1 gap-1">
+                {solutionItems.map((item) => {
+                  const Icon = item.icon
+                  return (
+                    <DropdownMenuItem key={item.label} asChild className="cursor-pointer focus:bg-transparent">
+                      <Link 
+                        href={item.href} 
+                        className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors"
+                      >
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-white/10 flex items-center justify-center">
+                          <Icon className="w-4 h-4 text-blue-400" />
+                        </div>
+                        <div>
+                          <div className="font-medium text-sm text-white/90">{item.label}</div>
+                          <div className="text-xs text-gray-400">{item.description}</div>
+                        </div>
+                      </Link>
+                    </DropdownMenuItem>
+                  )
+                })}
+              </div>
+              <DropdownMenuSeparator className="my-2" />
+              <DropdownMenuItem asChild className="cursor-pointer focus:bg-transparent">
+                <Link 
+                  href="/contact" 
+                  className="flex items-center justify-between p-3 rounded-lg hover:bg-blue-500/10 transition-colors"
+                >
+                  <span className="text-sm font-medium text-blue-400">Custom solution</span>
+                  <ArrowRight className="w-4 h-4 text-blue-400" />
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
           </DropdownMenu>
           <button 
             onClick={() => scrollToSection('demo')} 
@@ -245,13 +317,17 @@ export function SiteHeader() {
           >
             TestFlow
           </button>
+<<<<<<< HEAD
           <div className="w-1 h-1 rounded-full bg-gray-400"></div>
+=======
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
           <button 
             onClick={() => scrollToSection('features')} 
             className="text-sm text-gray-400 hover:text-white transition-colors"
           >
             Features
           </button>
+<<<<<<< HEAD
           <DropdownMenu open={isResourcesOpen} onOpenChange={setIsResourcesOpen}>
             <div 
               ref={resourcesTriggerRef}
@@ -282,6 +358,22 @@ export function SiteHeader() {
             className="hidden md:inline-flex text-sm text-gray-400 hover:text-white transition-colors"
           >
             Login
+=======
+          <Link 
+            href="/docs" 
+            className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors"
+          >
+            <Book className="w-4 h-4" />
+            Documentation
+          </Link>
+        </nav>
+        <div className="flex items-center gap-4">
+          <Link
+            href="#"
+            className="hidden md:inline-flex text-sm text-gray-400 hover:text-white transition-colors"
+          >
+            Sign in
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
           </Link>
           <Button asChild>
             <Link 
@@ -294,6 +386,7 @@ export function SiteHeader() {
           </Button>
         </div>
       </div>
+<<<<<<< HEAD
 
       {/* Solutions Dropdown Menu - Absolutely positioned relative to header */}
       {isSolutionsOpen && (
@@ -529,8 +622,13 @@ export function SiteHeader() {
           </div>
         </div>
       )}
+=======
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
     </header>
   )
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d

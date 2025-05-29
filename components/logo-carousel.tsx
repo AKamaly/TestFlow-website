@@ -4,6 +4,24 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 const logos = {
+<<<<<<< HEAD
+=======
+  row1: [
+    { src: '/logos/NVDA_BIG.png', alt: 'NVIDIA' },
+    { src: '/logos/AMD_BIG.png', alt: 'AMD' },
+    { src: '/logos/INTC.png', alt: 'Intel' },
+    { src: '/logos/ADI_BIG.png', alt: 'Analog Devices' },
+    { src: '/logos/IFX.DE.png', alt: 'Infineon' },
+    { src: '/logos/ON_BIG.png', alt: 'ON Semiconductor' },
+  ],
+  row2: [
+    { src: '/logos/6723.T_BIG.png', alt: 'Renesas' },
+    { src: '/logos/LSCC_BIG.png', alt: 'Lattice Semiconductor' },
+    { src: '/logos/TXN_BIG.png', alt: 'Texas Instruments' },
+    { src: '/logos/ALGM_BIG.png', alt: 'Allegro MicroSystems' },
+    { src: '/logos/SITM_BIG.png', alt: 'SiTime' },
+  ],
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
   row3: [
     { src: '/logos/keysight-logo.svg', alt: 'Keysight' },
     { src: '/logos/tektronix-logo.svg', alt: 'Tektronix' },
@@ -48,7 +66,21 @@ export function LogoCarousel() {
   return (
     <div className="w-full overflow-hidden">
       <div className="space-y-8">
+<<<<<<< HEAD
         {/* Only Row 3 */}
+=======
+        {/* Row 1 */}
+        <div className="overflow-hidden">
+          <LogoRow logos={logos.row1} direction="normal" speed={40} />
+        </div>
+        
+        {/* Row 2 */}
+        <div className="overflow-hidden">
+          <LogoRow logos={logos.row2} direction="reverse" speed={30} />
+        </div>
+        
+        {/* Row 3 */}
+>>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
         <div className="overflow-hidden">
           <LogoRow logos={logos.row3} direction="normal" speed={35} />
         </div>
