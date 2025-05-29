@@ -440,11 +440,7 @@ export function DemoSection() {
                   playsInline
                   className="w-full h-full object-cover"
                 >
-<<<<<<< HEAD
                   <source src="/Video/TestFlow workflow builder Video.mp4" type="video/mp4" />
-=======
-                  <source src="/static/media/TestFlow workflow builder Video.mp4" type="video/mp4" />
->>>>>>> 77c207a692b3163b84a5af0a1281b675fe8d729d
                   Your browser does not support the video tag.
                 </video>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />

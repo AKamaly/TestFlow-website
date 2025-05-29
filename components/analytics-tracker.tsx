@@ -77,6 +77,104 @@ export const trackPageSpecificEvent = (eventType: string, data: Record<string, a
   trackEvent(`page_${eventType}`, data)
 }
 
+// Track feature interactions with more detail
+export const trackFeatureInteraction = (featureName: string, interactionType: string, details?: Record<string, any>) => {
+  trackEvent('feature_interaction', {
+    feature_name: featureName,
+    interaction_type: interactionType,
+    feature_category: details?.category || 'general',
+    interaction_duration: details?.duration,
+    interaction_success: details?.success,
+    timestamp: new Date().toISOString()
+  })
+}
+
+// Track user engagement level
+export const trackEngagementScore = (score: number, factors: string[]) => {
+  trackEvent('engagement_score', {
+    score: score,
+    contributing_factors: factors,
+    session_duration: Math.round((Date.now() - window.performance.timing.navigationStart) / 1000),
+    page_scroll_percentage: getScrollPercentage(),
+    interactions_count: getInteractionsCount()
+  })
+}
+
+// Helper function to calculate scroll percentage
+const getScrollPercentage = () => {
+  const h = document.documentElement
+  const b = document.body
+  const st = 'scrollTop'
+  const sh = 'scrollHeight'
+  return Math.round((h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100)
+}
+
+// Helper function to track interaction count (implement in your state management)
+const getInteractionsCount = () => {
+  return (window as any).interactionCount || 0
+}
+
+// Enhanced section tracker with more metrics
+export function EnhancedSectionTracker({ 
+  sectionId, 
+  sectionName, 
+  category 
+}: { 
+  sectionId: string, 
+  sectionName: string,
+  category?: string 
+}) {
+  useEffect(() => {
+    let viewStartTime: number
+    let interactionCount = 0
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            viewStartTime = Date.now()
+            trackSectionView(sectionName, {
+              section_id: sectionId,
+              section_category: category,
+              viewport_percentage: Math.round(entry.intersectionRatio * 100)
+            })
+          } else if (viewStartTime) {
+            // Track when user leaves section
+            const viewDuration = Date.now() - viewStartTime
+            trackEvent('section_engagement', {
+              section_name: sectionName,
+              view_duration_seconds: Math.round(viewDuration / 1000),
+              interaction_count: interactionCount
+            })
+          }
+        })
+      },
+      { 
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+        rootMargin: '0px'
+      }
+    )
+
+    const element = document.getElementById(sectionId)
+    if (element) {
+      observer.observe(element)
+      
+      // Track interactions within section
+      element.addEventListener('click', () => {
+        interactionCount++
+      })
+    }
+
+    return () => {
+      if (element) {
+        observer.unobserve(element)
+      }
+    }
+  }, [sectionId, sectionName, category])
+
+  return null
+}
+
 // Section visibility tracker component
 export function SectionTracker({ sectionId, sectionName }: { sectionId: string, sectionName: string }) {
   const pathname = usePathname()
@@ -173,15 +271,18 @@ export function EnhancedPageTracker() {
       else if (path.includes('/careers')) pageCategory = 'recruitment'
       else if (path === '/') pageCategory = 'homepage'
 
-      // Track enhanced page view
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'enhanced_page_view', {
-          page_path: path,
-          page_title: document.title,
-          page_category: pageCategory,
-          timestamp: new Date().toISOString()
-        })
-      }
+      // Track enhanced page view with a delay to ensure title is set
+      setTimeout(() => {
+        if (typeof window !== 'undefined' && window.gtag) {
+          const pageTitle = document.title || 'Atoms TestFlow - AI-powered validation platform'
+          window.gtag('event', 'enhanced_page_view', {
+            page_path: path,
+            page_title: pageTitle,
+            page_category: pageCategory,
+            timestamp: new Date().toISOString()
+          })
+        }
+      }, 100);
     }
 
     // Track route changes

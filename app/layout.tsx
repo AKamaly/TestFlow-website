@@ -14,13 +14,19 @@ function PageViewTracker() {
   const searchParams = useSearchParams()
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'page_view', {
-        page_path: pathname,
-        page_search: searchParams.toString(),
-        page_title: document.title
-      });
-    }
+    // Wait for a short delay to ensure title is set
+    const timer = setTimeout(() => {
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        const pageTitle = document.title || 'Atoms TestFlow - AI-powered validation platform'
+        ;(window as any).gtag('event', 'page_view', {
+          page_path: pathname,
+          page_search: searchParams.toString(),
+          page_title: pageTitle
+        });
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [pathname, searchParams])
 
   return null
