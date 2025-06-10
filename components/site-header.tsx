@@ -103,9 +103,10 @@ const resourceItems = {
     },
     {
       label: "Case Studies",
-      href: "/case-studies",
+      href: "#",
       icon: Book,
-      description: "Customer success stories"
+      description: "Coming Soon",
+      badge: "Soon"
     },
     {
       label: "Changelog",

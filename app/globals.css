@@ -82,17 +82,3 @@ body {
   background: rgba(255, 255, 255, 0.2);
 }
 
-html {
-  zoom: 125%;
-  -moz-transform: scale(1.25);
-  -moz-transform-origin: 0 0;
-}
-
-/* For better cross-browser compatibility */
-@supports not (zoom: 125%) {
-  html {
-    transform: scale(1.25);
-    transform-origin: 0 0;
-  }
-}
-

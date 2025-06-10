@@ -317,63 +317,123 @@ export default function DemosPage() {
       </section>
       
       {/* CTA Section */}
-      <section className="py-20 md:py-32 border-t border-white/10">
+      <section className="relative overflow-hidden py-16 md:py-24">
         <div className="container mx-auto px-4 max-w-[1400px] w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative max-w-4xl mx-auto bg-gradient-to-b from-white/[0.03] to-white/[0.01] rounded-2xl border border-white/10 p-8 md:p-12"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-2xl blur-3xl opacity-30" />
-            <div className="relative text-center space-y-8">
-              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent">
-                Ready to Supercharge Your Validation Process?
-              </h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Join leading companies who trust TestFlow to accelerate their hardware validation
-              </p>
-              <Link 
-                href="/contact" 
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-full px-8 py-4 transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)]"
+          {/* Main rounded container with glassy black background */}
+          <div className="relative rounded-3xl overflow-hidden bg-black/60 backdrop-blur-xl border border-white/20">
+            {/* Background effects */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10" />
+            <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 rounded-3xl blur-2xl opacity-30" />
+            
+            <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center p-8 md:p-12 lg:p-16">
+              {/* Left Content */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="space-y-8"
               >
-                Contact Sales
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              
-              <div className="flex items-center justify-center gap-6 pt-4">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div
-                      key={i}
-                      className="w-10 h-10 rounded-full border-2 border-black bg-gradient-to-br from-blue-400 to-purple-400"
-                    />
-                  ))}
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
+                >
+                  Ready to{' '}
+                  <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    Get Started?
+                  </span>
+                </motion.h2>
+                
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="text-lg text-gray-300 leading-relaxed max-w-lg"
+                >
+                  Experience the power of AI-driven validation. Start your free trial today and see how TestFlow can transform your workflow.
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                  className="flex flex-col sm:flex-row gap-4"
+                >
+                  <Link 
+                    href="/contact" 
+                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center justify-center gap-2 h-12 px-8 text-lg font-semibold w-fit"
+                  >
+                    Start Free Trial
+                    <motion.div
+                      animate={{
+                        x: [0, 4, 0]
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      <ArrowRight className="w-5 h-5" />
+                    </motion.div>
+                  </Link>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 }}
+                  className="flex items-center gap-6 pt-4"
+                >
+                  <div className="flex items-center gap-2 text-sm text-gray-400">
+                    <Check className="w-4 h-4 text-green-400" />
+                    <span>No Credit Card Required</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-400">
+                    <Check className="w-4 h-4 text-green-400" />
+                    <span>Full Feature Access</span>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              {/* Right Image Container */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="flex items-center justify-center"
+              >
+                {/* Image with layered effects like about page */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-[2rem] blur-2xl transform rotate-3" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-purple-500/10 rounded-[2rem] blur-2xl transform -rotate-3" />
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-[1.75rem] transform translate-x-2 translate-y-2" />
+                    <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-[1.75rem] overflow-hidden border-2 border-white/10 shadow-2xl transform hover:scale-[1.01] transition-transform duration-500">
+                      <Image
+                        src="/images/TestFlow CTA Image .png"
+                        alt="TestFlow Platform Interface"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent" />
+                    </div>
+                  </div>
+                  <div className="absolute -top-5 -right-5 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full p-1 shadow-lg transform hover:scale-105 transition-transform">
+                    <div className="bg-black rounded-full p-2.5">
+                      <ArrowRight className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
                 </div>
-                <div className="text-left">
-                  <div className="text-sm font-medium">Join 10,000+ engineers</div>
-                  <div className="text-sm text-gray-400">who are already using TestFlow</div>
-                </div>
-              </div>
-              
-              <div className="flex items-center justify-center gap-4 text-sm text-gray-400">
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-green-400" />
-                  <span>85% Faster Validation</span>
-                </div>
-                <div className="w-1 h-1 rounded-full bg-gray-700" />
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-green-400" />
-                  <span>Universal Compatibility</span>
-                </div>
-                <div className="w-1 h-1 rounded-full bg-gray-700" />
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-green-400" />
-                  <span>Enterprise Security</span>
-                </div>
-              </div>
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
       

@@ -640,73 +640,124 @@ return (
     </section>
 
     {/* CTA Section */}
-    <section className="relative py-20 md:py-32 overflow-hidden">
-      <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative max-w-4xl mx-auto"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-2xl blur-3xl opacity-50" />
-          <div className="relative bg-black/40 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12">
-            <div className="text-center space-y-8">
-              <motion.div
+    <section className="relative overflow-hidden py-16 md:py-24">
+      <div className="container mx-auto px-4 max-w-[1400px] w-full">
+        {/* Main rounded container with glassy black background */}
+        <div className="relative rounded-3xl overflow-hidden bg-black/60 backdrop-blur-xl border border-white/20">
+          {/* Background effects */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10" />
+          <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 rounded-3xl blur-2xl opacity-30" />
+          
+          <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center p-8 md:p-12 lg:p-16">
+            {/* Left Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="space-y-4"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
               >
-                <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-white via-white to-gray-400 bg-clip-text text-transparent">
-                  Start Your Electronics Validation Journey
-                </h2>
-                <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
-                  Join leading electronics manufacturers who trust Atoms Testflow to validate their products.
-                </p>
-              </motion.div>
+                Start Your Electronics{' '}
+                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  Validation Journey
+                </span>
+              </motion.h2>
+              
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-lg text-gray-300 leading-relaxed max-w-lg"
+              >
+                Join leading electronics manufacturers who trust Atoms TestFlow to validate their products faster and more efficiently.
+              </motion.p>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="flex flex-col items-center gap-6"
+                transition={{ delay: 0.3 }}
+                className="flex flex-col sm:flex-row gap-4"
               >
-                <Link href="/contact" className="group relative overflow-hidden bg-white text-black hover:bg-white/90 rounded-full px-8 py-6 text-lg font-medium transition-all duration-300 w-full">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <span className="relative flex items-center gap-2 justify-center">
-                    Try Atoms TestFlow Now
-                    <motion.div
-                      animate={{
-                        x: [0, 8, 0],
-                      }}
-                      transition={{
-                        duration: 1,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    >
-                      <ArrowRight className="w-5 h-5" />
-                    </motion.div>
-                  </span>
+                <Link 
+                  href="/contact" 
+                  onClick={() => handleCTAClick('Try Atoms TestFlow Now', 'Electronics CTA')}
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center justify-center gap-2 h-12 px-8 text-lg font-semibold w-fit"
+                >
+                  Try Atoms TestFlow Now
+                  <motion.div
+                    animate={{
+                      x: [0, 4, 0]
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.div>
                 </Link>
+              </motion.div>
 
-                <div className="flex items-center gap-4 text-sm text-gray-400">
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-400" />
-                    <span>Instant Setup</span>
-                  </div>
-                  <div className="w-1 h-1 rounded-full bg-gray-700" />
-                  <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-400" />
-                    <span>24/7 Support</span>
-                  </div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="flex items-center gap-6 pt-4"
+              >
+                <div className="flex items-center gap-2 text-sm text-gray-400">
+                  <Check className="w-4 h-4 text-green-400" />
+                  <span>Instant Setup</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-400">
+                  <Check className="w-4 h-4 text-green-400" />
+                  <span>24/7 Support</span>
                 </div>
               </motion.div>
-            </div>
+            </motion.div>
+
+            {/* Right Image Container */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="flex items-center justify-center"
+            >
+              {/* Image with layered effects like about page */}
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-[2rem] blur-2xl transform rotate-3" />
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-purple-500/10 rounded-[2rem] blur-2xl transform -rotate-3" />
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-[1.75rem] transform translate-x-2 translate-y-2" />
+                  <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-[1.75rem] overflow-hidden border-2 border-white/10 shadow-2xl transform hover:scale-[1.01] transition-transform duration-500">
+                    <Image
+                      src="/images/TestFlow CTA Image .png"
+                      alt="TestFlow Platform Interface"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent" />
+                  </div>
+                </div>
+                <div className="absolute -top-5 -right-5 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full p-1 shadow-lg transform hover:scale-105 transition-transform">
+                  <div className="bg-black rounded-full p-2.5">
+                    <ArrowRight className="w-5 h-5 text-white" />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
 

@@ -3,7 +3,7 @@ const nextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
-    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com']
+    domains: ['9zog2la6l29pbfba.public.blob.vercel-storage.com']
   },
   trailingSlash: true,
   // Ensure static assets are copied to the output directory

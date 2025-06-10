@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { SiteHeader } from "@/components/site-header"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Search, User, Tag, ArrowUpRight, Clock, Calendar, Filter } from 'lucide-react'
+import { ArrowRight, Search, User, Tag, ArrowUpRight, Clock, Calendar, Filter, Check } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { SectionTracker, trackButtonClick, trackFormSubmission, trackPageSpecificEvent } from '@/components/analytics-tracker'
@@ -345,64 +345,130 @@ export default function BlogPage() {
           </div>
         )}
 
-        {/* CTA Section from home page */}
-        <section id="cta" className="relative py-24 mt-10 overflow-hidden">
-          <div className="relative max-w-5xl mx-auto text-center">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-3xl blur-3xl opacity-30" />
-            <div className="relative">
-              <div className="space-y-4 mb-8">
-                <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent">
-                  Ready to transform your<br />validation process?
-                </h2>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                  Join leading companies who trust Atoms TestFlow to validate their products faster and more efficiently.
-                </p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link 
-                  href="/contact" 
-                  onClick={() => trackButtonClick('Get Started', 'Blog CTA', { page: 'blog' })}
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center justify-center gap-2 h-11 px-6 text-base w-full sm:w-auto min-w-[160px]"
+        {/* CTA Section */}
+        <section className="relative overflow-hidden py-16 md:py-24 mt-10">
+          <div className="container mx-auto px-4 max-w-[1400px] w-full">
+            {/* Main rounded container with glassy black background */}
+            <div className="relative rounded-3xl overflow-hidden bg-black/60 backdrop-blur-xl border border-white/20">
+              {/* Background effects */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10" />
+              <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 rounded-3xl blur-2xl opacity-30" />
+              
+              <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center p-8 md:p-12 lg:p-16">
+                {/* Left Content */}
+                <motion.div
+                  initial={{ opacity: 0, x: -40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="space-y-8"
                 >
-                  Get Started
-                  <motion.div
-                    animate={{
-                      x: [0, 4, 0]
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
+                  <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                    className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
                   >
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.div>
-                </Link>
-                <Link 
-                  href="/docs" 
-                  onClick={() => trackButtonClick('View Documentation', 'Blog CTA', { page: 'blog' })}
-                  className="rounded-full border border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 h-11 px-6 text-base w-full sm:w-auto min-w-[160px] flex items-center justify-center"
-                >
-                  View Documentation
-                </Link>
-              </div>
+                    Ready to transform your{' '}
+                    <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                      validation process?
+                    </span>
+                  </motion.h2>
+                  
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="text-lg text-gray-300 leading-relaxed max-w-lg"
+                  >
+                    Join leading companies who trust Atoms TestFlow to validate their products faster and more efficiently.
+                  </motion.p>
 
-              <div className="mt-12 flex flex-col items-center gap-6">
-                <div className="flex items-center gap-6">
-                  <div className="flex -space-x-2">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div
-                        key={i}
-                        className="w-10 h-10 rounded-full border-2 border-black bg-gradient-to-br from-blue-400 to-purple-400"
-                      />
-                    ))}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="flex flex-col sm:flex-row gap-4"
+                  >
+                    <Link 
+                      href="/contact" 
+                      onClick={() => trackButtonClick('Get Started', 'Blog CTA', { page: 'blog' })}
+                      className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center justify-center gap-2 h-12 px-8 text-lg font-semibold w-fit"
+                    >
+                      Get Started
+                      <motion.div
+                        animate={{
+                          x: [0, 4, 0]
+                        }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      >
+                        <ArrowRight className="w-5 h-5" />
+                      </motion.div>
+                    </Link>
+                    <Link 
+                      href="/docs" 
+                      onClick={() => trackButtonClick('View Documentation', 'Blog CTA', { page: 'blog' })}
+                      className="border-2 border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 rounded-full transition-all duration-300 flex items-center justify-center gap-2 h-12 px-8 text-lg font-medium w-fit"
+                    >
+                      View Documentation
+                    </Link>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 }}
+                    className="flex items-center gap-6 pt-4"
+                  >
+                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                      <Check className="w-4 h-4 text-green-400" />
+                      <span>10,000+ Engineers</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                      <Check className="w-4 h-4 text-green-400" />
+                      <span>Trusted Platform</span>
+                    </div>
+                  </motion.div>
+                </motion.div>
+
+                {/* Right Image Container */}
+                <motion.div
+                  initial={{ opacity: 0, x: 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="flex items-center justify-center"
+                >
+                  {/* Image with layered effects like about page */}
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-[2rem] blur-2xl transform rotate-3" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-purple-500/10 rounded-[2rem] blur-2xl transform -rotate-3" />
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-[1.75rem] transform translate-x-2 translate-y-2" />
+                      <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-[1.75rem] overflow-hidden border-2 border-white/10 shadow-2xl transform hover:scale-[1.01] transition-transform duration-500">
+                        <Image
+                          src="/images/TestFlow CTA Image .png"
+                          alt="TestFlow Platform Interface"
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent" />
+                      </div>
+                    </div>
+                    <div className="absolute -top-5 -right-5 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full p-1 shadow-lg transform hover:scale-105 transition-transform">
+                      <div className="bg-black rounded-full p-2.5">
+                        <ArrowRight className="w-5 h-5 text-white" />
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-left">
-                    <div className="text-sm font-medium">Join 10,000+ engineers</div>
-                    <div className="text-sm text-gray-400">who are already using Atoms TestFlow</div>
-                  </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </div>
