@@ -16,22 +16,22 @@ import React from "react"
 
 const solutionItems = [
   {
-    label: "Semiconductors",
-    href: "/semiconductor",
-    icon: Cpu,
-    description: "Complete validation solutions for semiconductor manufacturing and testing"
+    label: "Startups",
+    href: "/startups",
+    icon: Rocket,
+    description: "Launch faster than ever before with AI-powered validation designed for startups"
   },
   {
-    label: "Research Labs",
-    href: "/research-labs",
-    icon: Flask,
-    description: "Advanced tools for research laboratories and academic institutions"
+    label: "Midmarket",
+    href: "/midmarket",
+    icon: Building2,
+    description: "Enterprise features at midmarket prices - scale your validation efficiently"
   },
   {
-    label: "Electronics",
-    href: "/electronics",
-    icon: CircuitBoard,
-    description: "Comprehensive testing solutions for electronics manufacturing"
+    label: "Enterprise",
+    href: "/enterprise",
+    icon: Users,
+    description: "Complete enterprise-grade validation platform for large organizations"
   }
 ]
 

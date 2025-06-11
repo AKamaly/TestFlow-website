@@ -156,58 +156,127 @@ export function HomePage() {
       <SectionTracker sectionId="roi" sectionName="ROI Calculator" />
       <SectionTracker sectionId="cta" sectionName="Final CTA" />
       {/* Hero Section */}
-      <section className="relative pt-20 pb-0 md:pt-24 md:pb-0 overflow-hidden">
-        {/* Background Elements */}
+      <section className="relative pt-20 pb-12 md:pt-24 md:pb-20 overflow-hidden">
+        {/* Enhanced Background Elements */}
         <div className="absolute inset-0">
+          {/* Grid Pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-          <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent rounded-full blur-3xl" />
-          <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-purple-500/10 via-transparent to-transparent rounded-full blur-3xl" />
+          
+          {/* Multiple Gradient Layers */}
+          <div className="absolute top-0 -left-1/4 w-3/4 h-3/4 bg-gradient-to-br from-blue-500/20 via-purple-500/15 to-transparent rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-0 -right-1/4 w-3/4 h-3/4 bg-gradient-to-tl from-purple-500/20 via-blue-500/15 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-full blur-2xl" />
+          
+          {/* Radial Gradient Overlay */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(147,51,234,0.08),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]" />
+          
+          {/* Floating Particles */}
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-blue-400/30 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+          
+          {/* Larger Floating Elements */}
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={`large-${i}`}
+              className="absolute w-2 h-2 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-sm"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -20, 0],
+                x: [0, 10, 0],
+                opacity: [0.3, 0.8, 0.3],
+              }}
+              transition={{
+                duration: 4 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+              }}
+            />
+          ))}
         </div>
 
         <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
           <div className="max-w-4xl mx-auto text-center">
-            {/* Badge */}
+            {/* Enhanced Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-block rounded-full px-4 py-1.5 text-sm font-medium bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 backdrop-blur-sm mb-8"
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
+              className="inline-block rounded-full px-4 py-1.5 text-sm font-medium bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 backdrop-blur-xl mb-8 relative overflow-hidden group hover:scale-105 transition-all duration-300"
             >
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Introducing AI-Powered Validation
+              {/* Badge Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <span className="relative bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-semibold">
+                ✨ Introducing AI-Powered Validation
               </span>
+              
+              {/* Shimmer Effect */}
+              <div className="absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer" />
             </motion.div>
 
+            {/* Enhanced Title */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-white to-purple-400 bg-clip-text text-transparent leading-[1.2] tracking-tight"
+              transition={{ duration: 0.8, delay: 0.1, type: "spring", stiffness: 100 }}
+              className="text-3xl md:text-5xl font-bold mb-6 leading-[1.2] tracking-tight relative"
             >
-              Validate and launch your hardware faster.
+              {/* Text with Enhanced Gradient */}
+              <span className="bg-gradient-to-r from-blue-400 via-white to-purple-400 bg-clip-text text-transparent relative">
+                Validate and launch your hardware faster.
+              </span>
+              
+              {/* Glow Effect Behind Text */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-white/10 to-purple-500/20 blur-2xl -z-10 scale-110" />
             </motion.h1>
 
+            {/* Enhanced Description */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base md:text-lg text-gray-400 max-w-xl mx-auto mb-8"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-base md:text-lg text-gray-400 max-w-xl mx-auto mb-8 relative"
             >
-              Our AI validation tool helps semiconductors and electronics companies automate their testing process, reducing time-to-market and validation costs.
+              <span className="relative z-10">
+                Our AI validation tool helps semiconductors and electronics companies automate their testing process, reducing time-to-market and validation costs.
+              </span>
+              {/* Subtle glow behind text */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 blur-xl -z-10" />
             </motion.p>
 
+            {/* Enhanced Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
             >
-              <Button asChild size="default" className="h-11 px-6 text-base">
+              {/* Enhanced Get Started Button */}
+              <Button asChild size="default" className="h-11 px-6 text-base group relative overflow-hidden">
                 <Link 
                   href="/contact" 
                   onClick={() => trackButtonClick('Get Started', 'Hero Section', { page: 'home' })}
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center gap-2"
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(79,70,229,0.6)] flex items-center gap-2 relative z-10"
                 >
+                  {/* Button Background Glow */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300 -z-10" />
+                  
                   Get Started
                   <motion.div
                     animate={{
@@ -221,53 +290,124 @@ export function HomePage() {
                   >
                     <ArrowRight className="w-4 h-4" />
                   </motion.div>
+                  
+                  {/* Shimmer Effect */}
+                  <div className="absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer" />
                 </Link>
               </Button>
+              
+              {/* Enhanced Watch Demo Button */}
               <Button 
                 variant="outline" 
                 size="default" 
-                className="h-11 px-6 text-base"
+                className="h-11 px-6 text-base group relative overflow-hidden"
                 onClick={() => {
                   setShowVideoModal(true)
                   trackButtonClick('Watch Demo', 'Hero Section', { page: 'home' })
                 }}
               >
-                <span className="rounded-full border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 flex items-center gap-2">
+                <span className="rounded-full border-blue-500/30 hover:border-blue-500/60 hover:bg-blue-500/10 flex items-center gap-2 relative z-10 transition-all duration-300">
+                  {/* Button Glow */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+                  
                   <PlayCircle className="w-4 h-4" />
                   Watch Demo
+                  
+                  {/* Subtle shimmer */}
+                  <div className="absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer" />
                 </span>
               </Button>
             </motion.div>
 
-            {/* Product Preview */}
+            {/* Enhanced Product Preview */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative mx-auto max-w-5xl"
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 1, delay: 0.4, type: "spring", stiffness: 100 }}
+              className="relative mx-auto max-w-5xl group mb-20"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-2xl blur-2xl" />
-              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full"
+              {/* Multiple Glow Layers */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 rounded-2xl blur-3xl opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/15 to-purple-500/10 rounded-2xl blur-2xl" />
+              <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/15 via-purple-500/15 to-blue-500/15 rounded-3xl blur-2xl opacity-50" />
+              
+              {/* Main Container */}
+              <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-2xl backdrop-blur-sm bg-black/20 group-hover:border-white/30 transition-all duration-500">
+                {/* Inner Glow */}
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-500/5 via-transparent to-purple-500/5 rounded-2xl" />
+                
+                {/* Video Container */}
+                <div className="relative">
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full relative z-10"
+                  >
+                    <source src="/Video/cursorful-video-1741889347046.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  
+                  {/* Video Overlay Effects */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-purple-500/5 pointer-events-none" />
+                </div>
+                
+                {/* Floating UI Elements */}
+                <motion.div
+                  className="absolute top-4 right-4 bg-black/60 backdrop-blur-xl border border-white/20 rounded-lg px-3 py-2"
+                  animate={{
+                    y: [0, -5, 0],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
                 >
-                  <source src="/Video/cursorful-video-1741889347046.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                    <span className="text-xs text-white/80">AI Active</span>
+                  </div>
+                </motion.div>
+                
+                <motion.div
+                  className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-xl border border-white/20 rounded-lg px-3 py-2"
+                  animate={{
+                    y: [0, 5, 0],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1
+                  }}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+                    <span className="text-xs text-white/80">Validating...</span>
+                  </div>
+                </motion.div>
               </div>
+              
+              {/* Corner Accents */}
+              <div className="absolute -top-2 -left-2 w-4 h-4 border-l-2 border-t-2 border-blue-400/50 rounded-tl-lg" />
+              <div className="absolute -top-2 -right-2 w-4 h-4 border-r-2 border-t-2 border-purple-400/50 rounded-tr-lg" />
+              <div className="absolute -bottom-2 -left-2 w-4 h-4 border-l-2 border-b-2 border-blue-400/50 rounded-bl-lg" />
+              <div className="absolute -bottom-2 -right-2 w-4 h-4 border-r-2 border-b-2 border-purple-400/50 rounded-br-lg" />
+            </motion.div>
+
+            {/* Integrated Logo Carousel */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="relative"
+            >
+              <LogoCarousel />
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* Logo Carousel Section - Now part of hero */}
-      <section className="py-12 bg-gradient-to-b from-black to-gray-900/30 border-b border-white/5">
-        <div className="container mx-auto px-4 max-w-[1400px] w-full">
-          <LogoCarousel />
         </div>
       </section>
 
@@ -1355,15 +1495,14 @@ export function HomePage() {
               </div>
             </div>
 
-            {/* Industries Links */}
+            {/* Solutions Links */}
             <div className="space-y-4">
-              <h3 className="font-semibold text-lg">Industries</h3>
+              <h3 className="font-semibold text-lg">Solutions</h3>
               <ul className="space-y-3">
                 {[
-                  { label: 'Semiconductor', href: '/semiconductor' },
-                  { label: 'Electronics', href: '/electronics' },
-                  { label: 'Automotive', href: '/automotive' },
-                  { label: 'Research Labs', href: '/research-labs' }
+                  { label: 'Startups', href: '/startups' },
+                  { label: 'Midmarket', href: '/midmarket' },
+                  { label: 'Enterprise', href: '/enterprise' }
                 ].map((link) => (
                   <li key={link.label}>
                     <Link href={link.href} className="text-gray-400 hover:text-white transition-colors">
@@ -1379,7 +1518,6 @@ export function HomePage() {
               <h3 className="font-semibold text-lg">Sections</h3>
               <ul className="space-y-3">
                 {[
-                  { label: 'Solutions', href: '#solutions' },
                   { label: 'TestFlow', href: '#demo' },
                   { label: 'Features', href: '#features' },
                   { label: 'Contact', href: '/contact' }
@@ -1426,6 +1564,48 @@ export function HomePage() {
           </div>
         </div>
       </footer>
+
+      {/* Custom Styles */}
+      <style jsx>{`
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%) skewX(-12deg);
+          }
+          100% {
+            transform: translateX(200%) skewX(-12deg);
+          }
+        }
+        
+        .animate-shimmer {
+          animation: shimmer 1.5s ease-in-out;
+        }
+        
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+        
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+          0%, 100% {
+            opacity: 0.5;
+          }
+          50% {
+            opacity: 1;
+          }
+        }
+        
+        .animate-glow {
+          animation: glow 2s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   )
 } 

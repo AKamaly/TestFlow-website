@@ -621,15 +621,14 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Industries Links */}
+            {/* Solutions Links */}
             <div className="space-y-4">
-              <h3 className="font-semibold text-lg">Industries</h3>
+              <h3 className="font-semibold text-lg">Solutions</h3>
               <ul className="space-y-3">
                 {[
-                  { label: 'Semiconductor', href: '/semiconductor' },
-                  { label: 'Electronics', href: '/electronics' },
-                  { label: 'Automotive', href: '/automotive' },
-                  { label: 'Research Labs', href: '/research-labs' }
+                  { label: 'Startups', href: '/startups' },
+                  { label: 'Midmarket', href: '/midmarket' },
+                  { label: 'Enterprise', href: '/enterprise' }
                 ].map((link) => (
                   <li key={link.label}>
                     <Link href={link.href} className="text-gray-400 hover:text-white transition-colors">
