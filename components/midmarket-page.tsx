@@ -439,13 +439,13 @@ export function MidmarketPage() {
             {/* Features Grid */}
             <div className="space-y-6 max-w-6xl mx-auto">
               {/* Row 1: Left wider than right */}
-              <div className="grid grid-cols-5 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                 <motion.div
                   initial={{ opacity: 0, y: 40, x: -20 }}
                   whileInView={{ opacity: 1, y: 0, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1, duration: 0.8, ease: "easeOut" }}
-                  className="col-span-3 group relative"
+                  className="md:col-span-3 group relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-violet-600/30 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
                   <div className="relative h-96 bg-gradient-to-br from-purple-500 via-violet-500 to-purple-600 rounded-3xl overflow-hidden p-8 text-white transform group-hover:scale-[1.02] transition-all duration-500 border border-purple-400/30 shadow-[0_8px_32px_rgba(147,51,234,0.4)]">
@@ -484,7 +484,7 @@ export function MidmarketPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
-                  className="col-span-2 group relative"
+                  className="md:col-span-2 group relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
                   <div className="relative h-80 bg-gradient-to-br from-orange-500 via-amber-500 to-orange-600 rounded-3xl overflow-hidden p-8 text-white border border-orange-400/30 shadow-[0_8px_32px_rgba(249,115,22,0.3)] group-hover:scale-[1.02] transition-all duration-500">
@@ -508,13 +508,13 @@ export function MidmarketPage() {
               </div>
 
               {/* Row 2: Left narrower than right */}
-              <div className="grid grid-cols-5 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 }}
-                  className="col-span-2 group relative"
+                  className="md:col-span-2 group relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
                   <div className="relative h-80 bg-gradient-to-br from-emerald-600 via-teal-600 to-emerald-700 rounded-3xl overflow-hidden p-8 text-white border border-emerald-400/30 shadow-[0_8px_32px_rgba(16,185,129,0.3)] group-hover:scale-[1.02] transition-all duration-500">
@@ -541,7 +541,7 @@ export function MidmarketPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4 }}
-                  className="col-span-3 group relative"
+                  className="md:col-span-3 group relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-teal-500/20 to-cyan-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
                   <div className="relative h-80 bg-gradient-to-br from-teal-600 via-cyan-600 to-teal-700 rounded-3xl overflow-hidden p-8 text-white border border-teal-400/30 shadow-[0_8px_32px_rgba(20,184,166,0.3)] group-hover:scale-[1.02] transition-all duration-500">

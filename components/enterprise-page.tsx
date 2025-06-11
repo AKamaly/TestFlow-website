@@ -138,9 +138,9 @@ export function EnterprisePage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Background Elements */}
-      <div className="fixed inset-0 pointer-events-none">
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
         <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent rounded-full blur-3xl" />
         <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-purple-500/10 via-transparent to-transparent rounded-full blur-3xl" />
@@ -327,7 +327,7 @@ export function EnterprisePage() {
       {/* Features Section - Enhanced with stunning visuals */}
       <section className="relative py-20 md:py-32 overflow-hidden">
         {/* Enhanced background elements */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
           <div className="absolute top-0 -left-1/4 w-3/4 h-3/4 bg-gradient-to-br from-purple-500/15 via-blue-500/10 to-transparent rounded-full blur-3xl" />
           <div className="absolute bottom-0 -right-1/4 w-3/4 h-3/4 bg-gradient-to-tl from-blue-500/15 via-purple-500/10 to-transparent rounded-full blur-3xl" />
@@ -383,13 +383,13 @@ export function EnterprisePage() {
             {/* Enhanced Features Grid */}
             <div className="space-y-8 max-w-6xl mx-auto">
               {/* Row 1: Left wider than right */}
-              <div className="grid grid-cols-5 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
                 <motion.div
                   initial={{ opacity: 0, y: 40, x: -20 }}
                   whileInView={{ opacity: 1, y: 0, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1, duration: 0.8, ease: "easeOut" }}
-                  className="col-span-3 group relative"
+                  className="md:col-span-3 group relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-purple-600/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
                   <div className="relative h-96 bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl overflow-hidden p-8 text-white transform group-hover:scale-[1.02] transition-all duration-500 border border-purple-400/20 shadow-[0_8px_32px_rgba(147,51,234,0.3)]">
@@ -427,7 +427,7 @@ export function EnterprisePage() {
                   whileInView={{ opacity: 1, y: 0, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-                  className="col-span-2 group relative"
+                  className="md:col-span-2 group relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-400/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
                   <div className="relative h-96 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-3xl overflow-hidden p-8 text-white transform group-hover:scale-[1.02] transition-all duration-500 border border-blue-400/20 shadow-[0_8px_32px_rgba(59,130,246,0.3)]">
@@ -461,13 +461,13 @@ export function EnterprisePage() {
               </div>
 
               {/* Row 2: Left narrower than right */}
-              <div className="grid grid-cols-5 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
                 <motion.div
                   initial={{ opacity: 0, y: 40, x: -20 }}
                   whileInView={{ opacity: 1, y: 0, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-                  className="col-span-2 group relative"
+                  className="md:col-span-2 group relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-blue-700/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
                   <div className="relative h-96 bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl overflow-hidden p-8 text-white transform group-hover:scale-[1.02] transition-all duration-500 border border-blue-500/20 shadow-[0_8px_32px_rgba(37,99,235,0.3)]">
@@ -504,7 +504,7 @@ export function EnterprisePage() {
                   whileInView={{ opacity: 1, y: 0, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-                  className="col-span-3 group relative"
+                  className="md:col-span-3 group relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-800/20 to-gray-900/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
                   <div className="relative h-96 bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl overflow-hidden p-8 text-white transform group-hover:scale-[1.02] transition-all duration-500 border border-gray-600/20 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
@@ -541,7 +541,7 @@ export function EnterprisePage() {
               </div>
 
               {/* Row 3: Equal width containers */}
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <motion.div
                   initial={{ opacity: 0, y: 40, x: -20 }}
                   whileInView={{ opacity: 1, y: 0, x: 0 }}
@@ -1032,7 +1032,7 @@ export function EnterprisePage() {
 
       {/* Enhanced Footer */}
       <footer className="border-t border-white/10 bg-gradient-to-b from-black to-gray-900/50">
-        <div className="container px-4">
+        <div className="container mx-auto px-4 max-w-[1400px] w-full">
           {/* Main Footer Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-16">
             {/* Brand Column - Takes 2 columns */}
@@ -1222,25 +1222,16 @@ export function EnterprisePage() {
         /* Smooth scrolling */
         html {
           scroll-behavior: smooth;
+          overflow-x: hidden;
         }
         
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-          width: 8px;
+        /* Prevent horizontal overflow on body */
+        body {
+          overflow-x: hidden;
+          position: relative;
         }
         
-        ::-webkit-scrollbar-track {
-          background: rgba(0, 0, 0, 0.1);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-          background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
-          border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(to bottom, #2563eb, #7c3aed);
-        }
+
         
         /* Enhanced backdrop blur support */
         @supports (backdrop-filter: blur(20px)) {

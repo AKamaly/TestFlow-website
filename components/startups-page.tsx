@@ -364,13 +364,13 @@ export function StartupsPage() {
             {/* Features Grid */}
             <div className="space-y-6 max-w-6xl mx-auto">
               {/* Row 1: Left wider than right */}
-              <div className="grid grid-cols-5 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 }}
-                  className="col-span-3 group relative"
+                  className="md:col-span-3 group relative"
                 >
                   <div className="relative h-80 bg-gradient-to-br from-green-500 to-green-600 rounded-3xl overflow-hidden p-8 text-white">
                     <h3 className="text-xl font-bold mb-4">Accelerate Time-to-Market</h3>
@@ -394,7 +394,7 @@ export function StartupsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
-                  className="col-span-2 group relative"
+                  className="md:col-span-2 group relative"
                 >
                   <div className="relative h-80 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-3xl overflow-hidden p-8 text-white">
                     <h3 className="text-xl font-bold mb-4">Bootstrap-Friendly Pricing</h3>
@@ -415,13 +415,13 @@ export function StartupsPage() {
               </div>
 
               {/* Row 2: Left narrower than right */}
-              <div className="grid grid-cols-5 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 }}
-                  className="col-span-2 group relative"
+                  className="md:col-span-2 group relative"
                 >
                   <div className="relative h-80 bg-gradient-to-br from-purple-600 to-purple-700 rounded-3xl overflow-hidden p-8 text-white">
                     <h3 className="text-xl font-bold mb-4">Validate Ideas Quickly</h3>
@@ -445,7 +445,7 @@ export function StartupsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4 }}
-                  className="col-span-3 group relative"
+                  className="md:col-span-3 group relative"
                 >
                   <div className="relative h-80 bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl overflow-hidden p-8 text-white">
                     <h3 className="text-xl font-bold mb-4">Scale from Day One</h3>
