@@ -199,15 +199,16 @@ export function EnterprisePage() {
             </motion.h1>
 
             {/* Enhanced Subheading */}
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto mb-10 leading-relaxed font-light"
             >
               TestFlow is designed with enterprise in mind. We push the boundaries of what's possible with AI validation, automating and optimizing how hardware testing is done - 
               <span className="text-blue-300 font-medium"> the days of scattered tools and manual processes are over.</span>
-            </motion.p>
+            </motion.div>
 
             {/* Enhanced CTA Section */}
             <motion.div
@@ -288,7 +289,7 @@ export function EnterprisePage() {
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-blue-500/30 animate-gradient-x opacity-50 blur-sm" />
             
             <Image
-              src="/images/Hero graphic.png"
+              src="/images/Hero graphic.webp"
               alt="TestFlow Enterprise Platform - AI-Powered Validation"
               fill
               className="object-cover w-full h-full relative z-20 hover:scale-105 transition-transform duration-700"
@@ -369,15 +370,15 @@ export function EnterprisePage() {
                 </span>
               </motion.h2>
               
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
+                transition={{ delay: 0.2 }}
+                className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto"
               >
-                Transform your validation process with enterprise-grade AI automation that scales with your organization
-              </motion.p>
+                Discover how TestFlow Enterprise helps large organizations streamline their validation processes and accelerate time-to-market.
+              </motion.div>
             </motion.div>
 
             {/* Enhanced Features Grid */}
@@ -409,7 +410,7 @@ export function EnterprisePage() {
                     {/* Enhanced Feature 1 Image */}
                     <div className="absolute bottom-0 left-4 right-4 h-52 group-hover:scale-105 transition-transform duration-500">
                       <Image
-                        src="/images/features1.png"
+                        src="/images/features1.webp"
                         alt="Save on Software License Fees"
                         fill
                         className="object-contain drop-shadow-2xl"
@@ -447,7 +448,7 @@ export function EnterprisePage() {
                     {/* Enhanced Feature 2 Image */}
                     <div className="absolute bottom-2 left-4 right-4 top-36 group-hover:scale-105 transition-transform duration-500">
                       <Image
-                        src="/images/features2.png"
+                        src="/images/features2.webp"
                         alt="Data Analytics and Reporting"
                         fill
                         className="object-contain drop-shadow-2xl"
@@ -487,7 +488,7 @@ export function EnterprisePage() {
                     {/* Enhanced Feature 3 Image */}
                     <div className="absolute bottom-2 left-2 right-2 h-36 group-hover:scale-105 transition-transform duration-500">
                       <Image
-                        src="/images/features3.png"
+                        src="/images/features3.webp"
                         alt="Save on Headcount"
                         fill
                         className="object-contain drop-shadow-2xl"
@@ -525,7 +526,7 @@ export function EnterprisePage() {
                     <div className="absolute inset-x-0 bottom-4 flex items-end justify-center px-4 group-hover:scale-105 transition-transform duration-500">
                       <div className="relative w-full h-48">
                         <Image
-                          src="/images/features4.png"
+                          src="/images/features4.webp"
                           alt="Replicate Top-Performing Engineers"
                           fill
                           className="object-contain drop-shadow-2xl"
@@ -567,7 +568,7 @@ export function EnterprisePage() {
                     {/* Enhanced Feature 5 Image */}
                     <div className="absolute bottom-0 left-8 right-8 h-44 group-hover:scale-105 transition-transform duration-500">
                       <Image
-                        src="/images/features5.png"
+                        src="/images/features5.webp"
                         alt="Standardize Testing Across Your Team"
                         fill
                         className="object-contain drop-shadow-2xl"
@@ -604,7 +605,7 @@ export function EnterprisePage() {
                     {/* Enhanced Feature 6 Image */}
                     <div className="absolute bottom-0 left-8 right-8 h-44 group-hover:scale-105 transition-transform duration-500">
                       <Image
-                        src="/images/features6.png"
+                        src="/images/features6.webp"
                         alt="Engineers Focus on High-Leverage Activities"
                         fill
                         className="object-contain drop-shadow-2xl"
@@ -819,7 +820,7 @@ export function EnterprisePage() {
                       <div className="hidden md:flex flex-col gap-4">
                         <div className="relative w-16 h-16 rounded-xl bg-white/5 border border-white/10 overflow-hidden">
                           <Image
-                            src="/images/certificate-1.png"
+                            src="/images/certificate-1.webp"
                             alt="Certificate 1"
                             fill
                             className="object-contain p-2"
@@ -827,7 +828,7 @@ export function EnterprisePage() {
                         </div>
                         <div className="relative w-16 h-16 rounded-xl bg-white/5 border border-white/10 overflow-hidden">
                           <Image
-                            src="/images/certificate-2.png"
+                            src="/images/certificate-2.webp"
                             alt="Certificate 2"
                             fill
                             className="object-contain p-2"
@@ -835,7 +836,7 @@ export function EnterprisePage() {
                         </div>
                         <div className="relative w-16 h-16 rounded-xl bg-white/5 border border-white/10 overflow-hidden">
                           <Image
-                            src="/images/certificate-3.png"
+                            src="/images/certificate-3.webp"
                             alt="Certificate 3"
                             fill
                             className="object-contain p-2"
@@ -1010,7 +1011,7 @@ export function EnterprisePage() {
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-[1.75rem] transform translate-x-2 translate-y-2" />
                     <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-[1.75rem] overflow-hidden border-2 border-white/10 shadow-2xl transform hover:scale-[1.01] transition-transform duration-500">
                       <Image
-                        src="/images/TestFlow CTA Image .png"
+                        src="/images/TestFlow CTA Image .webp"
                         alt="TestFlow Platform Interface"
                         fill
                         className="object-cover"

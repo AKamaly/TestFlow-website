@@ -151,14 +151,14 @@ export function StartupsPage() {
                 </span>
               </motion.h1>
 
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-8"
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto"
               >
-                Your intelligent partner for automated hardware validation, designed to streamline testing processes and accelerate product launches.
-              </motion.p>
+                Discover how TestFlow helps startups streamline their validation processes and accelerate time-to-market.
+              </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -200,7 +200,7 @@ export function StartupsPage() {
                 {/* Main Interface Image */}
                 <div className="relative aspect-[21/9] w-full">
                   <Image
-                    src="/images/TestFlow slide 1 .png"
+                    src="/images/TestFlow slide 1 .webp"
                     alt="TestFlow AI Assistant Interface - Your intelligent startup validation partner"
                     fill
                     className="object-cover"
@@ -269,7 +269,7 @@ export function StartupsPage() {
                   >
                     <div className="relative aspect-[5/3] rounded-2xl overflow-hidden">
                       <Image
-                        src="/images/productivity.png"
+                        src="/images/productivity.webp"
                         alt="TestFlow Productivity Dashboard - Startup Validation Platform"
                         fill
                         className="object-cover"
@@ -380,7 +380,7 @@ export function StartupsPage() {
                     
                     <div className="absolute bottom-0 left-4 right-4 h-48">
                       <Image
-                        src="/images/features1.png"
+                        src="/images/features1.webp"
                         alt="Accelerate Time-to-Market"
                         fill
                         className="object-contain"
@@ -404,7 +404,7 @@ export function StartupsPage() {
                     
                     <div className="absolute bottom-2 left-4 right-4 top-32">
                       <Image
-                        src="/images/features2.png"
+                        src="/images/features2.webp"
                         alt="Bootstrap-Friendly Pricing"
                         fill
                         className="object-contain"
@@ -431,7 +431,7 @@ export function StartupsPage() {
                     
                     <div className="absolute bottom-2 left-2 right-2 h-32">
                       <Image
-                        src="/images/features3.png"
+                        src="/images/features3.webp"
                         alt="Validate Ideas Quickly"
                         fill
                         className="object-contain"
@@ -456,7 +456,7 @@ export function StartupsPage() {
                     <div className="absolute inset-x-0 bottom-4 flex items-end justify-center px-4">
                       <div className="relative w-full h-44">
                         <Image
-                          src="/images/feature4 midmarket.png"
+                          src="/images/features4.webp"
                           alt="Scale from Day One"
                           fill
                           className="object-contain"
@@ -885,7 +885,7 @@ export function StartupsPage() {
                     <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-[1.75rem] transform translate-x-2 translate-y-2" />
                     <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-[1.75rem] overflow-hidden border-2 border-white/10 shadow-2xl transform hover:scale-[1.01] transition-transform duration-500">
                       <Image
-                        src="/images/TestFlow CTA Image .png"
+                        src="/images/TestFlow CTA Image .webp"
                         alt="TestFlow Platform Interface"
                         fill
                         className="object-cover"

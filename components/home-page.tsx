@@ -25,6 +25,14 @@ export function HomePage() {
   const [showVideoModal, setShowVideoModal] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
 
+  // Show webinar popup on page load
+  useEffect(() => {
+    const hasSeenWebinar = sessionStorage.getItem('hasSeenWebinar')
+    if (!hasSeenWebinar) {
+      setShowWebinar(true)
+    }
+  }, [])
+
   // Auto-slide functionality
   useEffect(() => {
     const timer = setInterval(() => {
@@ -247,7 +255,7 @@ export function HomePage() {
             </motion.h1>
 
             {/* Enhanced Description */}
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -258,7 +266,7 @@ export function HomePage() {
               </span>
               {/* Subtle glow behind text */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 blur-xl -z-10" />
-            </motion.p>
+            </motion.div>
 
             {/* Enhanced Buttons */}
             <motion.div
@@ -456,7 +464,7 @@ export function HomePage() {
                 </span>
               </motion.h2>
 
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -464,7 +472,7 @@ export function HomePage() {
                 className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto"
               >
                 We're building the next paradigm of hardware validation – sleek, intuitive and easy to use.
-              </motion.p>
+              </motion.div>
             </motion.div>
 
             {/* Before and After Comparison */}
@@ -488,7 +496,7 @@ export function HomePage() {
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="relative w-[95%] h-[95%]">
                       <Image
-                        src="/images/before-scattered-tools.png"
+                        src="/images/before-scattered-tools.webp"
                         alt="Before TestFlow - Scattered validation tools and complex workflows"
                         fill
                         className="object-contain"
@@ -531,7 +539,7 @@ export function HomePage() {
                       >
                         <div className="w-40 h-40">
                           <Image
-                            src="/images/testflow-logo.png"
+                            src="/images/testflow-logo.webp"
                             alt="TestFlow Logo"
                             width={160}
                             height={160}
@@ -690,7 +698,7 @@ export function HomePage() {
                         {/* Actual Image or Placeholder */}
                         {index === 0 ? (
                           <Image
-                            src="/images/TestFlow slide 1 .png"
+                            src="/images/TestFlow slide 1 .webp"
                             alt="AI-Powered Validation - TestFlow Interface"
                             fill
                             className="object-cover w-full h-full"
@@ -699,7 +707,7 @@ export function HomePage() {
                           />
                         ) : index === 1 ? (
                           <Image
-                            src="/images/Analytics slide 2 .png"
+                            src="/images/Analytics slide 2 .webp"
                             alt="Advanced Analytics Dashboard"
                             fill
                             className="object-cover w-full h-full"
@@ -707,7 +715,7 @@ export function HomePage() {
                           />
                         ) : (
                           <Image
-                            src="/images/Team Collaboration slide 3.png"
+                            src="/images/Team Collaboration slide 3.webp"
                             alt="Team Collaboration Interface"
                             fill
                             className="object-cover w-full h-full"
@@ -867,7 +875,7 @@ export function HomePage() {
                 {/* Main Interface Image */}
                 <div className="relative aspect-[21/9] w-full">
                   <Image
-                    src="/images/TestFlow slide 1 .png"
+                    src="/images/TestFlow slide 1 .webp"
                     alt="TestFlow AI Assistant Interface - Meet your intelligent validation partner"
                     fill
                     className="object-cover"
@@ -1350,7 +1358,7 @@ export function HomePage() {
                   </span>
                 </motion.h2>
                 
-                <motion.p
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -1358,7 +1366,7 @@ export function HomePage() {
                   className="text-lg text-gray-300 leading-relaxed max-w-lg"
                 >
                   Join leading companies who trust Atoms TestFlow to validate their products faster and more efficiently.
-                </motion.p>
+                </motion.div>
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -1422,7 +1430,7 @@ export function HomePage() {
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-[1.75rem] transform translate-x-2 translate-y-2" />
                     <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-[1.75rem] overflow-hidden border-2 border-white/10 shadow-2xl transform hover:scale-[1.01] transition-transform duration-500">
                       <Image
-                        src="/images/TestFlow CTA Image .png"
+                        src="/images/TestFlow CTA Image .webp"
                         alt="TestFlow Platform Interface"
                         fill
                         className="object-cover"

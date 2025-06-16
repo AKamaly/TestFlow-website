@@ -157,15 +157,15 @@ export function MidmarketPage() {
             </motion.h1>
 
             {/* Enhanced Subheading with Purple Accents */}
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto mb-10 leading-relaxed font-light"
+              className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto"
             >
-              TestFlow delivers enterprise-grade validation capabilities designed specifically for midmarket companies. 
-              <span className="text-purple-300 font-medium bg-gradient-to-r from-purple-300 to-violet-300 bg-clip-text text-transparent"> Scale your testing operations efficiently without the enterprise complexity or cost.</span>
-            </motion.p>
+              Discover how TestFlow helps mid-sized companies streamline their validation processes and accelerate time-to-market.
+            </motion.div>
 
             {/* Enhanced CTA Section with Purple Gradients */}
             <motion.div
@@ -251,7 +251,7 @@ export function MidmarketPage() {
             <div className="absolute inset-0 bg-gradient-to-b from-purple-500/20 via-transparent to-violet-500/20 blur-lg" />
             
             <Image
-              src="/images/Hero graphic.png"
+              src="/images/Hero graphic.webp"
               alt="TestFlow Midmarket Platform - AI-Powered Validation"
               fill
               className="object-cover w-full h-full relative z-20 hover:scale-105 transition-transform duration-700"
@@ -321,7 +321,7 @@ export function MidmarketPage() {
                   >
                     <div className="relative aspect-[5/3] rounded-2xl overflow-hidden">
                       <Image
-                        src="/images/productivity.png"
+                        src="/images/productivity.webp"
                         alt="TestFlow Productivity Dashboard - Midmarket Validation Platform"
                         fill
                         className="object-cover"
@@ -465,7 +465,7 @@ export function MidmarketPage() {
                     
                     <div className="absolute bottom-0 left-4 right-4 h-52 group-hover:scale-105 transition-transform duration-500">
                       <Image
-                        src="/images/features1.png"
+                        src="/images/features1.webp"
                         alt="Cost-Effective Validation Solution"
                         fill
                         className="object-contain drop-shadow-2xl"
@@ -497,7 +497,7 @@ export function MidmarketPage() {
                     
                     <div className="absolute bottom-0 left-2 right-2 top-28">
                       <Image
-                        src="/images/features2.png"
+                        src="/images/features2.webp"
                         alt="Streamlined Team Workflows"
                         fill
                         className="object-contain drop-shadow-lg"
@@ -527,7 +527,7 @@ export function MidmarketPage() {
                     
                     <div className="absolute bottom-2 left-2 right-2 h-32">
                       <Image
-                        src="/images/features3.png"
+                        src="/images/features3.webp"
                         alt="Scale Without Additional Hires"
                         fill
                         className="object-contain drop-shadow-lg"
@@ -555,7 +555,7 @@ export function MidmarketPage() {
                     <div className="absolute inset-x-0 bottom-4 flex items-end justify-center px-4">
                       <div className="relative w-full h-44">
                         <Image
-                          src="/images/feature4 midmarket.png"
+                          src="/images/feature4 midmarket.webp"
                           alt="Organize Your Chips Validation Across Your Team"
                           fill
                           className="object-contain drop-shadow-lg"
@@ -984,7 +984,7 @@ export function MidmarketPage() {
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-[1.75rem] transform translate-x-2 translate-y-2" />
                     <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-[1.75rem] overflow-hidden border-2 border-white/10 shadow-2xl transform hover:scale-[1.01] transition-transform duration-500">
                       <Image
-                        src="/images/TestFlow CTA Image .png"
+                        src="/images/TestFlow CTA Image .webp"
                         alt="TestFlow Platform Interface"
                         fill
                         className="object-cover"
