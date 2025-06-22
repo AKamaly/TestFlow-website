@@ -29,7 +29,11 @@ export function HomePage() {
   useEffect(() => {
     const hasSeenWebinar = sessionStorage.getItem('hasSeenWebinar')
     if (!hasSeenWebinar) {
-      setShowWebinar(true)
+      const timer = setTimeout(() => {
+        setShowWebinar(true)
+      }, 3000) // 3 second delay
+      
+      return () => clearTimeout(timer) // Cleanup timeout on unmount
     }
   }, [])
 
