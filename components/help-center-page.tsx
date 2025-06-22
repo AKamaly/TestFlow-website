@@ -203,7 +203,7 @@ export function HelpCenterPage() {
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-[1.75rem] transform translate-x-2 translate-y-2" />
                     <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-[1.75rem] overflow-hidden border-2 border-white/10 shadow-2xl transform hover:scale-[1.01] transition-transform duration-500">
                       <Image
-                        src="/images/TestFlow CTA Image .png"
+                        src="/images/TestFlow CTA Image .webp"
                         alt="TestFlow Platform Interface"
                         fill
                         className="object-cover"

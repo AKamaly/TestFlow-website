@@ -279,7 +279,7 @@ export default function BlogPost() {
 
           <div className="relative aspect-[16/9] my-12 rounded-xl overflow-hidden border border-white/10">
             <Image
-              src="/images/TestFlow CTA Image .png"
+              src="/images/TestFlow CTA Image .webp"
               alt="TestFlow Platform - Supporting AI Chip Validation and Testing"
               fill
               className="object-cover"

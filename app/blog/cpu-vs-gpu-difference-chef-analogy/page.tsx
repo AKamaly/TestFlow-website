@@ -303,7 +303,7 @@ export default function BlogPost() {
           <div className="my-12 rounded-xl overflow-hidden border border-white/10">
             <div className="relative aspect-[16/9]">
               <Image
-                src="/images/TestFlow CTA Image .png"
+                src="/images/TestFlow CTA Image .webp"
                 alt="TestFlow platform interface showing CPU and GPU validation workflows"
                 fill
                 className="object-cover"
