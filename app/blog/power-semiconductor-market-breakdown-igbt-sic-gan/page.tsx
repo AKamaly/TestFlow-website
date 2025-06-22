@@ -221,7 +221,7 @@ export default function BlogPost() {
               <ul className="space-y-2 text-gray-400">
                 <li>• 10x higher breakdown voltage than silicon</li>
                 <li>• 3x higher thermal conductivity</li>
-                <li>• Superior high-temperature operation (>200°C)</li>
+                <li>• Superior high-temperature operation (&gt;200°C)</li>
                 <li>• Lower switching losses and higher efficiency</li>
                 <li>• Reduced system size and weight</li>
                 <li>• Enhanced reliability in harsh environments</li>
