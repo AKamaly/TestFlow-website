@@ -87,11 +87,10 @@ const resourceItems = {
       description: "Guides and documentation"
     },
     {
-      label: "Guides",
-      href: "#",
+      label: "Documentation",
+      href: "/docs",
       icon: FileText,
-      description: "Coming Soon",
-      badge: "Soon"
+      description: "Comprehensive guides and API reference"
     }
   ],
   discover: [

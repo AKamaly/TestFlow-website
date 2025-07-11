@@ -15,17 +15,17 @@ import { SiteHeader } from "@/components/site-header"
 import { useState, useEffect } from 'react'
 import { Notification } from "@/components/notification"
 import { LogoCarousel } from '@/components/logo-carousel'
-import { WebinarPopup } from "@/components/webinar-popup"
 import { VideoModal } from "@/components/video-modal"
 import { SectionTracker, trackButtonClick, trackFormSubmission, trackPageSpecificEvent } from '@/components/analytics-tracker'
 
 export function HomePage() {
   const [showSubscribeNotification, setShowSubscribeNotification] = useState(false)
-  const [showWebinar, setShowWebinar] = useState(false)
+  // const [showWebinar, setShowWebinar] = useState(false)
   const [showVideoModal, setShowVideoModal] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
 
   // Show webinar popup on page load
+  /*
   useEffect(() => {
     const hasSeenWebinar = sessionStorage.getItem('hasSeenWebinar')
     if (!hasSeenWebinar) {
@@ -36,6 +36,7 @@ export function HomePage() {
       return () => clearTimeout(timer) // Cleanup timeout on unmount
     }
   }, [])
+  */
 
   // Auto-slide functionality
   useEffect(() => {
@@ -46,10 +47,12 @@ export function HomePage() {
     return () => clearInterval(timer);
   }, []);
 
+  /*
   const handleCloseWebinar = () => {
     setShowWebinar(false)
     sessionStorage.setItem('hasSeenWebinar', 'true')
   }
+  */
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -714,8 +717,12 @@ export function HomePage() {
                             src="/images/Analytics slide 2 .webp"
                             alt="Advanced Analytics Dashboard"
                             fill
-                            className="object-cover w-full h-full"
+                            className="object-cover w-full h-full cursor-pointer"
                             style={{ objectPosition: 'center 30%' }}
+                            onClick={() => {
+                              window.open('https://youtu.be/pUrUVCDAThY?si=dsfoiryRuJ9pA0vQ', '_blank')
+                              trackButtonClick('Analytics Video', 'Team Slides Section', { page: 'home' })
+                            }}
                           />
                         ) : (
                           <Image
@@ -1332,6 +1339,110 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* Tutorial CTA Section */}
+      <section className="relative py-20 md:py-32 overflow-hidden border-t border-white/10">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+          <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-purple-500/10 via-transparent to-transparent rounded-full blur-3xl" />
+        </div>
+
+        <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold">
+                Ready to{' '}
+                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  Get Started?
+                </span>
+              </h2>
+              
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                Choose your path to begin your journey with TestFlow's AI-powered validation platform
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto pt-8">
+                {/* Start Tutorial Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="group relative"
+                >
+                  <Link 
+                    href="/contact"
+                    onClick={() => trackButtonClick('Start Tutorial', 'Tutorial CTA', { page: 'home' })}
+                    className="block"
+                  >
+                    <div className="relative p-8 rounded-3xl bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-500/20 backdrop-blur-sm hover:border-blue-400/40 transition-all duration-300">
+                      {/* Glow Effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-blue-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+                      
+                      <div className="relative">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center mb-6">
+                          <PlayCircle className="w-6 h-6 text-white" />
+                        </div>
+                        
+                        <h3 className="text-2xl font-bold mb-4">Start Tutorial</h3>
+                        <p className="text-gray-400 mb-6">Schedule a guided walkthrough of TestFlow's features with our team</p>
+                        
+                        <div className="flex items-center text-blue-400 group-hover:text-blue-300 transition-colors">
+                          <span>Schedule Now</span>
+                          <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+
+                {/* View Examples Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="group relative"
+                >
+                  <Link 
+                    href="/contact"
+                    onClick={() => trackButtonClick('View Examples', 'Tutorial CTA', { page: 'home' })}
+                    className="block"
+                  >
+                    <div className="relative p-8 rounded-3xl bg-gradient-to-br from-purple-500/10 to-purple-600/5 border border-purple-500/20 backdrop-blur-sm hover:border-purple-400/40 transition-all duration-300">
+                      {/* Glow Effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-transparent to-purple-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+                      
+                      <div className="relative">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center mb-6">
+                          <LayoutTemplate className="w-6 h-6 text-white" />
+                        </div>
+                        
+                        <h3 className="text-2xl font-bold mb-4">View Examples</h3>
+                        <p className="text-gray-400 mb-6">See how other companies are using TestFlow to accelerate validation</p>
+                        
+                        <div className="flex items-center text-purple-400 group-hover:text-purple-300 transition-colors">
+                          <span>Explore Now</span>
+                          <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative overflow-hidden py-16 md:py-24">
         <div className="container mx-auto px-4 max-w-[1400px] w-full">
@@ -1459,10 +1570,13 @@ export function HomePage() {
         onClose={() => setShowVideoModal(false)}
       />
 
+      {/* Webinar popup - commented out after webinar completion */}
+      {/*
       <WebinarPopup 
         isOpen={showWebinar}
         onClose={handleCloseWebinar}
       />
+      */}
 
       <Notification 
         isOpen={showSubscribeNotification}
