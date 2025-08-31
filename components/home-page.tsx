@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Check, ArrowRight, Clock, AlertTriangle, BrainCircuit, Cable, Users, LayoutTemplate, PlayCircle } from 'lucide-react'
+import { Check, ArrowRight, Clock, AlertTriangle, PlayCircle } from 'lucide-react'
 import Image from "next/image"
 import { HeroForm } from '@/components/hero-form'
 import { TypingEffect } from '@/components/typing-effect'
@@ -16,16 +16,16 @@ import { useState, useEffect } from 'react'
 import { Notification } from "@/components/notification"
 import { LogoCarousel } from '@/components/logo-carousel'
 import { VideoModal } from "@/components/video-modal"
+import { WebinarPopup } from "@/components/webinar-popup"
 import { SectionTracker, trackButtonClick, trackFormSubmission, trackPageSpecificEvent } from '@/components/analytics-tracker'
 
 export function HomePage() {
   const [showSubscribeNotification, setShowSubscribeNotification] = useState(false)
-  // const [showWebinar, setShowWebinar] = useState(false)
+  const [showWebinar, setShowWebinar] = useState(false)
   const [showVideoModal, setShowVideoModal] = useState(false)
-  const [currentSlide, setCurrentSlide] = useState(0)
+
 
   // Show webinar popup on page load
-  /*
   useEffect(() => {
     const hasSeenWebinar = sessionStorage.getItem('hasSeenWebinar')
     if (!hasSeenWebinar) {
@@ -36,23 +36,13 @@ export function HomePage() {
       return () => clearTimeout(timer) // Cleanup timeout on unmount
     }
   }, [])
-  */
 
-  // Auto-slide functionality
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % 3);
-    }, 4000);
 
-    return () => clearInterval(timer);
-  }, []);
 
-  /*
   const handleCloseWebinar = () => {
     setShowWebinar(false)
     sessionStorage.setItem('hasSeenWebinar', 'true')
   }
-  */
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -63,100 +53,9 @@ export function HomePage() {
     form.reset()
   }
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % 3)
-  }
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + 3) % 3)
-  }
 
-  const slides = [
-    {
-      id: 'ai-validation',
-      title: 'AI-Powered Validation',
-      icon: <BrainCircuit className="w-6 h-6 text-blue-400" />,
-      gradient: 'from-blue-500/5 via-purple-500/5 to-blue-500/5',
-      titleGradient: 'from-blue-400 to-purple-400',
-      iconBg: 'bg-blue-500/10 border-blue-500/20',
-      description: 'Leverage advanced machine learning algorithms to automatically generate test scripts, predict failure patterns, and optimize validation workflows for semiconductor devices.',
-      stats: [
-        {
-          label: 'Test Scripts Generated',
-          value: '1,247',
-          subtext: '+89% faster than manual',
-          color: 'green',
-          badge: 'Auto'
-        },
-        {
-          label: 'Validation Accuracy',
-          value: '99.7%',
-          subtext: '🎯 AI-driven precision',
-          color: 'blue'
-        }
-      ],
-      placeholderIcon: <BrainCircuit className="w-10 h-10 text-blue-400" />,
-      placeholderText: 'AI Validation Image'
-    },
-    {
-      id: 'analytics',
-      title: 'Advanced Analytics',
-      icon: <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-      </svg>,
-      gradient: 'from-green-500/5 via-blue-500/5 to-green-500/5',
-      titleGradient: 'from-green-400 to-blue-400',
-      iconBg: 'bg-green-500/10 border-green-500/20',
-      description: 'Gain deep insights into your validation processes with real-time analytics, performance metrics, and predictive failure analysis for optimal chip performance.',
-      stats: [
-        {
-          label: 'Data Points Analyzed',
-          value: '2.4M',
-          subtext: 'Real-time processing',
-          color: 'green',
-          badge: 'Live'
-        },
-        {
-          label: 'Prediction Accuracy',
-          value: '94.2%',
-          subtext: '📊 Failure prediction',
-          color: 'green'
-        }
-      ],
-      placeholderIcon: <svg className="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-      </svg>,
-      placeholderText: 'Analytics Dashboard'
-    },
-    {
-      id: 'collaboration',
-      title: 'Team Collaboration',
-      icon: <Users className="w-6 h-6 text-purple-400" />,
-      gradient: 'from-purple-500/5 via-pink-500/5 to-purple-500/5',
-      titleGradient: 'from-purple-400 to-pink-400',
-      iconBg: 'bg-purple-500/10 border-purple-500/20',
-      description: 'Enable seamless collaboration between validation engineers, design teams, and stakeholders with shared workspaces, real-time updates, and integrated communication tools.',
-      stats: [
-        {
-          label: 'Active Collaborators',
-          value: '47',
-          subtext: 'Across 12 projects',
-          color: 'purple',
-          badge: 'Online'
-        },
-        {
-          label: 'Shared Workspaces',
-          value: '23',
-          subtext: '🤝 Real-time sync',
-          color: 'purple'
-        }
-      ],
-      placeholderIcon: <Users className="w-10 h-10 text-purple-400" />,
-      placeholderText: 'Collaboration Interface'
-    }
-  ]
 
-  const currentSlideData = slides[currentSlide]
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -238,7 +137,7 @@ export function HomePage() {
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <span className="relative bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-semibold">
-                ✨ Introducing AI-Powered Validation
+                ✨ Accelerate Your Post-Silicon Success
               </span>
               
               {/* Shimmer Effect */}
@@ -254,7 +153,7 @@ export function HomePage() {
             >
               {/* Text with Enhanced Gradient */}
               <span className="bg-gradient-to-r from-blue-400 via-white to-purple-400 bg-clip-text text-transparent relative">
-                Validate and launch your hardware faster.
+                Post-Silicon Validation Automation That Delivers Results
               </span>
               
               {/* Glow Effect Behind Text */}
@@ -269,7 +168,7 @@ export function HomePage() {
               className="text-base md:text-lg text-gray-400 max-w-xl mx-auto mb-8 relative"
             >
               <span className="relative z-10">
-                Our AI validation tool helps semiconductors and electronics companies automate their testing process, reducing time-to-market and validation costs.
+                Cut validation time by up to 70% while improving quality. Our AI-powered platform streamlines your post-silicon validation workflow, helping you ship reliable products faster and reduce costs.
               </span>
               {/* Subtle glow behind text */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 blur-xl -z-10" />
@@ -451,7 +350,7 @@ export function HomePage() {
                 className="inline-block rounded-full px-4 py-1.5 text-sm font-medium bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 backdrop-blur-sm mb-6"
               >
                 <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  The Future is Unified
+                  Built for Validation Engineers
                 </span>
               </motion.div>
 
@@ -462,12 +361,12 @@ export function HomePage() {
                 transition={{ delay: 0.1 }}
                 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
               >
-                Every Tool You Need, Consolidated Within{' '}
+                Replace LabVIEW, Python, and Every Other Tool with{' '}
                 <span className="bg-gradient-to-r from-pink-400 to-purple-500 bg-clip-text text-transparent">
                   One
                 </span>{' '}
                 <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
-                  Exceptional Platform
+                  Simple AI Platform
                 </span>
               </motion.h2>
 
@@ -478,7 +377,7 @@ export function HomePage() {
                 transition={{ delay: 0.2 }}
                 className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto"
               >
-                We're building the next paradigm of hardware validation – sleek, intuitive and easy to use.
+                Stop juggling multiple instruments, scripts, and data analysis tools. TestFlow brings everything together in one intelligent platform designed specifically for post-silicon validation engineers.
               </motion.div>
             </motion.div>
 
@@ -628,7 +527,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Team Slides Section */}
+      {/* Validation Success Stories Section */}
       <section className="relative py-20 md:py-32 overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0">
@@ -638,7 +537,7 @@ export function HomePage() {
         </div>
 
         <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             {/* Header */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -650,10 +549,10 @@ export function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="inline-block rounded-full px-4 py-1.5 text-sm font-medium bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 backdrop-blur-sm mb-6"
+                className="inline-block rounded-full px-4 py-1.5 text-sm font-medium bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 backdrop-blur-sm mb-6"
               >
-                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Advanced Validation Solutions
+                <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+                  ⚡ Validation Engineer Success Stories
                 </span>
               </motion.div>
 
@@ -664,9 +563,9 @@ export function HomePage() {
                 transition={{ delay: 0.1 }}
                 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
               >
-                Revolutionizing{' '}
-                <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                  Chip Validation
+                Stop Spending Weeks on{' '}
+                <span className="bg-gradient-to-r from-red-400 to-orange-500 bg-clip-text text-transparent">
+                  Manual Validation
                 </span>
               </motion.h2>
 
@@ -677,101 +576,238 @@ export function HomePage() {
                 transition={{ delay: 0.2 }}
                 className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto"
               >
-                Discover how TestFlow transforms semiconductor validation with cutting-edge AI, comprehensive analytics, and seamless team collaboration.
+                See how AI automation transforms the three most time-consuming tasks in post-silicon validation workflows.
               </motion.p>
             </motion.div>
 
-            {/* Slides Container */}
+            {/* Feature Showcase Image */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="relative w-full"
+              className="relative mb-20"
             >
-              {/* Slides Wrapper */}
-              <div className="relative overflow-hidden rounded-3xl w-full">
-                <div 
-                  className="flex w-full transition-transform duration-500 ease-in-out"
-                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                >
-                  {slides.map((slide, index) => (
-                    <div key={slide.id} className="w-full flex-shrink-0">
-                      {/* Full-width Image Container */}
-                      <div className="relative aspect-[21/9] w-full bg-gradient-to-br from-gray-900/50 to-gray-800/30 border border-white/10 backdrop-blur-sm overflow-hidden">
-                        {/* Background Gradient */}
-                        <div className={`absolute inset-0 bg-gradient-to-r ${slide.gradient} opacity-30`} />
-                        
-                        {/* Actual Image or Placeholder */}
-                        {index === 0 ? (
-                          <Image
-                            src="/images/TestFlow slide 1 .webp"
-                            alt="AI-Powered Validation - TestFlow Interface"
-                            fill
-                            className="object-cover w-full h-full"
-                            style={{ objectPosition: 'center 30%' }}
-                            priority={index === 0}
-                          />
-                        ) : index === 1 ? (
-                          <Image
-                            src="/images/Analytics slide 2 .webp"
-                            alt="Advanced Analytics Dashboard"
-                            fill
-                            className="object-cover w-full h-full cursor-pointer"
-                            style={{ objectPosition: 'center 30%' }}
-                            onClick={() => {
-                              window.open('https://youtu.be/pUrUVCDAThY?si=dsfoiryRuJ9pA0vQ', '_blank')
-                              trackButtonClick('Analytics Video', 'Team Slides Section', { page: 'home' })
-                            }}
-                          />
-                        ) : (
-                          <Image
-                            src="/images/Team Collaboration slide 3.webp"
-                            alt="Team Collaboration Interface"
-                            fill
-                            className="object-cover w-full h-full"
-                            style={{ objectPosition: 'center 30%' }}
-                          />
-                        )}
-
-                        {/* Content Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-green-500/10 rounded-3xl blur-3xl opacity-30" />
+              <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm">
+                
+                {/* Main Feature Image */}
+                <div className="relative aspect-[21/9] w-full overflow-hidden">
+                  <Image
+                    src="https://9zog2la6l29pbfba.public.blob.vercel-storage.com/TestFlow%20%20image.png"
+                    alt="TestFlow AI Platform - Complete validation workflow automation showing AI script generation, data analytics, and real-time monitoring"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  
+                  {/* Transparent Play Button */}
+                  <motion.button
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      setShowVideoModal(true)
+                      trackButtonClick('Play Validation Demo Video', 'Validation Success Stories', { page: 'home' })
+                    }}
+                    className="absolute flex items-center justify-center group cursor-pointer"
+                    style={{ 
+                      left: '45%', 
+                      top: '60%', 
+                      transform: 'translate(-50%, -50%)' 
+                    }}
+                  >
+                    {/* Background Glow */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-xl scale-150 group-hover:scale-175 transition-transform duration-300" />
+                    
+                    {/* Play Button */}
+                    <div className="relative w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-blue-500/80 to-purple-600/80 backdrop-blur-sm rounded-full flex items-center justify-center border border-blue-400/50 group-hover:from-blue-500/90 group-hover:to-purple-600/90 group-hover:border-blue-400/70 transition-all duration-300 shadow-lg group-hover:shadow-[0_0_25px_rgba(79,70,229,0.6)]">
+                      <PlayCircle className="w-8 h-8 md:w-10 md:h-10 text-white ml-0.5" />
                     </div>
-                  ))}
+                  </motion.button>
                 </div>
               </div>
+            </motion.div>
 
-              {/* Navigation Arrows */}
-              <div className="flex justify-center gap-4 mt-8">
-                <button 
-                  onClick={prevSlide}
-                  className="w-12 h-12 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center hover:bg-white/[0.1] transition-colors group"
-                >
-                  <svg className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <button 
-                  onClick={nextSlide}
-                  className="w-12 h-12 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center hover:bg-white/[0.1] transition-colors group"
-                >
-                  <svg className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
+            {/* Validation Use Cases Grid */}
+            <div className="grid lg:grid-cols-3 gap-8 mb-16">
+              {/* Use Case 1: AI Script Generation */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="bg-gradient-to-br from-blue-500/10 to-blue-600/5 backdrop-blur-xl border border-blue-500/20 rounded-3xl p-8 hover:border-blue-400/40 transition-all duration-300 hover:scale-[1.02]"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-white">AI Script Generation</h3>
+                </div>
+                
+                <p className="text-gray-300 mb-6">
+                  Transform datasheet specifications into production-ready test scripts automatically. Upload your datasheet, describe requirements, and get comprehensive validation code in minutes.
+                </p>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-400">Manual Scripting:</span>
+                    <span className="text-red-400 font-semibold">3-5 days</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-400">With TestFlow AI:</span>
+                    <span className="text-green-400 font-semibold">2 hours</span>
+                  </div>
+                  <div className="border-t border-white/10 pt-4">
+                    <div className="text-2xl font-bold text-green-400 mb-1">94% Faster</div>
+                    <div className="text-sm text-gray-400">Script generation from specs</div>
+                  </div>
+                </div>
+              </motion.div>
 
-              {/* Slide Indicators */}
-              <div className="flex justify-center gap-2 mt-6">
-                {slides.map((_, index) => (
-                  <button
-                    key={`indicator-${index}`}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`w-2 h-2 rounded-full transition-colors ${index === currentSlide ? 'bg-blue-400' : 'bg-white/20 hover:bg-white/40'}`}
-                  ></button>
-                ))}
+              {/* Use Case 2: Automated Test Planning */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+                className="bg-gradient-to-br from-purple-500/10 to-purple-600/5 backdrop-blur-xl border border-purple-500/20 rounded-3xl p-8 hover:border-purple-400/40 transition-all duration-300 hover:scale-[1.02]"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-white">Automated Test Planning</h3>
+                </div>
+                
+                <p className="text-gray-300 mb-6">
+                  Generate comprehensive test plans from datasheet specifications. AI analyzes your chip requirements and creates detailed validation sequences with optimal test coverage.
+                </p>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-400">Manual Planning:</span>
+                    <span className="text-red-400 font-semibold">1-2 weeks</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-400">With TestFlow:</span>
+                    <span className="text-green-400 font-semibold">1 day</span>
+                  </div>
+                  <div className="border-t border-white/10 pt-4">
+                    <div className="text-2xl font-bold text-green-400 mb-1">85% Faster</div>
+                    <div className="text-sm text-gray-400">Complete test planning</div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Use Case 3: Real-time Analytics */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6 }}
+                className="bg-gradient-to-br from-green-500/10 to-green-600/5 backdrop-blur-xl border border-green-500/20 rounded-3xl p-8 hover:border-green-400/40 transition-all duration-300 hover:scale-[1.02]"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-white">Real-time Analytics</h3>
+                </div>
+                
+                <p className="text-gray-300 mb-6">
+                  Monitor validation progress with live analytics dashboards. Get instant pass/fail determinations, automated compliance checking, and detailed performance insights.
+                </p>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-400">Manual Analysis:</span>
+                    <span className="text-red-400 font-semibold">2-3 days</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-400">With TestFlow:</span>
+                    <span className="text-green-400 font-semibold">Real-time</span>
+                  </div>
+                  <div className="border-t border-white/10 pt-4">
+                    <div className="text-2xl font-bold text-green-400 mb-1">99.7% Accuracy</div>
+                    <div className="text-sm text-gray-400">Automated validation</div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Social Proof & CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.7 }}
+              className="text-center"
+            >
+              <div className="flex flex-col items-center gap-6 mb-8">
+                <div className="flex -space-x-3">
+                  <img 
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" 
+                    alt="Validation Engineer" 
+                    className="w-12 h-12 rounded-full border-3 border-white/30 shadow-lg"
+                  />
+                  <img 
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face" 
+                    alt="Validation Engineer" 
+                    className="w-12 h-12 rounded-full border-3 border-white/30 shadow-lg"
+                  />
+                  <img 
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" 
+                    alt="Validation Engineer" 
+                    className="w-12 h-12 rounded-full border-3 border-white/30 shadow-lg"
+                  />
+                  <img 
+                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" 
+                    alt="Validation Engineer" 
+                    className="w-12 h-12 rounded-full border-3 border-white/30 shadow-lg"
+                  />
+                  <img 
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" 
+                    alt="Validation Engineer" 
+                    className="w-12 h-12 rounded-full border-3 border-white/30 shadow-lg"
+                  />
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-500/20 to-blue-500/20 border-3 border-white/30 flex items-center justify-center backdrop-blur-sm">
+                    <span className="text-xs font-semibold text-white">+195</span>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <p className="text-lg text-gray-300">
+                    <span className="text-green-400 font-semibold">200+ validation engineers</span> are saving 70% of their validation time
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Used by validation teams at leading semiconductor companies worldwide
+                  </p>
+                </div>
               </div>
+              
+              <Button asChild className="bg-gradient-to-r from-green-500 to-blue-600 text-white hover:from-green-600 hover:to-blue-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(34,197,94,0.4)] h-16 px-12 text-xl font-semibold">
+                <Link 
+                  href="/contact"
+                  onClick={() => trackButtonClick('Start Free Trial', 'Validation Success Stories', { page: 'home' })}
+                >
+                  Start Your Free Trial →
+                </Link>
+              </Button>
+              
+              <p className="text-sm text-gray-500 mt-4">
+                Free 30-day trial • Full platform access • No credit card required • Setup in 5 minutes
+              </p>
             </motion.div>
           </div>
         </div>
@@ -792,158 +828,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Meet TestFlow Section */}
-      <section className="relative py-20 md:py-32 overflow-hidden border-t border-white/10">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-          <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent rounded-full blur-3xl" />
-          <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-purple-500/10 via-transparent to-transparent rounded-full blur-3xl" />
-        </div>
 
-        <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
-          <div className="max-w-6xl mx-auto">
-            {/* Header */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="inline-block rounded-full px-4 py-1.5 text-sm font-medium bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 backdrop-blur-sm mb-6"
-              >
-                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Meet Our First AI Assistant
-                </span>
-              </motion.div>
-
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
-              >
-                Meet TestFlow,{' '}
-                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  the AI Validation Assistant
-                </span>
-              </motion.h2>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-8"
-              >
-                Your intelligent partner for automated hardware validation, designed to streamline testing processes and accelerate product launches.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
-              >
-                <Button 
-                  onClick={() => {
-                    setShowVideoModal(true)
-                    trackButtonClick('Watch Demo', 'Meet TestFlow Section', { page: 'home' })
-                  }}
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center justify-center gap-2 h-12 px-8 text-lg font-semibold"
-                >
-                  <PlayCircle className="w-5 h-5" />
-                  Watch Demo
-                </Button>
-                <Button asChild variant="outline" className="h-12 px-8 text-lg">
-                  <Link 
-                    href="/contact"
-                    onClick={() => trackButtonClick('Talk to Sales', 'Meet TestFlow Section', { page: 'home' })}
-                    className="rounded-full border border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 flex items-center justify-center"
-                  >
-                    Talk to Sales
-                  </Link>
-                </Button>
-              </motion.div>
-            </motion.div>
-
-            {/* Full-width Image Container */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="relative w-full"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-3xl blur-3xl opacity-30" />
-              <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm">
-                {/* Main Interface Image */}
-                <div className="relative aspect-[21/9] w-full">
-                  <Image
-                    src="/images/TestFlow slide 1 .webp"
-                    alt="TestFlow AI Assistant Interface - Meet your intelligent validation partner"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                  
-                  {/* Play Button Overlay */}
-                  <motion.button
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => {
-                      setShowVideoModal(true)
-                      trackButtonClick('Play Video Overlay', 'Meet TestFlow Section', { page: 'home' })
-                    }}
-                    className="absolute inset-0 flex items-center justify-center group"
-                  >
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-2xl scale-150 group-hover:scale-175 transition-transform duration-300" />
-                      <div className="relative w-20 h-20 md:w-24 md:h-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl group-hover:shadow-[0_0_40px_rgba(79,70,229,0.6)] transition-all duration-300">
-                        <PlayCircle className="w-10 h-10 md:w-12 md:h-12 text-white ml-1" />
-                      </div>
-                    </div>
-                  </motion.button>
-                </div>
-
-                {/* Feature Highlights */}
-                <div className="absolute bottom-6 left-6 right-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {[
-                      { title: "AI-Powered Automation", description: "Intelligent test generation and execution" },
-                      { title: "Natural Language Interface", description: "Communicate with your validation system" },
-                      { title: "Real-time Analytics", description: "Instant insights and performance metrics" }
-                    ].map((feature, index) => (
-                      <motion.div
-                        key={feature.title}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.7 + index * 0.1 }}
-                        className="bg-black/60 backdrop-blur-xl border border-white/20 rounded-xl p-4"
-                      >
-                        <h4 className="text-sm font-semibold text-white mb-1">{feature.title}</h4>
-                        <p className="text-xs text-gray-400">{feature.description}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* How TestFlow Works Section */}
       <section className="relative py-20 md:py-32 overflow-hidden border-t border-white/10">
@@ -1031,25 +916,41 @@ export function HomePage() {
                   </p>
 
                   {/* Mock Instrument Connection Interface */}
-                  <div className="bg-black/40 rounded-xl p-4 border border-purple-500/20">
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                      <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                      <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                      <span className="text-xs text-purple-300 ml-2">Instrument Manager</span>
+                  <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-lg">
+                    {/* App Header */}
+                    <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center">
+                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                          </svg>
+                        </div>
+                        <span className="text-sm font-semibold text-gray-800">Instrument Manager</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                      </div>
                     </div>
+                    
+                    {/* Instrument List */}
                     <div className="space-y-3">
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                        <span className="text-xs text-gray-300">Keysight E5071C Network Analyzer</span>
+                      <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
+                        <div className="w-3 h-3 rounded-full bg-green-500 shadow-sm"></div>
+                        <div className="flex-1">
+                          <div className="text-sm font-medium text-gray-800">Keysight E36312A Power Supply</div>
+                          <div className="text-xs text-green-600">Connected • Ready</div>
+                        </div>
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                        <span className="text-xs text-gray-300">Rohde & Schwarz FSW Signal Analyzer</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
-                        <span className="text-xs text-gray-300">Tektronix AWG70001A</span>
+                      <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
+                        <div className="w-3 h-3 rounded-full bg-green-500 shadow-sm"></div>
+                        <div className="flex-1">
+                          <div className="text-sm font-medium text-gray-800">Keithley 2450 Source Meter</div>
+                          <div className="text-xs text-green-600">Connected • Ready</div>
+                        </div>
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                       </div>
                     </div>
                   </div>
@@ -1096,15 +997,41 @@ export function HomePage() {
                     </div>
                     
                     {/* Mock AI Chat Interface */}
-                    <div className="bg-black/40 rounded-xl p-6 border border-blue-500/20">
-                      <div className="space-y-4">
-                        <div className="bg-blue-500/20 rounded-lg p-3 ml-8">
-                          <div className="text-xs text-blue-300 mb-1">You</div>
-                          <div className="text-sm text-white">I need to validate the RF performance of our new 5G chip at 28GHz frequency range</div>
+                    <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-lg">
+                      {/* Chat Header */}
+                      <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
+                            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                          </div>
+                          <span className="text-sm font-semibold text-gray-800">TestFlow AI Assistant</span>
                         </div>
-                        <div className="bg-gray-700/40 rounded-lg p-3 mr-8">
-                          <div className="text-xs text-gray-400 mb-1">TestFlow AI</div>
-                          <div className="text-sm text-gray-200">I'll configure S-parameter measurements from 26-30GHz with 0.1GHz steps. Setting up power sweep from -10 to +20dBm...</div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                          <span className="text-xs text-green-600">Online</span>
+                        </div>
+                      </div>
+                      
+                      {/* Chat Messages */}
+                      <div className="space-y-4">
+                        <div className="flex justify-end">
+                          <div className="bg-blue-500 rounded-lg p-3 max-w-[80%]">
+                            <div className="text-xs text-blue-100 mb-1">You</div>
+                            <div className="text-sm text-white">I need to validate the RF performance of our new 5G chip at 28GHz frequency range</div>
+                          </div>
+                        </div>
+                        <div className="flex justify-start">
+                          <div className="bg-gray-100 rounded-lg p-3 max-w-[80%]">
+                            <div className="text-xs text-gray-500 mb-1">TestFlow AI</div>
+                            <div className="text-sm text-gray-800">I'll configure S-parameter measurements from 26-30GHz with 0.1GHz steps. Setting up power sweep from -10 to +20dBm...</div>
+                            <div className="flex items-center gap-2 mt-2">
+                              <div className="w-1 h-1 rounded-full bg-blue-500 animate-pulse"></div>
+                              <div className="w-1 h-1 rounded-full bg-blue-500 animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                              <div className="w-1 h-1 rounded-full bg-blue-500 animate-pulse" style={{animationDelay: '0.4s'}}></div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1152,20 +1079,42 @@ export function HomePage() {
                     </div>
                     
                     {/* Mock Code Editor */}
-                    <div className="bg-black/40 rounded-xl p-4 border border-indigo-500/20">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                        <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                        <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                        <span className="text-xs text-indigo-300 ml-2">validation_script.py</span>
+                    <div className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden">
+                      {/* Editor Header */}
+                      <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-gray-200">
+                        <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-1">
+                            <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                            <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                            <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <svg className="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                            <span className="text-sm font-medium text-gray-700">validation_script.py</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-md font-medium">
+                            AI Generated
+                          </div>
+                        </div>
                       </div>
-                      <div className="space-y-1 text-xs font-mono">
-                        <div className="text-purple-300"># RF Performance Validation</div>
-                        <div className="text-blue-300">freq_range = <span className="text-yellow-300">(26e9, 30e9)</span></div>
-                        <div className="text-blue-300">power_sweep = <span className="text-yellow-300">(-10, 20)</span></div>
-                        <div className="text-green-300">measure_s_parameters()</div>
-                        <div className="text-green-300">analyze_linearity()</div>
-                        <div className="text-gray-400"># Auto-generated by TestFlow AI</div>
+                      
+                      {/* Code Content */}
+                      <div className="p-4 bg-gray-900 text-xs font-mono leading-relaxed">
+                        <div className="space-y-1">
+                          <div className="text-green-400"># RF Performance Validation Script</div>
+                          <div className="text-gray-500"># Auto-generated by TestFlow AI</div>
+                          <div className="text-blue-300">freq_range = <span className="text-yellow-300">(26e9, 30e9)</span></div>
+                          <div className="text-blue-300">power_sweep = <span className="text-yellow-300">(-10, 20)</span></div>
+                          <div className="text-purple-300">def validate_rf_performance():</div>
+                          <div className="text-white ml-4">measure_s_parameters(freq_range)</div>
+                          <div className="text-white ml-4">analyze_linearity(power_sweep)</div>
+                          <div className="text-white ml-4">generate_report()</div>
+                          <div className="text-gray-500 mt-2"># Ready for execution ✓</div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1190,52 +1139,41 @@ export function HomePage() {
                   </div>
                   
                   <p className="text-gray-300 text-base leading-relaxed mb-6">
-                    Execute your validation tests with real-time monitoring and progress tracking. TestFlow manages the entire process automatically while you monitor the results.
+                    Execute your PMIC validation tests with real-time monitoring and progress tracking. TestFlow manages the entire process automatically while you monitor the results.
                   </p>
 
                   {/* Mock Execution Progress */}
-                  <div className="bg-black/40 rounded-xl p-4 border border-violet-500/20">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-violet-300">RF Validation Progress</span>
-                        <span className="text-xs text-green-400">Running...</span>
+                  <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-lg">
+                    {/* Progress Header */}
+                    <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-violet-500 to-violet-600 flex items-center justify-center">
+                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                          </svg>
+                        </div>
+                        <span className="text-sm font-semibold text-gray-800">PMIC Validation Progress</span>
                       </div>
-                      
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3">
-                          <div className="w-4 h-4 rounded bg-green-500 flex items-center justify-center">
-                            <div className="w-2 h-2 bg-white rounded"></div>
-                          </div>
-                          <div className="flex-1">
-                            <div className="text-xs text-gray-300">S-Parameter Sweep</div>
-                            <div className="w-full bg-gray-700 rounded-full h-1.5 mt-1">
-                              <div className="bg-green-400 h-1.5 rounded-full w-full"></div>
-                            </div>
-                          </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                        <span className="text-xs text-green-600 font-medium">Running...</span>
+                      </div>
+                    </div>
+                    
+                    {/* Single Progress Item */}
+                    <div className="flex items-center gap-4 p-4 bg-violet-50 rounded-lg border border-violet-200">
+                      <div className="w-8 h-8 rounded-full bg-violet-500 flex items-center justify-center animate-pulse shadow-sm">
+                        <div className="w-3 h-3 bg-white rounded-full"></div>
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-lg font-semibold text-gray-800">Load Regulation Test</div>
+                        <div className="text-sm text-gray-600 mb-3">Testing output voltage stability under varying load conditions</div>
+                        <div className="w-full bg-gray-200 rounded-full h-3 mt-2">
+                          <div className="bg-violet-500 h-3 rounded-full w-3/4 shadow-sm transition-all duration-1000"></div>
                         </div>
-                        
-                        <div className="flex items-center gap-3">
-                          <div className="w-4 h-4 rounded bg-violet-500 flex items-center justify-center animate-pulse">
-                            <div className="w-2 h-2 bg-white rounded"></div>
-                          </div>
-                          <div className="flex-1">
-                            <div className="text-xs text-gray-300">Power Linearity Test</div>
-                            <div className="w-full bg-gray-700 rounded-full h-1.5 mt-1">
-                              <div className="bg-violet-400 h-1.5 rounded-full w-3/4"></div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center gap-3">
-                          <div className="w-4 h-4 rounded bg-gray-600 flex items-center justify-center">
-                            <div className="w-2 h-2 bg-gray-400 rounded"></div>
-                          </div>
-                          <div className="flex-1">
-                            <div className="text-xs text-gray-400">Noise Figure Analysis</div>
-                            <div className="w-full bg-gray-700 rounded-full h-1.5 mt-1">
-                              <div className="bg-gray-500 h-1.5 rounded-full w-1/4"></div>
-                            </div>
-                          </div>
+                        <div className="flex items-center justify-between mt-2">
+                          <div className="text-xs text-violet-600 font-medium">In Progress • 75%</div>
+                          <div className="text-xs text-gray-500">Load: 0.1A → 3.0A</div>
                         </div>
                       </div>
                     </div>
@@ -1257,66 +1195,113 @@ export function HomePage() {
                     <div className="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-pink-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
                       5
                     </div>
-                    <h3 className="text-xl font-bold text-white">Data Analytics and Generate Report</h3>
+                    <h3 className="text-xl font-bold text-white">PMIC Analytics and Generate Report</h3>
                   </div>
                   
                   <div className="grid md:grid-cols-3 gap-8 items-center">
                     <div className="md:col-span-1">
                       <p className="text-gray-300 text-base leading-relaxed mb-6">
-                        Comprehensive data analysis with automated report generation. Get detailed insights, pass/fail results, and compliance verification with industry standards.
+                        Comprehensive PMIC data analysis with automated report generation. Get detailed V/I sweep results, load regulation analysis, and compliance verification.
                       </p>
                       
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
                           <div className="w-2 h-2 rounded-full bg-pink-400"></div>
-                          <span className="text-sm text-gray-300">Automated Analysis</span>
+                          <span className="text-sm text-gray-300">V/I Curve Analysis</span>
                         </div>
                         <div className="flex items-center gap-3">
                           <div className="w-2 h-2 rounded-full bg-pink-400"></div>
-                          <span className="text-sm text-gray-300">Compliance Reports</span>
+                          <span className="text-sm text-gray-300">Load Regulation Reports</span>
                         </div>
                         <div className="flex items-center gap-3">
                           <div className="w-2 h-2 rounded-full bg-pink-400"></div>
-                          <span className="text-sm text-gray-300">Trend Analysis</span>
+                          <span className="text-sm text-gray-300">Efficiency Analysis</span>
                         </div>
                       </div>
                     </div>
                     
                     {/* Mock Analytics Dashboard */}
-                    <div className="md:col-span-2 bg-black/40 rounded-xl p-6 border border-pink-500/20">
-                      <div className="grid grid-cols-2 gap-6">
-                        {/* Chart Area */}
-                        <div>
-                          <div className="flex items-center justify-between mb-3">
-                            <span className="text-xs text-pink-300">S-Parameter Results</span>
-                            <span className="text-xs text-green-400">✓ PASS</span>
+                    <div className="md:col-span-2 bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
+                      {/* Dashboard Header */}
+                      <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-pink-500 to-pink-600 flex items-center justify-center">
+                            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
                           </div>
-                          <div className="flex items-end gap-1 h-20">
-                            {[60, 80, 45, 90, 70, 85, 75, 95, 65, 88].map((height, i) => (
-                              <div 
-                                key={i}
-                                className="bg-gradient-to-t from-pink-500 to-pink-300 rounded-sm flex-1"
-                                style={{ height: `${height}%` }}
-                              ></div>
-                            ))}
+                          <span className="text-sm font-semibold text-gray-800">PMIC V/I Sweep Analysis</span>
+                        </div>
+                        <div className="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium">
+                          ✓ PASS
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-6">
+                        {/* V/I Curve Chart */}
+                        <div>
+                          <div className="mb-3">
+                            <span className="text-sm font-medium text-gray-700">Voltage vs Current Curve</span>
+                          </div>
+                          <div className="h-24 bg-gray-50 rounded-lg p-3 relative overflow-hidden">
+                            {/* Voltage curve - ascending line */}
+                            <svg className="w-full h-full" viewBox="0 0 100 60">
+                              {/* Grid lines */}
+                              <defs>
+                                <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" strokeWidth="0.5"/>
+                                </pattern>
+                              </defs>
+                              <rect width="100" height="60" fill="url(#grid)" />
+                              
+                              {/* Voltage curve */}
+                              <path 
+                                d="M 5 50 Q 25 45 45 35 Q 65 25 95 15" 
+                                fill="none" 
+                                stroke="#ec4899" 
+                                strokeWidth="2"
+                                className="drop-shadow-sm"
+                              />
+                              
+                              {/* Data points */}
+                              {[
+                                {x: 5, y: 50}, {x: 15, y: 47}, {x: 25, y: 43}, 
+                                {x: 35, y: 38}, {x: 45, y: 32}, {x: 55, y: 28}, 
+                                {x: 65, y: 23}, {x: 75, y: 19}, {x: 85, y: 16}, {x: 95, y: 15}
+                              ].map((point, i) => (
+                                <circle 
+                                  key={i}
+                                  cx={point.x} 
+                                  cy={point.y} 
+                                  r="1.5" 
+                                  fill="#ec4899"
+                                  className="drop-shadow-sm"
+                                />
+                              ))}
+                            </svg>
+                            
+                            {/* Axis labels */}
+                            <div className="absolute bottom-1 left-2 text-xs text-gray-500">0A</div>
+                            <div className="absolute bottom-1 right-2 text-xs text-gray-500">3A</div>
+                            <div className="absolute top-1 left-1 text-xs text-gray-500 transform -rotate-90 origin-center">3.3V</div>
                           </div>
                         </div>
                         
-                        {/* Metrics */}
-                        <div className="space-y-4">
-                          <div className="bg-gray-800/50 rounded-lg p-3">
-                            <div className="text-xs text-gray-400">Return Loss</div>
-                            <div className="text-lg font-bold text-green-400">-25.3 dB</div>
-                            <div className="text-xs text-gray-500">Spec: &lt; -20 dB</div>
+                        {/* PMIC Metrics */}
+                        <div className="space-y-3">
+                          <div className="bg-green-50 rounded-lg p-3 border border-green-200">
+                            <div className="text-xs text-gray-600 font-medium">Load Regulation</div>
+                            <div className="text-lg font-bold text-green-600">0.02%</div>
+                            <div className="text-xs text-gray-500">Spec: &lt; 0.1% ✓</div>
                           </div>
-                          <div className="bg-gray-800/50 rounded-lg p-3">
-                            <div className="text-xs text-gray-400">Insertion Loss</div>
-                            <div className="text-lg font-bold text-green-400">-1.2 dB</div>
-                            <div className="text-xs text-gray-500">Spec: &lt; -2 dB</div>
+                          <div className="bg-green-50 rounded-lg p-3 border border-green-200">
+                            <div className="text-xs text-gray-600 font-medium">Efficiency</div>
+                            <div className="text-lg font-bold text-green-600">94.2%</div>
+                            <div className="text-xs text-gray-500">Spec: &gt; 90% ✓</div>
                           </div>
-                          <div className="bg-gray-800/50 rounded-lg p-3">
-                            <div className="text-xs text-gray-400">Overall Result</div>
-                            <div className="text-lg font-bold text-green-400">PASS</div>
+                          <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
+                            <div className="text-xs text-gray-600 font-medium">Overall Result</div>
+                            <div className="text-lg font-bold text-blue-600">PASS</div>
                             <div className="text-xs text-gray-500">All specs met</div>
                           </div>
                         </div>
@@ -1339,109 +1324,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Tutorial CTA Section */}
-      <section className="relative py-20 md:py-32 overflow-hidden border-t border-white/10">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-          <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent rounded-full blur-3xl" />
-          <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-purple-500/10 via-transparent to-transparent rounded-full blur-3xl" />
-        </div>
 
-        <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold">
-                Ready to{' '}
-                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Get Started?
-                </span>
-              </h2>
-              
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Choose your path to begin your journey with TestFlow's AI-powered validation platform
-              </p>
-
-              <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto pt-8">
-                {/* Start Tutorial Card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                  whileHover={{ scale: 1.02 }}
-                  className="group relative"
-                >
-                  <Link 
-                    href="/contact"
-                    onClick={() => trackButtonClick('Start Tutorial', 'Tutorial CTA', { page: 'home' })}
-                    className="block"
-                  >
-                    <div className="relative p-8 rounded-3xl bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-500/20 backdrop-blur-sm hover:border-blue-400/40 transition-all duration-300">
-                      {/* Glow Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-blue-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
-                      
-                      <div className="relative">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center mb-6">
-                          <PlayCircle className="w-6 h-6 text-white" />
-                        </div>
-                        
-                        <h3 className="text-2xl font-bold mb-4">Start Tutorial</h3>
-                        <p className="text-gray-400 mb-6">Schedule a guided walkthrough of TestFlow's features with our team</p>
-                        
-                        <div className="flex items-center text-blue-400 group-hover:text-blue-300 transition-colors">
-                          <span>Schedule Now</span>
-                          <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-
-                {/* View Examples Card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  whileHover={{ scale: 1.02 }}
-                  className="group relative"
-                >
-                  <Link 
-                    href="/contact"
-                    onClick={() => trackButtonClick('View Examples', 'Tutorial CTA', { page: 'home' })}
-                    className="block"
-                  >
-                    <div className="relative p-8 rounded-3xl bg-gradient-to-br from-purple-500/10 to-purple-600/5 border border-purple-500/20 backdrop-blur-sm hover:border-purple-400/40 transition-all duration-300">
-                      {/* Glow Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-transparent to-purple-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
-                      
-                      <div className="relative">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center mb-6">
-                          <LayoutTemplate className="w-6 h-6 text-white" />
-                        </div>
-                        
-                        <h3 className="text-2xl font-bold mb-4">View Examples</h3>
-                        <p className="text-gray-400 mb-6">See how other companies are using TestFlow to accelerate validation</p>
-                        
-                        <div className="flex items-center text-purple-400 group-hover:text-purple-300 transition-colors">
-                          <span>Explore Now</span>
-                          <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="relative overflow-hidden py-16 md:py-24">
@@ -1570,13 +1453,10 @@ export function HomePage() {
         onClose={() => setShowVideoModal(false)}
       />
 
-      {/* Webinar popup - commented out after webinar completion */}
-      {/*
       <WebinarPopup 
         isOpen={showWebinar}
         onClose={handleCloseWebinar}
       />
-      */}
 
       <Notification 
         isOpen={showSubscribeNotification}

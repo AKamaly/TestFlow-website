@@ -75,7 +75,7 @@ export function WebinarPopup({ isOpen, onClose }: WebinarPopupProps) {
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 text-gray-400 text-sm">
                       <Calendar className="w-4 h-4 text-blue-400" />
-                      <span>July 1st at 9:00 AM Pacific Time (PT)</span>
+                      <span>September 15th at 9:00 AM Pacific Time (PT)</span>
                     </div>
                     
                     <div className="flex items-center gap-2 text-gray-400 text-sm">
@@ -85,7 +85,7 @@ export function WebinarPopup({ isOpen, onClose }: WebinarPopupProps) {
                   </div>
 
                   <Link 
-                    href="https://events.teams.microsoft.com/event/9c08db61-da17-4562-9129-19591d613ad3@f96ca994-4257-4a36-94c7-0bd142d2bc27" 
+                    href="https://events.teams.microsoft.com/event/846a9c57-185f-448e-a6be-c7a85a722cb0@f96ca994-4257-4a36-94c7-0bd142d2bc27" 
                     className="inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg px-4 py-2 text-sm font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)] group"
                     onClick={onClose}
                     target="_blank"
