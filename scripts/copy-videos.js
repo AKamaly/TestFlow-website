@@ -19,10 +19,10 @@ destDirs.forEach(dir => {
 // Copy all files from source to destinations
 try {
   const files = fs.readdirSync(sourceDir);
-  
+
   files.forEach(file => {
     const sourcePath = path.join(sourceDir, file);
-    
+
     // Check if it's a file (not a directory)
     if (fs.statSync(sourcePath).isFile()) {
       // Copy to all destination directories
@@ -33,7 +33,7 @@ try {
       });
     }
   });
-  
+
   console.log('All video files copied successfully!');
 } catch (error) {
   console.error('Error copying video files:', error);

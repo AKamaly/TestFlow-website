@@ -12,12 +12,20 @@ declare global {
 
 // Analytics tracking utility
 export const trackEvent = (eventName: string, parameters?: Record<string, any>) => {
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', eventName, {
-      page_path: window.location.pathname,
-      timestamp: new Date().toISOString(),
-      ...parameters
-    })
+  if (typeof window !== 'undefined') {
+    // Track in Google Analytics
+    if ((window as any).gtag) {
+      (window as any).gtag('event', eventName, {
+        page_path: window.location.pathname,
+        timestamp: new Date().toISOString(),
+        ...parameters
+      })
+    }
+    
+    // Track in Microsoft Clarity
+    if ((window as any).clarity) {
+      (window as any).clarity('event', eventName, parameters)
+    }
   }
 }
 
@@ -269,6 +277,11 @@ export function EnhancedPageTracker() {
       else if (path.includes('/docs')) pageCategory = 'content_documentation'
       else if (path.includes('/contact')) pageCategory = 'conversion_contact'
       else if (path.includes('/careers')) pageCategory = 'recruitment'
+      else if (path.includes('/testflow-agent')) pageCategory = 'product_testflow_agent'
+      else if (path.includes('/pricing')) pageCategory = 'conversion_pricing'
+      else if (path.includes('/startups')) pageCategory = 'solution_startups'
+      else if (path.includes('/midmarket')) pageCategory = 'solution_midmarket'
+      else if (path.includes('/enterprise')) pageCategory = 'solution_enterprise'
       else if (path === '/') pageCategory = 'homepage'
 
       // Track enhanced page view with a delay to ensure title is set

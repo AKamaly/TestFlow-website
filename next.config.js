@@ -1,9 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: 'export', // Required for Firebase static hosting
   images: {
     unoptimized: true,
-    domains: ['9zog2la6l29pbfba.public.blob.vercel-storage.com']
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'hebbkx1anhila5yf.public.blob.vercel-storage.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '9zog2la6l29pbfba.public.blob.vercel-storage.com',
+        pathname: '/**',
+      },
+    ],
   },
   trailingSlash: true,
   // Ensure static assets are copied to the output directory
@@ -21,4 +32,4 @@ const nextConfig = {
   }
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig

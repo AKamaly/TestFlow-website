@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { Calendar, X, ArrowRight, Users } from 'lucide-react'
+import { Calendar, X, ArrowRight, Users, Trophy } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -29,7 +29,7 @@ export function WebinarPopup({ isOpen, onClose }: WebinarPopupProps) {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative bg-black rounded-2xl max-w-3xl w-[calc(100%-32px)] mx-auto shadow-xl overflow-hidden border border-white/10"
+            className="relative bg-black rounded-2xl max-w-4xl w-[calc(100%-32px)] mx-auto shadow-xl overflow-hidden border border-white/10"
           >
             {/* Close button */}
             <button
@@ -44,8 +44,8 @@ export function WebinarPopup({ isOpen, onClose }: WebinarPopupProps) {
               {/* Left side - Image */}
               <div className="relative w-full md:w-1/2 aspect-[4/3] md:aspect-auto">
                 <Image
-                  src="https://9zog2la6l29pbfba.public.blob.vercel-storage.com/webinar%20pop%20up%20image%20-dGQP9mVfcVkoYZ5XA6cBdpB2ygBalm.png"
-                  alt="Hardware Validation Webinar"
+                  src="https://9zog2la6l29pbfba.public.blob.vercel-storage.com/THE%20GLOBAL%20HARDWARE%20VALIDATION%20CHALLENGE%202025%20%282%29.png"
+                  alt="Global Hardware Validation Challenge 2025"
                   fill
                   className="object-cover"
                   priority
@@ -54,49 +54,36 @@ export function WebinarPopup({ isOpen, onClose }: WebinarPopupProps) {
 
               {/* Right side - Content */}
               <div className="relative w-full md:w-1/2 p-6 md:p-8 bg-gradient-to-br from-gray-900/50 to-black/30 backdrop-blur-xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-blue-500/10 opacity-50" />
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/15 via-fuchsia-500/10 to-blue-500/5 opacity-60" />
                 
                 <div className="relative space-y-4">
                   {/* Badge */}
-                  <div className="inline-block rounded-full px-2.5 py-0.5 text-sm font-medium bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 backdrop-blur-sm">
-                    <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                      Upcoming Webinar
+                  <div className="inline-flex items-center gap-2 rounded-full px-2.5 py-0.5 text-sm font-medium bg-gradient-to-r from-purple-500/15 to-pink-500/15 border border-purple-500/40 backdrop-blur-sm">
+                    <Trophy className="w-3.5 h-3.5 text-yellow-300" />
+                    <span className="bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+                      Global Chip Validation Challenge 2025
                     </span>
                   </div>
                   
                   <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
-                    The Future of Hardware Validation
+                    Join the Global Hardware Validation Challenge
                   </h3>
                   
                   <p className="text-gray-400 text-sm">
-                    Join us for an exclusive webinar where we'll showcase the latest advancements in AI-powered hardware validation and testing automation.
+                    Put your validation lab to the test and see how fast you can go from first power-on to sign-off with AI-powered automation.
                   </p>
 
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-gray-400 text-sm">
-                      <Calendar className="w-4 h-4 text-blue-400" />
-                      <span>September 15th at 9:00 AM Pacific Time (PT)</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-2 text-gray-400 text-sm">
-                      <Users className="w-4 h-4 text-purple-400" />
-                      <span>Limited spots available</span>
-                    </div>
-                  </div>
-
                   <Link 
-                    href="https://events.teams.microsoft.com/event/846a9c57-185f-448e-a6be-c7a85a722cb0@f96ca994-4257-4a36-94c7-0bd142d2bc27" 
-                    className="inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg px-4 py-2 text-sm font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)] group"
+                    href="/challenge"
+                    className="inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg px-4 py-2 text-sm font-medium hover:from-purple-700 hover:to-pink-700 transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(168,85,247,0.6)] hover:shadow-[0_0_25px_rgba(236,72,153,0.7)] group"
                     onClick={onClose}
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
-                    Register Now
+                    Join Now
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Link>
 
                   <div className="text-xs text-gray-500 text-center">
-                    Free for all registered participants
+                    Free to join · Limited early-access slots for partner labs
                   </div>
                 </div>
               </div>

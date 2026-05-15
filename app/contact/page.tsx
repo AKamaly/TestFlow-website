@@ -2,12 +2,16 @@
 
 import { SiteHeader } from "@/components/site-header"
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import Script from 'next/script'
 import { Notification } from "@/components/notification"
-import { SectionTracker, trackFormSubmission, trackPageSpecificEvent } from '@/components/analytics-tracker'
+import { SectionTracker, trackFormSubmission, trackPageSpecificEvent, trackButtonClick } from '@/components/analytics-tracker'
 import { motion } from 'framer-motion'
-import { ArrowRight, Check } from 'lucide-react'
+import { ArrowRight, Check, Mail, MessageSquare, Calendar, Clock } from 'lucide-react'
 import Image from 'next/image'
+import { TestFlowFooter } from '@/components/test-flow-footer'
+import { RainbowButton } from '@/components/ui/rainbow-button'
+import { CTASection } from "@/components/cta-section"
 
 export default function ContactPage() {
   const [showSubscribeNotification, setShowSubscribeNotification] = useState(false)
@@ -21,289 +25,197 @@ export default function ContactPage() {
     form.reset()
   }
 
-  // Track when Calendly loads
-  const handleCalendlyLoad = () => {
-    trackPageSpecificEvent('calendly_loaded', { page: 'contact' })
-  }
+  // Initialize Cal.com after script loads
+  useEffect(() => {
+    const initCal = () => {
+      if (typeof window !== 'undefined' && (window as any).Cal && (window as any).Cal.loaded) {
+        try {
+          // Initialize Cal.com
+          ; (window as any).Cal('init', '30min', { origin: 'https://app.cal.com' })
+
+            // Set up inline calendar
+            ; (window as any).Cal.ns['30min']('inline', {
+              elementOrSelector: '#my-cal-inline-30min',
+              config: { layout: 'month_view', theme: 'dark' },
+              calLink: 'testflowai/30min',
+            })
+
+            // Configure UI
+            ; (window as any).Cal.ns['30min']('ui', {
+              theme: 'dark',
+              cssVarsPerTheme: { dark: { 'cal-brand': '#be7eff' } },
+              hideEventTypeDetails: false,
+              layout: 'month_view',
+            })
+
+          trackPageSpecificEvent('cal_com_loaded', { page: 'contact' })
+        } catch (error) {
+          console.error('Error initializing Cal.com:', error)
+        }
+      }
+    }
+
+    // Check if Cal is already loaded
+    initCal()
+
+    // Also listen for when it loads
+    const interval = setInterval(() => {
+      if ((window as any).Cal && (window as any).Cal.loaded) {
+        initCal()
+        clearInterval(interval)
+      }
+    }, 100)
+
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div className="min-h-screen bg-black text-white">
+      {/* Background Gradients - Same as Hero Section */}
+      <div
+        aria-hidden
+        className="z-[2] absolute inset-0 pointer-events-none isolate opacity-50 contain-strict hidden lg:block">
+        <div className="w-[35rem] h-[80rem] -translate-y-87.5 absolute left-0 top-0 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]" />
+        <div className="h-[80rem] absolute left-0 top-0 w-56 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.06)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)] [translate:5%_-50%]" />
+        <div className="h-[80rem] -translate-y-87.5 absolute left-0 top-0 w-56 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
+      </div>
+
       <SiteHeader />
 
       {/* Section Trackers */}
       <SectionTracker sectionId="hero" sectionName="Contact Hero" />
       <SectionTracker sectionId="calendly" sectionName="Calendly Booking" />
 
-      <div className="relative pt-20 pb-20 md:pt-24 md:pb-28 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-          <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent rounded-full blur-3xl" />
-          <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-purple-500/10 via-transparent to-transparent rounded-full blur-3xl" />
-        </div>
-
+      <div className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden z-10">
         <div className="container mx-auto px-4 relative max-w-[1400px] w-full">
-          <div id="hero" className="text-center max-w-2xl mx-auto mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Schedule a Discovery Call
-            </h1>
-            <p className="text-gray-400 text-lg">
-              Book a call with our team to discuss how we can accelerate your hardware validation
-            </p>
-          </div>
-          
-          {/* Calendly inline widget */}
-          <div id="calendly" className="rounded-lg overflow-hidden border border-white/10 bg-black">
-            <iframe
-              src="https://calendly.com/kamaly-atoms/testflow-discovery-call?embed_type=inline&hide_landing_page_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=3b82f6"
-              width="100%"
-              height="700px"
-              frameBorder="0"
-              title="Schedule a call with Atoms TestFlow"
-              className="bg-black"
-              style={{ colorScheme: 'dark' }}
-              onLoad={handleCalendlyLoad}
-            />
+          {/* Two Column Layout */}
+          <div id="calendly" className="grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-16 max-w-7xl mx-auto items-center">
+            
+            {/* Left Side - Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="space-y-8 lg:pr-8"
+            >
+              {/* Main Headline */}
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-[36px] lg:text-[3.8rem] font-medium tracking-tight text-foreground leading-[2.6rem] lg:leading-[4.3rem]"
+              >
+                <span className="block">Start testing</span>
+                <span className="block">hardware faster.</span>
+              </motion.h1>
+
+              {/* Sub-headline */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl"
+              >
+                See how TestFlow automates your entire bench setup within five minutes. You can create your first validation automation flow and run it inside the lab.
+              </motion.p>
+
+              {/* Testimonial Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="relative bg-zinc-950/80 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 mt-12 shadow-2xl"
+              >
+                {/* Quote */}
+                <p className="text-foreground text-lg mb-4 leading-relaxed font-medium">
+                  &quot;TestFlow has improved our validation cycle by over 70%. It has given us incredible leverage over our time, fully automating test generation and execution.&quot;
+                </p>
+
+                {/* Attribution */}
+                <p className="text-muted-foreground text-sm font-medium tracking-wide uppercase">
+                  VP of Engineering
+                </p>
+              </motion.div>
+            </motion.div>
+
+            {/* Right Side - Cal.com Calendar */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="relative w-full max-w-md mx-auto lg:max-w-none"
+            >
+                {/* Glow effect behind the calendar container */}
+                <div className="absolute -inset-4 z-0 overflow-hidden opacity-30 blur-2xl rounded-full">
+                    <img
+                        src="/hero-glow.webp"
+                        alt=""
+                        aria-hidden
+                        className="w-full h-full object-cover pointer-events-none scale-150"
+                    />
+                </div>
+              <div className="relative z-10 bg-zinc-950/80 backdrop-blur-xl border border-white/10 rounded-[2rem] p-2 shadow-2xl h-[600px] flex items-center justify-center overflow-hidden">
+                <div
+                  id="my-cal-inline-30min"
+                  className="w-full h-full"
+                  style={{ width: '100%', height: '100%', overflow: 'auto' }}
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="container mx-auto px-4 max-w-[1400px] w-full">
-          {/* Main rounded container with glassy black background */}
-          <div className="relative rounded-3xl overflow-hidden bg-black/60 backdrop-blur-xl border border-white/20">
-            {/* Background effects */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10" />
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 rounded-3xl blur-2xl opacity-30" />
-            
-            <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center p-8 md:p-12 lg:p-16">
-              {/* Left Content */}
-              <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="space-y-8"
-              >
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
-                >
-                  Ready to accelerate your{' '}
-                  <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    validation process?
-                  </span>
-                </motion.h2>
-                
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="text-lg text-gray-300 leading-relaxed max-w-lg"
-                >
-                  Join industry leaders and transform how you validate your products with Atoms TestFlow.
-                </motion.p>
+      <CTASection />
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  className="flex flex-col sm:flex-row gap-4"
-                >
-                  <Link 
-                    href="/docs" 
-                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(79,70,229,0.4)] flex items-center justify-center gap-2 h-12 px-8 text-lg font-semibold w-fit"
-                  >
-                    Get Started
-                    <motion.div
-                      animate={{
-                        x: [0, 4, 0]
-                      }}
-                      transition={{
-                        duration: 1.5,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    >
-                      <ArrowRight className="w-5 h-5" />
-                    </motion.div>
-                  </Link>
-                  <Link
-                    href="/docs"
-                    className="border-2 border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/5 rounded-full transition-all duration-300 flex items-center justify-center gap-2 h-12 px-8 text-lg font-medium w-fit"
-                  >
-                    View Documentation
-                  </Link>
-                </motion.div>
+      {/* TestFlow Footer */}
+      <TestFlowFooter />
 
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 }}
-                  className="flex items-center gap-6 pt-4"
-                >
-                  <div className="flex items-center gap-2 text-sm text-gray-400">
-                    <Check className="w-4 h-4 text-green-400" />
-                    <span>85% Faster Validation</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-400">
-                    <Check className="w-4 h-4 text-green-400" />
-                    <span>24/7 Automated Testing</span>
-                  </div>
-                </motion.div>
-              </motion.div>
-
-              {/* Right Image Container */}
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="flex items-center justify-center"
-              >
-                {/* Image with layered effects like about page */}
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-[2rem] blur-2xl transform rotate-3" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-purple-500/10 rounded-[2rem] blur-2xl transform -rotate-3" />
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-[1.75rem] transform translate-x-2 translate-y-2" />
-                    <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-[1.75rem] overflow-hidden border-2 border-white/10 shadow-2xl transform hover:scale-[1.01] transition-transform duration-500">
-                      <Image
-                        src="/images/TestFlow CTA Image .webp"
-                        alt="TestFlow Platform Interface"
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent" />
-                    </div>
-                  </div>
-                  <div className="absolute -top-5 -right-5 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full p-1 shadow-lg transform hover:scale-105 transition-transform">
-                    <div className="bg-black rounded-full p-2.5">
-                      <ArrowRight className="w-5 h-5 text-white" />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-white/10">
-        <div className="container px-4">
-          {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-12">
-            {/* Brand Column - Takes 2 columns */}
-            <div className="lg:col-span-2 space-y-4">
-              <Link href="/" className="text-xl font-bold block">
-                Atoms Testflow
-              </Link>
-              <p className="text-gray-400 text-sm">
-                The AI validation platform that accelerates your product launch.
-              </p>
-              <div className="flex gap-4">
-                {[
-                  { name: 'LinkedIn', icon: 'linkedin', href: 'https://linkedin.com/company/atomstestflow' },
-                  { name: 'YouTube', icon: 'youtube', href: 'https://youtube.com' }
-                ].map((social) => (
-                  <Link
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
-                  >
-                    <div className="w-5 h-5">
-                      {social.icon === 'linkedin' && <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>}
-                      {social.icon === 'youtube' && <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* Solutions Links */}
-            <div className="space-y-4">
-              <h3 className="font-semibold text-lg">Solutions</h3>
-              <ul className="space-y-3">
-                {[
-                  { label: 'Startups', href: '/startups' },
-                  { label: 'Midmarket', href: '/midmarket' },
-                  { label: 'Enterprise', href: '/enterprise' }
-                ].map((link) => (
-                  <li key={link.label}>
-                    <Link href={link.href} className="text-gray-400 hover:text-white transition-colors">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Sections Links */}
-            <div className="space-y-4">
-              <h3 className="font-semibold text-lg">Sections</h3>
-              <ul className="space-y-3">
-                {[
-                  { label: 'Solutions', href: '/#solutions' },
-                  { label: 'TestFlow', href: '/#demo' },
-                  { label: 'Features', href: '/#features' },
-                  { label: 'Contact', href: '/contact' }
-                ].map((link) => (
-                  <li key={link.label}>
-                    <Link href={link.href} className="text-gray-400 hover:text-white transition-colors">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Newsletter - Takes 1 column */}
-            <div className="space-y-4">
-              <h3 className="font-semibold text-lg">Stay Updated</h3>
-              <p className="text-sm text-gray-400">Subscribe to our newsletter for the latest updates and features.</p>
-              <form className="space-y-2" onSubmit={handleNewsletterSubmit}>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="w-full px-3 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg text-sm hover:from-blue-600 hover:to-purple-600 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  Subscribe
-                </button>
-              </form>
-            </div>
-          </div>
-
-          {/* Bottom Footer */}
-          <div className="border-t border-white/10 py-6">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="flex flex-col md:flex-row gap-4 items-center">
-                <p className="text-gray-400 text-sm">
-                  © {new Date().getFullYear()} Atoms. All rights reserved.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      <Notification 
+      <Notification
         isOpen={showSubscribeNotification}
         onClose={() => setShowSubscribeNotification(false)}
         message="Thanks for subscribing! We'll keep you updated with the latest news."
+      />
+
+      {/* Cal.com Embed Script */}
+      <Script
+        id="cal-com-embed"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function (C, A, L) { 
+              let p = function (a, ar) { a.q.push(ar); }; 
+              let d = C.document; 
+              C.Cal = C.Cal || function () { 
+                let cal = C.Cal; 
+                let ar = arguments; 
+                if (!cal.loaded) { 
+                  cal.ns = {}; 
+                  cal.q = cal.q || []; 
+                  d.head.appendChild(d.createElement("script")).src = A; 
+                  cal.loaded = true; 
+                } 
+                if (ar[0] === L) { 
+                  const api = function () { p(api, arguments); }; 
+                  const namespace = ar[1]; 
+                  api.q = api.q || []; 
+                  if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;
+                } 
+                p(cal, ar); 
+              }; 
+            })(window, "https://app.cal.com/embed/embed.js", "init");
+            
+            Cal("init", "30min", {origin:"https://app.cal.com"});
+            
+            Cal.ns["30min"]("inline", {
+              elementOrSelector:"#my-cal-inline-30min",
+              config: {"layout":"month_view","theme":"dark"},
+              calLink: "testflowai/30min",
+            });
+            
+            Cal.ns["30min"]("ui", {"theme":"dark","cssVarsPerTheme":{"dark":{"cal-brand":"#be7eff"}},"hideEventTypeDetails":false,"layout":"month_view"});
+          `
+        }}
       />
     </div>
   )

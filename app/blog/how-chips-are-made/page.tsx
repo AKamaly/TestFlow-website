@@ -4,15 +4,16 @@ import { SiteHeader } from "@/components/site-header"
 import { ArrowLeft, User, Calendar, Clock, CheckCircle2, ArrowRight, Layers, Zap, Microscope, Target, Settings, Package, TestTube, Cpu, Factory, Beaker, Scissors, Shield } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { BlogPostLayout } from "@/components/blog-post-layout"
 
 export default function BlogPost() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <BlogPostLayout>
       <SiteHeader />
-      
+
       <div className="container mx-auto px-4 relative max-w-[900px] w-full pb-20 pt-20 md:pt-24">
         {/* Back to blog */}
-        <Link 
+        <Link
           href="/blog"
           className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors"
         >
@@ -28,7 +29,7 @@ export default function BlogPost() {
           <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
             How Chips Are Made: A Visual Journey Through Semiconductor Manufacturing
           </h1>
-          
+
           {/* Article Meta */}
           <div className="flex items-center gap-6 text-gray-400">
             <div className="flex items-center gap-2">
@@ -560,7 +561,7 @@ export default function BlogPost() {
 
           <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 p-8 rounded-xl border border-blue-500/20 my-8">
             <h3 className="text-xl font-bold mb-6">TestFlow: AI-Powered Post-Silicon Validation</h3>
-            
+
             {/* TestFlow Image */}
             <div className="relative aspect-[21/9] mb-6 rounded-xl overflow-hidden border border-white/10">
               <Image
@@ -571,7 +572,7 @@ export default function BlogPost() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
             </div>
-            
+
             <p className="text-gray-300 mb-6">
               At Atoms, we focus on the critical phase that comes after all this manufacturing complexity: post-silicon validation. That's what we're building with TestFlow—an AI-powered validation tool that automates the entire validation process, helping teams bring chips to market 10x faster.
             </p>
@@ -635,28 +636,8 @@ export default function BlogPost() {
             As semiconductor technology continues to advance, both manufacturing precision and validation sophistication must evolve together. The companies that master both aspects—creating chips with atomic precision and validating them with AI-powered efficiency—will lead the next generation of technological innovation.
           </p>
 
-          <div className="mt-12 p-8 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-3xl border border-blue-500/20">
-            <h3 className="text-2xl font-bold mb-4">Ready to Accelerate Your Chip Validation?</h3>
-            <p className="text-gray-300 mb-6">
-              Your chips have been manufactured with incredible precision. Now ensure they work flawlessly with TestFlow's AI-powered validation platform. Accelerate your time-to-market and bring your silicon investments to life faster than ever before.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link 
-                href="/contact" 
-                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 rounded-full px-6 py-3 text-center font-medium"
-              >
-                Schedule a Demo
-              </Link>
-              <Link 
-                href="/" 
-                className="border border-blue-500/30 hover:bg-blue-500/5 rounded-full px-6 py-3 text-center font-medium"
-              >
-                Learn More About TestFlow
-              </Link>
-            </div>
-          </div>
         </article>
       </div>
-    </div>
+    </BlogPostLayout>
   )
 } 

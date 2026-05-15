@@ -1,0 +1,34 @@
+# Query: metadata
+# ContextLines: 1
+
+8 results - 5 files
+
+app/metadata.ts:
+  1: import { Metadata } from "next"
+  2  
+  3: export const metadata: Metadata = {
+  4    title: 'TestFlow - AI-Powered Validation Platform',
+
+app/blog/optimizing-test-coverage/page.tsx:
+  235                  <li>• Standardize test result formats for ML processing</li>
+  236:                 <li>• Establish metadata tagging for design features</li>
+  237                  <li>• Implement data quality validation processes</li>
+
+app/enterprise/page.tsx:
+  8  
+  9: export const metadata = {
+  10    title: 'Enterprise Solutions | TestFlow - AI-Powered Validation Platform',
+
+app/midmarket/page.tsx:
+  6  
+  7: export const metadata = {
+  8    title: 'Midmarket Solutions | TestFlow - AI-Powered Validation Platform',
+
+public/logos/Instruments Logos/Keithley_Instruments_Logo.svg:
+   3  <svg width="1861.3" height="413.33" version="1.1" viewBox="0 0 1861.3 413.33" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   4:  <metadata>
+   5    <rdf:RDF>
+
+  11    </rdf:RDF>
+  12:  </metadata>
+  13   <g>

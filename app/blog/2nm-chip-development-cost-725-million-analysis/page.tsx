@@ -4,15 +4,16 @@ import { SiteHeader } from "@/components/site-header"
 import { ArrowLeft, User, Calendar, Clock, CheckCircle2, ArrowRight, DollarSign, TrendingUp, BarChart3, Target, AlertTriangle, Building2, Zap, Factory, Settings, Activity } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { BlogPostLayout } from "@/components/blog-post-layout"
 
 export default function BlogPost() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <BlogPostLayout>
       <SiteHeader />
-      
+
       <div className="container mx-auto px-4 relative max-w-[900px] w-full pb-20 pt-20 md:pt-24">
         {/* Back to blog */}
-        <Link 
+        <Link
           href="/blog"
           className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors"
         >
@@ -29,44 +30,44 @@ export default function BlogPost() {
             </div>
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4" />
-              <span>Aug 13, 2025</span>
+              <span>Jan 25, 2026</span>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4" />
               <span>14 min read</span>
             </div>
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-tight">
             How Much Does a 2nm Chip Really Cost? $725M Development Breakdown
           </h1>
-          
+
           <p className="text-xl text-gray-300 leading-relaxed">
-            We often talk about Moore's Law, but rarely about its cost. Discover why developing a 2nm chip now costs $725 million—and why validation has become the fastest-growing expense in advanced semiconductor design.
+            We often talk about Moore's Law, but rarely about its cost. Discover why developing a 2nm chip now costs $725 million—and why hardware validation, chip testing, and post-silicon verification have become the fastest-growing expenses in advanced semiconductor design.
           </p>
         </div>
 
         {/* Featured Image */}
-        <div className="relative aspect-[16/9] mb-12 rounded-xl overflow-hidden">
+        <div className="relative aspect-[16/9] mb-12 rounded-xl overflow-hidden bg-gray-900">
           <Image
-            src="https://favikon-medias.s3.eu-west-3.amazonaws.com/m/linkedin_7362453898231525376.jpg"
-            alt="2nm chip development costs breakdown - $725 million analysis"
+            src="/blog/2nm-chip-cost-breakdown.jpg"
+            alt="Cost of chip design by nanometer - hardware testing and validation breakdown showing $725M for 2nm chips"
             fill
-            className="object-cover"
+            className="object-contain"
           />
         </div>
 
         {/* Article Content */}
         <div className="prose prose-invert max-w-none">
-          
+
           {/* Introduction */}
           <div className="mb-12">
             <p className="text-lg text-gray-300 leading-relaxed mb-6">
               Moore's Law isn't just about transistor density—it's about economics. While we celebrate each new process node for its performance gains, the financial reality behind these advances tells a sobering story. Developing a chip on the latest 2nm process node now costs an staggering $725 million, representing a 25% increase from 3nm and a 15x jump from 28nm designs.
             </p>
-            
+
             <p className="text-lg text-gray-300 leading-relaxed">
-              But where does all this money go? And why is validation emerging as the fastest-growing cost component in advanced chip design? Let's break down the economics of bleeding-edge semiconductor development.
+              But where does all this money go? And why is hardware validation and chip testing emerging as the fastest-growing cost component in advanced chip design? As semiconductor complexity increases, hardware job validation, post-silicon testing, and comprehensive chip verification have become critical bottlenecks. Let's break down the economics of bleeding-edge semiconductor development and explore why hardware testing now represents over $159M of the total cost.
             </p>
           </div>
 
@@ -256,7 +257,7 @@ export default function BlogPost() {
               </div>
 
               <div className="bg-gradient-to-r from-orange-900/30 to-red-900/30 border border-orange-800/30 rounded-xl p-6">
-                <h3 className="text-xl font-semibold mb-4">Validation & Testing (22% - $159M)</h3>
+                <h3 className="text-xl font-semibold mb-4">Hardware Testing & Chip Validation (22% - $159M)</h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <h4 className="font-semibold text-orange-400 mb-3">Post-Silicon Validation</h4>
@@ -308,11 +309,11 @@ export default function BlogPost() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
               <AlertTriangle className="w-8 h-8 text-yellow-400" />
-              The Validation Crisis: Why Testing Costs Are Exploding
+              The Hardware Testing Crisis: Why Chip Validation Costs Are Exploding
             </h2>
 
             <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 mb-8">
-              <h3 className="text-xl font-semibold mb-4">Validation Cost Evolution</h3>
+              <h3 className="text-xl font-semibold mb-4">Hardware Job Validation Cost Evolution</h3>
               <div className="grid md:grid-cols-4 gap-4">
                 <div className="text-center p-4 bg-green-900/20 border border-green-800/30 rounded-lg">
                   <div className="text-2xl font-bold text-green-400">$8M</div>
@@ -335,11 +336,11 @@ export default function BlogPost() {
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
-                <h3 className="text-lg font-semibold mb-4 text-red-400">Why Validation Costs Are Exploding</h3>
+                <h3 className="text-lg font-semibold mb-4 text-red-400">Why Hardware Testing & Chip Validation Costs Are Exploding</h3>
                 <div className="space-y-3">
                   <div>
                     <h4 className="font-semibold text-sm">Exponential Complexity</h4>
-                    <p className="text-xs text-gray-300">2nm chips have 50B+ transistors requiring comprehensive testing</p>
+                    <p className="text-xs text-gray-300">2nm chips have 50B+ transistors requiring comprehensive hardware testing and chip validation</p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-sm">New Failure Modes</h4>
@@ -357,11 +358,11 @@ export default function BlogPost() {
               </div>
 
               <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
-                <h3 className="text-lg font-semibold mb-4 text-green-400">Validation Bottlenecks</h3>
+                <h3 className="text-lg font-semibold mb-4 text-green-400">Hardware Job Validation Bottlenecks</h3>
                 <div className="space-y-3">
                   <div>
                     <h4 className="font-semibold text-sm">Manual Testing</h4>
-                    <p className="text-xs text-gray-300">70% of validation still requires manual intervention</p>
+                    <p className="text-xs text-gray-300">70% of hardware validation and chip testing still requires manual intervention</p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-sm">Debug Time</h4>
@@ -382,13 +383,13 @@ export default function BlogPost() {
             <div className="bg-gradient-to-r from-blue-900/20 to-green-900/20 border border-blue-800/30 rounded-xl p-6">
               <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
                 <Zap className="w-5 h-5" />
-                AI-Powered Validation: The Solution
+                AI-Powered Hardware Testing: The Solution
               </h3>
               <p className="text-gray-300 text-sm mb-4">
-                Advanced validation platforms like TestFlow are addressing the validation crisis by automating complex test scenarios, reducing debug time by 70%, and enabling comprehensive coverage of 2nm designs. AI-driven testing is becoming essential for managing the complexity of bleeding-edge chips.
+                Advanced hardware testing platforms like TestFlow are addressing the chip validation crisis by automating complex test scenarios, reducing hardware job validation debug time by 70%, and enabling comprehensive coverage of 2nm designs. AI-driven chip testing and automated hardware validation workflows are becoming essential for managing the complexity of bleeding-edge chips.
               </p>
-              <Link 
-                href="/contact" 
+              <Link
+                href="/contact"
                 className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
               >
                 Learn About Advanced Validation
@@ -528,38 +529,17 @@ export default function BlogPost() {
                 The $725 million cost of 2nm chip development represents more than just inflation—it's a fundamental shift in semiconductor economics. We're witnessing the end of Moore's Law as an economically viable scaling strategy for most companies, replaced by a new reality where only the largest technology giants can afford to push the boundaries of silicon.
               </p>
               <p>
-                The explosion in validation costs, now representing 22% of total development expenses, reflects the growing complexity of modern chips. As transistors shrink and designs become more sophisticated, ensuring they work correctly becomes exponentially more challenging and expensive.
+                The explosion in hardware testing and chip validation costs, now representing 22% of total development expenses ($159M), reflects the growing complexity of modern chips. As transistors shrink and designs become more sophisticated, hardware job validation, post-silicon testing, and comprehensive chip verification become exponentially more challenging and expensive. Traditional manual testing approaches can no longer keep pace with the complexity of 2nm designs.
               </p>
               <p>
-                This economic reality is reshaping the entire semiconductor industry, concentrating innovation in the hands of a few companies while forcing others to find alternative strategies. The companies that master both advanced design and efficient validation will define the next era of computing.
+                This economic reality is reshaping the entire semiconductor industry, concentrating innovation in the hands of a few companies while forcing others to find alternative strategies. The companies that master both advanced chip design and efficient hardware testing workflows—leveraging AI-powered validation platforms and automated chip testing solutions—will define the next era of computing.
               </p>
             </div>
           </section>
 
           {/* CTA Section */}
-          <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-800/30 rounded-xl p-8 text-center">
-            <h3 className="text-2xl font-bold mb-4">Reduce Your Validation Costs</h3>
-            <p className="text-gray-300 mb-6">
-              Don't let validation become your biggest bottleneck. TestFlow's AI-powered platform can reduce validation time and costs by up to 70%, making advanced node development more economically viable.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                href="/contact" 
-                className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium transition-colors"
-              >
-                Schedule a Demo
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link 
-                href="/blog" 
-                className="inline-flex items-center justify-center gap-2 border border-gray-600 hover:border-gray-500 px-6 py-3 rounded-lg font-medium transition-colors"
-              >
-                Read More Articles
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
-    </div>
+    </BlogPostLayout>
   )
 }

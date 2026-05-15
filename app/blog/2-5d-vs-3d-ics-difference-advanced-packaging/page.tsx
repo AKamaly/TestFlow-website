@@ -9,10 +9,10 @@ export default function BlogPost() {
   return (
     <div className="min-h-screen bg-black text-white">
       <SiteHeader />
-      
+
       <div className="container mx-auto px-4 relative max-w-[900px] w-full pb-20 pt-20 md:pt-24">
         {/* Back to blog */}
-        <Link 
+        <Link
           href="/blog"
           className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors"
         >
@@ -36,11 +36,11 @@ export default function BlogPost() {
               <span>12 min read</span>
             </div>
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-tight">
             2.5D vs 3D ICs: The Difference Between Horizontal and Vertical Integration
           </h1>
-          
+
           <p className="text-xl text-gray-300 leading-relaxed">
             As Moore's Law slows, the industry is shifting to system-level innovation through advanced packaging. Discover the critical differences between 2.5D and 3D IC architectures and why they're revolutionizing semiconductor design.
           </p>
@@ -49,7 +49,7 @@ export default function BlogPost() {
         {/* Featured Image */}
         <div className="relative aspect-[16/9] mb-12 rounded-xl overflow-hidden">
           <Image
-            src="https://favikon-medias.s3.eu-west-3.amazonaws.com/m/linkedin_7333122444901138432.jpg"
+            src="https://9zog2la6l29pbfba.public.blob.vercel-storage.com/2.5%20vs%203D%20chips-c8gSuLDBbH9ClljIC489Br4Mho1NAA.jpg"
             alt="2.5D vs 3D ICs difference - advanced packaging semiconductor integration"
             fill
             className="object-cover"
@@ -58,13 +58,13 @@ export default function BlogPost() {
 
         {/* Article Content */}
         <div className="prose prose-invert max-w-none">
-          
+
           {/* Introduction */}
           <div className="mb-12">
             <p className="text-lg text-gray-300 leading-relaxed mb-6">
               As traditional silicon scaling approaches its physical limits, the semiconductor industry is pioneering new approaches to continue performance improvements. Advanced packaging technologies, particularly 2.5D and 3D integrated circuits, represent the next frontier in semiconductor innovation—moving beyond Moore's Law through clever integration rather than just smaller transistors.
             </p>
-            
+
             <p className="text-lg text-gray-300 leading-relaxed">
               These technologies aren't just academic concepts—they're powering today's most advanced processors, from AMD's chiplet-based CPUs to Apple's M-series processors. Understanding the differences between 2.5D and 3D integration is crucial for anyone involved in modern semiconductor design.
             </p>
@@ -82,7 +82,7 @@ export default function BlogPost() {
               <p className="text-gray-300 mb-4">
                 Think of 2.5D ICs as a city spread across one giant floor—multiple buildings (chips) connected by high-speed roads (interposer traces). Chips are placed side-by-side on a common interposer (silicon or glass), which routes connections between them with much higher bandwidth and lower latency than traditional PCBs.
               </p>
-              
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="font-semibold text-blue-400 mb-3">Key Characteristics</h4>
@@ -143,7 +143,7 @@ export default function BlogPost() {
               <p className="text-gray-300 mb-4">
                 3D ICs are like skyscrapers—floors (chips) stacked vertically with elevators (Through-Silicon Vias or TSVs) moving data between layers. This approach offers the ultimate in density and performance but presents significant thermal and manufacturing challenges.
               </p>
-              
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="font-semibold text-purple-400 mb-3">Core Technologies</h4>
@@ -565,7 +565,7 @@ export default function BlogPost() {
               <p className="text-gray-300 mb-4">
                 2.5D and 3D ICs introduce new testing challenges that require specialized equipment, methodologies, and expertise to ensure reliable operation across all conditions.
               </p>
-              
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="font-semibold text-yellow-400 mb-3">Testing Challenges</h4>
@@ -600,8 +600,8 @@ export default function BlogPost() {
               <p className="text-gray-300 text-sm mb-4">
                 2.5D and 3D ICs require specialized validation approaches that can handle their unique architectures and integration challenges. TestFlow's AI-powered platform provides comprehensive testing capabilities for advanced packaging technologies, ensuring reliable operation of complex integrated systems.
               </p>
-              <Link 
-                href="/contact" 
+              <Link
+                href="/contact"
                 className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
               >
                 Learn About Advanced Packaging Testing
@@ -633,15 +633,15 @@ export default function BlogPost() {
               Whether you're implementing 2.5D interposer designs or 3D stacked architectures, comprehensive validation ensures your advanced packaging solutions deliver the expected performance and reliability benefits.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                href="/contact" 
+              <Link
+                href="/contact"
                 className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium transition-colors"
               >
                 Schedule a Demo
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link 
-                href="/blog" 
+              <Link
+                href="/blog"
                 className="inline-flex items-center justify-center gap-2 border border-gray-600 hover:border-gray-500 px-6 py-3 rounded-lg font-medium transition-colors"
               >
                 Read More Articles
